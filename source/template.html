@@ -168,8 +168,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .board small{display:block;font-size:12.5px;color:var(--ink-2)}
 .board b{font-size:clamp(20px,2.2vw,26px);font-weight:600;letter-spacing:-.02em}
 .board .you b{color:var(--ink)}
-.board .you.win b{color:var(--green-ink)}
-.board .you.lose b{color:#D2452F}
+.board .you.win b,#u-km-box.win b{color:var(--green-ink)}
+.board .you.lose b,#u-km-box.lose b{color:#D2452F}
 .tip{min-height:22px;font-size:14px;color:var(--ink-2);padding:0 4px 10px}
 .node{cursor:pointer}
 .node circle{transition:fill .15s,stroke .15s}
@@ -590,7 +590,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <div class="evm-map">
         <p class="task" style="padding:2px 4px 10px"><b>Теперь ваша очередь.</b> Нажимайте на магазины на схеме в том порядке, в котором объехали бы их сами, и попробуйте проложить путь короче 33&nbsp;км.</p>
         <div class="evm-stats num">
-          <div><small>Ваш маршрут</small><b id="u-km">0 км</b></div>
+          <div id="u-km-box"><small id="u-km-l">Ваш путь сейчас</small><b id="u-km">0 км</b></div>
           <div><small>Магазинов</small><b id="u-cnt">0 из 12</b></div>
         </div>
         <svg id="evm-svg" viewBox="0 0 600 520" role="group" aria-label="Схема Москвы с 12 магазинами. Нажимайте на магазины по порядку обхода."></svg>
@@ -1257,6 +1257,8 @@ try{(function evm(){
     nodeEls.forEach((g,i)=>g.classList.toggle('done',i>0&&route.includes(i)));
     ukm.textContent=fmt(len(route))+' км'; ucnt.textContent=`${Math.min(12,new Set(route).size-1)} из 12`;
     you.textContent=done?fmt(len(route))+' км':'—';
+    $('#u-km-l').textContent=done?'Итог':'Ваш путь сейчас';
+    const kb=$('#u-km-box'); kb.classList.toggle('win',done&&len(route)<32.95); kb.classList.toggle('lose',done&&len(route)>33.05);
     youBox.classList.toggle('win',done&&len(route)<32.95); youBox.classList.toggle('lose',done&&len(route)>33.05);
     if(!done&&route.length>1) tip.textContent='Отлично. Продолжайте: выберите следующий магазин.';
   }
