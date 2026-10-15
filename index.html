@@ -443,6 +443,30 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .lb-cap small{display:block;color:#90A396;font-size:12.5px;margin-top:4px}
 .lb-close{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:28px;line-height:1}
 .lb-close:hover{background:rgba(255,255,255,.18)}
+
+/* hall 5: ask the map */
+.a-qs{display:flex;flex-wrap:wrap;gap:8px}
+.a-qs button{border:1.5px solid var(--rule);background:transparent;border-radius:999px;padding:9px 14px;font-size:14.5px;font-weight:500;color:var(--ink);transition:border-color .15s,background .15s}
+.a-qs button:hover{border-color:var(--ink)}
+.a-qs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.a-phrase{font-size:clamp(20px,2.2vw,26px);font-weight:500;letter-spacing:-.015em;line-height:1.45;margin:20px 0 14px}
+.a-phrase mark{background:transparent;color:inherit;border-radius:6px;padding:0 3px;box-shadow:inset 0 -3px 0 transparent;transition:background .3s,box-shadow .3s}
+.a-phrase mark.on{background:color-mix(in srgb,var(--m) 22%,transparent);box-shadow:inset 0 -3px 0 var(--m)}
+.a-photo{width:56px;height:38px;vertical-align:middle;border-radius:5px;border:1px solid var(--rule)}
+.a-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;min-height:54px}
+.a-chip{border-left:4px solid var(--m);background:var(--paper-2);border-radius:6px;padding:7px 12px;font-size:15px;font-weight:600;opacity:.15;transform:translateY(4px);transition:opacity .3s,transform .3s}
+.a-chip small{display:block;font-size:12px;font-weight:400;color:var(--ink-2)}
+.a-chip.on{opacity:1;transform:none}
+.ask canvas{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule)}
+.a-note{font-size:13px;color:var(--ink-2);margin-top:8px}
+.a-how{font-size:15.5px;margin-top:14px;max-width:62ch}
+.feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.feat a{display:flex;flex-direction:column;gap:6px;text-decoration:none;border-top:3px solid var(--yellow);padding-top:12px}
+.feat b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.feat span{font-size:14.5px;color:var(--ink-2);line-height:1.45}
+.feat em{font-style:normal;font-size:14px;font-weight:500;color:var(--green-ink);text-decoration:underline;text-underline-offset:4px;margin-top:auto}
+@media (max-width:700px){.feat{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.a-chip,.a-phrase mark{transition:none}}
 /* trip progress */
 .trip{display:flex;gap:12px;font:400 12px/1 var(--mono);color:var(--night-muted);margin-left:8px;white-space:nowrap}
 #trip-where{color:var(--night-text)}
@@ -539,7 +563,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <a href="#hall-2"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 2 · 1980</span><h3>Как проехать без остановок?</h3><p>Поймайте зелёную волну</p></a>
       <a href="#hall-3"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 3 · 1980</span><h3>Где я?</h3><p>Найдите себя на карте быстрее робота</p></a>
       <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · сегодня</span><h3>Как телефон определяет геолокацию</h3><p>Угадайте, какой сигнал выручит</p></a>
-      <a href="#hall-5"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 5 · 1984</span><h3>Что вокруг?</h3><p>Карта как модель данных</p></a>
+      <a href="#hall-5"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 5 · 1984</span><h3>Что вокруг?</h3><p>Спросите карту обычными словами</p></a>
       <a href="#hall-6"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 6 · 1984</span><h3>Карта-детектив</h3><p>Найдите центр города по точкам</p></a>
       <a href="#hall-7"><span class="y"><span class="dot" style="background:var(--lime)"></span>Зал 7 · 1938–1980</span><h3>Каким будет город?</h3><p>Проверьте прогнозы прошлого</p></a>
       <a href="#letter"><span class="y"><span class="dot" style="background:#fff"></span>Финал · 2056</span><h3>Письмо в будущее</h3><p>Семь вопросов и ваша статья</p></a>
@@ -752,7 +776,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
   <div class="hall-body">
     <div class="hh">
       <div><div class="kicker"><i></i><b>Зал 5</b> 1984 → 2026</div><h2 id="h-hall5">Что вокруг?</h2></div>
-      <p>К 1980-м карту начинают понимать как модель местности. По ней можно находить закономерности, которых не видно напрямую. Сегодня у этой модели можно просто спросить.</p>
+      <p>В 1984 году картограф Александр Берлянт писал, что карта — это модель местности, у которой можно узнать то, чего не видно сразу. Сегодня карте можно просто задать вопрос обычными словами.</p>
     </div>
     <div class="data">
       <div>
@@ -760,35 +784,23 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
         <div class="label"><b>А. Берлянт. «Информация, которую даёт карта».</b> «Наука и жизнь», №6, 1984, с. 78–82. Картограф рассказывает, как карта становится инструментом исследования. <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">Номер в архиве</a></div>
       </div>
       <div>
-<pre class="code" aria-label="Пример: запрос пользователя и вызов инструмента"><span class="c">// запрос пользователя</span>
-<span class="s">"Покажи кафе в районе Арбат, Москва</span>
-<span class="s"> с рейтингом выше 3"</span>
-
-<span class="c">// что вызывает ассистент 2ГИС Про</span>
-<span class="f">create_layer</span>({
-  <span class="k">territory</span>: <span class="s">"Арбат"</span>,
-  <span class="k">category</span>:  <span class="s">"кафе"</span>,
-  <span class="k">filters</span>:   <span class="s">"rating:[3 TO *]"</span>
-})</pre>
-        <p class="code-note">Пример из статьи «Как превратить запрос в дашборд: ИИ-ассистент для геоаналитики в 2ГИС Про», упрощён. Языковая модель переводит запрос в действия продукта по схеме ReAct, а данные берёт из API. <a href="https://habr.com/ru/companies/2gis/articles/1037974/" target="_blank" rel="noopener" style="color:var(--green-ink)">Читать на Хабре</a></p>
-        <div class="facts num">
-          <div><b>~500 RPS</b><span>выдерживает векторный поиск на pgvector, в 5 раз больше плановой нагрузки</span></div>
-          <div><b>&lt;300 мс</b><span>укладывается даже запасной, более полный поиск по HNSW</span></div>
-          <div><b>×10</b><span>ускорил раскладку виджетов в 2ГИС Про пространственный индекс R-Bush</span></div>
+        <div class="game ask">
+          <p class="task"><b>Спросите карту.</b> Выберите вопрос и посмотрите, как карта его понимает.</p>
+          <div class="a-qs" id="a-qs" role="group" aria-label="Вопросы к карте">
+            <button type="button" aria-pressed="true">Кафе на Арбате с рейтингом выше 3</button>
+            <button type="button" aria-pressed="false">Где тихо поработать?</button>
+            <button type="button" aria-pressed="false">Место, похожее на фото</button>
+          </div>
+          <p class="a-phrase" id="a-phrase" aria-live="polite"></p>
+          <div class="a-chips" id="a-chips"></div>
+          <canvas id="a-map" width="560" height="300" aria-label="Схема района: найденные места подсвечиваются зелёным"></canvas>
+          <p class="a-note" id="a-note"></p>
+          <p class="a-how">Так работает ИИ-помощник в 2ГИС: он не придумывает ответ, а переводит ваши слова в понятный карте запрос и ищет по настоящим данным.</p>
         </div>
-        <div class="items" style="margin-top:32px">
-          <article class="item">
-            <div class="meta">Сентябрь 2025 · Вера Романцова, Егор Осинкин, Никита Шварц</div>
-            <h5>ИИ-поиск в 2ГИС: как учим нейросети понимать настроение, фото и смыслы</h5>
-            <p>Поиск по атмосфере места, по похожему фото и по свободному запросу. Эмбеддинги, LLM-разметка с перекрёстной проверкой, векторный индекс.</p>
-            <a class="read" href="https://habr.com/ru/companies/2gis/articles/951008/" target="_blank" rel="noopener">Читать на Хабре</a>
-          </article>
-          <article class="item">
-            <div class="meta">Февраль 2026 · Андрей, frontend 2ГИС Про</div>
-            <h5>React Grid Layout в деле: эволюция геоаналитики в 2ГИС Про</h5>
-            <p>Карта, графики и таблицы стали виджетами рабочего пространства, которое пользователь собирает сам.</p>
-            <a class="read" href="https://habr.com/ru/companies/2gis/articles/990082/" target="_blank" rel="noopener">Читать на Хабре</a>
-          </article>
+        <div class="feat">
+          <a href="https://habr.com/ru/companies/2gis/articles/951008/" target="_blank" rel="noopener"><b>Поиск по настроению</b><span>Можно искать не только «кафе», но и «уютно», «с видом», «тихо».</span><em>Читать на Хабре</em></a>
+          <a href="https://habr.com/ru/companies/2gis/articles/951008/" target="_blank" rel="noopener"><b>Поиск по фото</b><span>Показали картинку, а карта нашла похожие места.</span><em>Читать на Хабре</em></a>
+          <a href="https://habr.com/ru/companies/2gis/articles/1037974/" target="_blank" rel="noopener"><b>Вопрос словами — готовый отчёт</b><span>Бизнес спрашивает карту обычными словами и сразу получает слои на карте, таблицы и графики.</span><em>Читать на Хабре</em></a>
         </div>
       </div>
     </div>
@@ -1512,6 +1524,73 @@ try{(function signals(){
   render();
 })();}catch(err){console.error('section failed',err)}
 
+
+try{(function ask(){
+  const cv=$('#a-map'), ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+  const phrase=$('#a-phrase'), chips=$('#a-chips'), note=$('#a-note'), btns=[...document.querySelectorAll('#a-qs button')];
+  const COL={what:'var(--yellow)',where:'var(--blue)',cond:'var(--green)',mood:'var(--green)',photo:'var(--blue)'};
+  // places on a schematic district: kind, rating, quiet, looksLike
+  const r=rng(2025), places=[];
+  for(let i=0;i<46;i++){ const k=r(); places.push({x:30+r()*(W-60),y:28+r()*(H-56),cafe:k<.55,work:k>=.55&&k<.75,rating:+(2+r()*3).toFixed(1),quiet:r()<.3,look:r()<.12}) }
+  // Arbat: a street band
+  const arb={x0:60,y0:H*.62,x1:W-60,y1:H*.3};
+  const distToArb=(p)=>{ const vx=arb.x1-arb.x0, vy=arb.y1-arb.y0, L=vx*vx+vy*vy; let t=((p.x-arb.x0)*vx+(p.y-arb.y0)*vy)/L; t=Math.max(0,Math.min(1,t)); return Math.hypot(arb.x0+vx*t-p.x,arb.y0+vy*t-p.y) };
+  const Q=[
+    {parts:['Покажи ',['кафе','what'],' ',['на Арбате','where'],' ',['с рейтингом выше 3','cond']],
+     chips:[['what','Что ищем','кафе'],['where','Где','Арбат'],['cond','Условие','рейтинг выше 3']],
+     match:p=>p.cafe&&distToArb(p)<34&&p.rating>3, label:p=>'★ '+String(p.rating).replace('.',','), street:true,
+     note:'Этот пример взят из статьи 2ГИС про ИИ-помощника в 2ГИС Про.'},
+    {parts:['Где ',['тихо','mood'],' ',['поработать с ноутбуком','what'],'?'],
+     chips:[['what','Что ищем','кафе и коворкинги'],['mood','Атмосфера','тихо'],['where','Где','рядом с вами']],
+     match:p=>(p.cafe||p.work)&&p.quiet&&Math.hypot(p.x-W*.45,p.y-H*.5)<W*.32, label:null, near:true,
+     note:'Пример. Поиск по атмосфере места описан в статье 2ГИС про ИИ-поиск.'},
+    {parts:['Найди место, ',['похожее на это фото','photo'],' ',['photo-icon','icon']],
+     chips:[['photo','На фото','светлый зал, растения, деревянные столы'],['what','Что ищем','похожие места']],
+     match:p=>p.look, label:null,
+     note:'Пример. Поиск по фото описан в статье 2ГИС про ИИ-поиск.'},
+  ];
+  const PHOTO='<svg class="a-photo" viewBox="0 0 64 44" aria-label="Фото кофейни"><rect width="64" height="44" rx="5" fill="#F4E6CF"/><rect x="6" y="6" width="22" height="18" rx="2" fill="#CFE4F2"/><rect x="36" y="26" width="22" height="4" rx="1" fill="#A0703F"/><rect x="40" y="30" width="3" height="10" fill="#A0703F"/><rect x="51" y="30" width="3" height="10" fill="#A0703F"/><circle cx="14" cy="34" r="6" fill="#5FA052"/><rect x="12" y="36" width="4" height="6" fill="#8A6A45"/><line x1="47" y1="0" x2="47" y2="12" stroke="#555" stroke-width="1.5"/><circle cx="47" cy="15" r="4" fill="#FFD36B"/></svg>';
+  let cur=-1, t0=0, raf=0;
+  function base(q){
+    ctx.fillStyle=css('--card'); ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle=css('--road'); ctx.lineWidth=10; ctx.lineCap='round';
+    for(let x=70;x<W;x+=120){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+30,H);ctx.stroke()}
+    for(let y=60;y<H;y+=90){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y+14);ctx.stroke()}
+    if(q&&q.street){ ctx.strokeStyle='rgba(0,115,250,.18)'; ctx.lineWidth=60; ctx.beginPath(); ctx.moveTo(arb.x0,arb.y0); ctx.lineTo(arb.x1,arb.y1); ctx.stroke();
+      ctx.save(); ctx.translate((arb.x0+arb.x1)/2,(arb.y0+arb.y1)/2); ctx.rotate(Math.atan2(arb.y1-arb.y0,arb.x1-arb.x0)); ctx.fillStyle=css('--blue-ink'); ctx.font='600 15px "SB Sans Text",sans-serif'; ctx.textAlign='center'; ctx.fillText('Арбат',0,-36); ctx.restore() }
+    if(q&&q.near){ ctx.fillStyle='rgba(0,115,250,.08)'; ctx.beginPath(); ctx.arc(W*.45,H*.5,W*.32,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=css('--blue'); ctx.beginPath(); ctx.arc(W*.45,H*.5,8,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.stroke() }
+    ctx.fillStyle=css('--ink-2'); ctx.globalAlpha=.35; places.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fill()}); ctx.globalAlpha=1;
+  }
+  function pinsAt(q,alpha){
+    ctx.globalAlpha=alpha; ctx.font='600 13px "SB Sans Text",sans-serif'; ctx.textAlign='left';
+    const hit=places.filter(q.match), boxes=[];
+    hit.forEach(p=>{ ctx.fillStyle=css('--green'); ctx.beginPath(); ctx.arc(p.x,p.y,8,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2.5; ctx.stroke() });
+    if(q.label) hit.forEach(p=>{ const t=q.label(p), w=ctx.measureText(t).width+10, b=[p.x+11,p.y-10,w,18];
+      const clash=boxes.some(o=>b[0]<o[0]+o[2]+4&&o[0]<b[0]+b[2]+4&&b[1]<o[1]+o[3]+2&&o[1]<b[1]+b[3]+2)||hit.some(o=>o!==p&&o.x>b[0]-8&&o.x<b[0]+b[2]+8&&o.y>b[1]-8&&o.y<b[1]+b[3]+8);
+      if(clash) return; boxes.push(b); ctx.fillStyle=css('--ink'); ctx.fillRect(...b); ctx.fillStyle=css('--card'); ctx.fillText(t,p.x+16,p.y+3) });
+    ctx.globalAlpha=1;
+  }
+  function show(i){
+    cur=i; btns.forEach((b,k)=>b.setAttribute('aria-pressed',k===i)); const q=Q[i];
+    phrase.innerHTML='«'+q.parts.map(p=>typeof p==='string'?p:p[1]==='icon'?PHOTO:`<mark data-k="${p[1]}" style="--m:${COL[p[1]]}">${p[0]}</mark>`).join('')+'»';
+    chips.innerHTML=q.chips.map(([k,a,b])=>`<div class="a-chip" data-k="${k}" style="--m:${COL[k]}"><small>${a}</small>${b}</div>`).join('');
+    note.textContent=q.note;
+    const marks=[...phrase.querySelectorAll('mark')], cs=[...chips.children];
+    marks.forEach(m=>m.classList.remove('on')); cs.forEach(c=>c.classList.remove('on'));
+    cancelAnimationFrame(raf); base(q);
+    if(RM){ marks.forEach(m=>m.classList.add('on')); cs.forEach(c=>c.classList.add('on')); pinsAt(q,1); return }
+    t0=performance.now();
+    const step=(now)=>{ const t=now-t0;
+      cs.forEach((c,k)=>{ if(t>350+k*450){ c.classList.add('on'); const m=phrase.querySelector(`mark[data-k="${c.dataset.k}"]`); if(m) m.classList.add('on') } });
+      const tp=350+cs.length*450; base(q); if(t>tp) pinsAt(q,Math.min(1,(t-tp)/400));
+      if(t<tp+450) raf=requestAnimationFrame(step); };
+    raf=requestAnimationFrame(step);
+  }
+  btns.forEach((b,k)=>b.addEventListener('click',()=>show(k)));
+  show(0);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ if(cur>=0){ base(Q[cur]); pinsAt(Q[cur],1) } });
+})();}catch(err){console.error('section failed',err)}
 
 try{(function detective(){
   const cv=$('#d-map'), ctx=cv.getContext('2d'), COLS=6, ROWS=4, W=cv.width, H=cv.height, cw=W/COLS, ch=H/ROWS;
