@@ -427,6 +427,22 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .sig-res .why{font-size:15px;color:var(--ink-2);line-height:1.5}
 @media (max-width:900px){.sig-grid{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){#s-svg .flow{animation:none}}
+
+/* zoomable images + lightbox */
+.zoomable{cursor:zoom-in}
+.scan{position:relative}
+.scan::after{content:"";position:absolute;right:16px;bottom:16px;width:40px;height:40px;border-radius:50%;background:rgba(19,28,22,.82) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='M15 15l5 5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/22px no-repeat;pointer-events:none;transition:transform .15s}
+.scan:hover::after{transform:scale(1.1)}
+.zoomable:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.lb{position:fixed;inset:0;z-index:70;background:rgba(6,10,8,.93);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:calc(56px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.lb-scroll{max-width:100%;max-height:calc(100vh - 150px);overflow:auto;-webkit-overflow-scrolling:touch;border-radius:4px}
+.lb-scroll img{display:block;max-width:min(94vw,1200px);max-height:calc(100vh - 150px);width:auto;height:auto;background:#fff;cursor:zoom-in;touch-action:pinch-zoom}
+.lb.zoomed .lb-scroll img{max-width:none;max-height:none;cursor:zoom-out}
+.lb.nozoom .lb-scroll img{cursor:default}
+.lb-cap{color:#C9D6CC;font-size:14px;line-height:1.45;max-width:72ch;text-align:center;margin:0}
+.lb-cap small{display:block;color:#90A396;font-size:12.5px;margin-top:4px}
+.lb-close{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:28px;line-height:1}
+.lb-close:hover{background:rgba(255,255,255,.18)}
 /* trip progress */
 .trip{display:flex;gap:12px;font:400 12px/1 var(--mono);color:var(--night-muted);margin-left:8px;white-space:nowrap}
 #trip-where{color:var(--night-text)}
@@ -587,7 +603,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
       <div class="items">
         <article class="item">
-          <img src="assets/img/habr-light-routes.webp" alt="Иллюстрация из статьи о лёгких маршрутах" loading="lazy" width="1000" height="906">
+          <img src="assets/img/habr-light-routes.webp" data-full="assets/img/habr-light-routes-full.webp" alt="Иллюстрация из статьи о лёгких маршрутах" loading="lazy" width="1000" height="906">
           <div class="meta">Март 2026 · Константин Чирихин</div>
           <h5>«Лёгкие маршруты» в 2ГИС: рассказываем про алгоритмы и новую систему штрафов</h5>
           <p>Лёгкий маршрут строится из оптимального: к весам рёбер добавляются штрафы за сложные манёвры. Чтобы поиск оставался быстрым, граф дополнен иерархией шорткатов, где одно ребро верхнего уровня покрывает несколько километров.</p>
@@ -643,7 +659,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
     </div>
     <div class="where">
       <div>
-        <div class="scan"><img src="assets/img/nij-1980-p87.webp" alt="Страница статьи «Робот-штурман» со схемой корреляционно-экстремальной навигации" width="704" height="1100" loading="lazy"></div>
+        <div class="scan"><img src="assets/img/nij-1980-p87.webp" data-full="assets/img/nij-1980-p87-full.webp" alt="Страница статьи «Робот-штурман» со схемой корреляционно-экстремальной навигации" width="704" height="1100" loading="lazy"></div>
         <div class="label"><b>В. Тарасенко, А. Кориков. «Робот-штурман».</b> «Наука и жизнь», №7, 1980, с. 84–90. Схема корреляционно-экстремальной системы ориентирования. <a href="https://djvu.online/file/zKwC09TdR1376" target="_blank" rel="noopener">Номер в архиве</a></div>
       </div>
       <div>
@@ -678,7 +694,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
       <div class="items">
         <article class="item">
-          <img src="assets/img/habr-ar-indoor.webp" alt="Иллюстрация из статьи об AR-навигации внутри зданий" loading="lazy" width="1000" height="582">
+          <img src="assets/img/habr-ar-indoor.webp" data-full="assets/img/habr-ar-indoor-full.webp" alt="Иллюстрация из статьи об AR-навигации внутри зданий" loading="lazy" width="1000" height="582">
           <div class="meta">Октябрь 2025 · Дмитрий Чудаков, Андрей Кузнецов</div>
           <h5>Компьютерное зрение + ARKit = AR-навигация внутри зданий</h5>
           <p>Внутри торгового центра GPS ненадёжен. По одной фотографии телефон определяет координаты, направление взгляда и этаж. Для каждого ТЦ снимают около 10&nbsp;000 кадров, в каждом около 3&nbsp;000 ключевых точек. Локализация занимает около 100&nbsp;мс.</p>
@@ -740,7 +756,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
     </div>
     <div class="data">
       <div>
-        <div class="scan"><img src="assets/img/nij-1984-p78.webp" alt="Первая страница статьи «Информация, которую даёт карта»" width="704" height="1100" loading="lazy"></div>
+        <div class="scan"><img src="assets/img/nij-1984-p78.webp" data-full="assets/img/nij-1984-p78-full.webp" alt="Первая страница статьи «Информация, которую даёт карта»" width="704" height="1100" loading="lazy"></div>
         <div class="label"><b>А. Берлянт. «Информация, которую даёт карта».</b> «Наука и жизнь», №6, 1984, с. 78–82. Картограф рассказывает, как карта становится инструментом исследования. <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">Номер в архиве</a></div>
       </div>
       <div>
@@ -883,6 +899,11 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
   <button type="button" id="ach-reset">Сбросить прогресс</button>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Увеличенное изображение" hidden>
+  <button class="lb-close" id="lb-close" type="button" aria-label="Закрыть">&times;</button>
+  <div class="lb-scroll" id="lb-scroll"><img id="lb-img" alt=""></div>
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
 
 <script>
 (()=>{
@@ -1667,6 +1688,46 @@ try{(function letter(){
     c.toBlob(b=>{ if(!b){note.textContent='Не удалось собрать картинку.';return} const u=URL.createObjectURL(b); const l=document.createElement('a'); l.href=u; l.download='pismo-2056.png'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); note.textContent='Картинка сохранена в загрузки.'; },'image/png');
   };
   render();
+})();}catch(err){console.error('section failed',err)}
+
+
+/* =========================================================
+   LIGHTBOX for scans and illustrations
+   ========================================================= */
+try{(function lightbox(){
+  const SEL='.scan img, .fig img, .pre img, .pred img, .item img, .babat img';
+  const lb=$('#lb'), img=$('#lb-img'), cap=$('#lb-cap'), box=$('#lb-scroll'), close=$('#lb-close');
+  let back=null, fitW=0;
+  const mark=()=>document.querySelectorAll(SEL).forEach(el=>{ if(el.dataset.z) return; el.dataset.z='1'; el.classList.add('zoomable'); el.tabIndex=0; el.setAttribute('role','button'); el.setAttribute('aria-label','Увеличить: '+(el.alt||'изображение')); });
+  mark(); new MutationObserver(mark).observe(document.body,{childList:true,subtree:true});
+  function caption(el){
+    const sc=el.closest('.scan'), lab=sc&&sc.nextElementSibling&&sc.nextElementSibling.classList.contains('label')?sc.nextElementSibling:(el.closest('.fig')||el.parentElement).querySelector('.label');
+    if(lab) return lab.innerHTML.replace(/<a[^>]*>.*?<\/a>/g,'').trim();
+    const pr=el.closest('.pred'); if(pr) return pr.querySelector('.src').textContent;
+    const it=el.closest('.item'); if(it) return it.querySelector('h5').textContent+'<small>Иллюстрация из статьи на Хабре</small>';
+    const pre=el.closest('.pre'); if(pre) return el.parentElement.querySelector('b').textContent;
+    return el.alt||'';
+  }
+  function open(el){
+    back=el; lb.classList.remove('zoomed','nozoom'); img.style.width='';
+    img.onload=()=>{ fitW=img.getBoundingClientRect().width; if(img.naturalWidth<=fitW*1.15 && img.naturalHeight<=img.getBoundingClientRect().height*1.15) lb.classList.add('nozoom') };
+    img.src=el.dataset.full||el.currentSrc||el.src; img.alt=el.alt||'';
+    cap.innerHTML=caption(el); lb.hidden=false; document.documentElement.style.overflow='hidden'; close.focus();
+  }
+  function shut(){ lb.hidden=true; img.removeAttribute('src'); document.documentElement.style.overflow=''; if(back) back.focus({preventScroll:true}) }
+  document.addEventListener('click',e=>{ const el=e.target.closest&&e.target.closest(SEL); if(el && el.classList.contains('zoomable')){ e.preventDefault(); open(el) } });
+  document.addEventListener('keydown',e=>{
+    if(!lb.hidden){ if(e.key==='Escape') shut(); if(e.key==='Tab'){ e.preventDefault(); close.focus() } return }
+    const el=document.activeElement; if((e.key==='Enter'||e.key===' ') && el && el.classList && el.classList.contains('zoomable')){ e.preventDefault(); open(el) } });
+  close.addEventListener('click',shut);
+  lb.addEventListener('click',e=>{ if(e.target===lb||e.target===cap) shut() });
+  img.addEventListener('click',e=>{
+    e.stopPropagation(); if(lb.classList.contains('nozoom')) return;
+    const r=img.getBoundingClientRect(), fx=(e.clientX-r.left)/r.width, fy=(e.clientY-r.top)/r.height;
+    const z=lb.classList.toggle('zoomed');
+    if(z){ img.style.width=Math.max(img.naturalWidth,fitW*1.8)+'px'; requestAnimationFrame(()=>{ box.scrollLeft=fx*box.scrollWidth-box.clientWidth/2; box.scrollTop=fy*box.scrollHeight-box.clientHeight/2 }) }
+    else img.style.width='';
+  });
 })();}catch(err){console.error('section failed',err)}
 
 /* for the curious */
