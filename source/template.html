@@ -510,7 +510,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <a href="#hall-1"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 1 · 1972</span><h3>Как посчитать путь?</h3><p>Обгоните ЭВМ на маршруте по Москве</p></a>
       <a href="#hall-2"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 2 · 1980</span><h3>Как проехать без остановок?</h3><p>Поймайте зелёную волну</p></a>
       <a href="#hall-3"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 3 · 1980</span><h3>Где я?</h3><p>Найдите себя на карте быстрее робота</p></a>
-      <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · сегодня</span><h3>Кому верить телефону?</h3><p>Угадайте, какой сигнал выручит</p></a>
+      <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · сегодня</span><h3>Как телефон определяет геолокацию</h3><p>Угадайте, какой сигнал выручит</p></a>
       <a href="#hall-5"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 5 · 1984</span><h3>Что вокруг?</h3><p>Карта как модель данных</p></a>
       <a href="#hall-6"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 6 · 1984</span><h3>Карта-детектив</h3><p>Найдите центр города по точкам</p></a>
       <a href="#hall-7"><span class="y"><span class="dot" style="background:var(--lime)"></span>Зал 7 · 1938–1980</span><h3>Каким будет город?</h3><p>Проверьте прогнозы прошлого</p></a>
@@ -683,7 +683,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
   <div class="rail"><div class="stop">4</div></div>
   <div class="hall-body">
     <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 4</b> сегодня</div><h2 id="h-hall4">Кому верить телефону?</h2></div>
+      <div><div class="kicker"><i></i><b>Зал 4</b> сегодня</div><h2 id="h-hall4">Как телефон определяет геолокацию</h2></div>
       <p>Обычно телефон узнаёт, где вы, по спутникам. Но в тоннеле их сигнал пропадает, а между высоток отражается от стен. Тогда выручают другие источники: Wi‑Fi и сотовые вышки. Угадайте, что поможет в каждом месте.</p>
     </div>
     <div class="game sig-game">
@@ -934,7 +934,7 @@ const ACH=(function(){
    ========================================================= */
 try{(function trip(){
   const fill=$('#trip-fill'), km=$('#trip-km'), where=$('#trip-where');
-  const halls=[['top','Старт'],['hall-1','Зал 1 · Путь'],['hall-2','Зал 2 · Зелёная волна'],['hall-3','Зал 3 · Где я'],['hall-4','Зал 4 · Кому верить'],['hall-5','Зал 5 · Что вокруг'],['hall-6','Зал 6 · Детектив'],['hall-7','Зал 7 · Прогнозы'],['letter','Финал · 2056']].map(([id,n])=>[document.getElementById(id),n,id]);
+  const halls=[['top','Старт'],['hall-1','Зал 1 · Путь'],['hall-2','Зал 2 · Зелёная волна'],['hall-3','Зал 3 · Где я'],['hall-4','Зал 4 · Геолокация'],['hall-5','Зал 5 · Что вокруг'],['hall-6','Зал 6 · Детектив'],['hall-7','Зал 7 · Прогнозы'],['letter','Финал · 2056']].map(([id,n])=>[document.getElementById(id),n,id]);
   const links=[...document.querySelectorAll('.bar nav a')];
   let raf=0;
   function upd(){
