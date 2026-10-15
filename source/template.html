@@ -390,6 +390,8 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .det-q h3{font-size:clamp(22px,2.2vw,28px);margin-top:8px}
 #d-why{font-size:15.5px;color:var(--ink-2);margin:14px 0 18px;line-height:1.5}
 #d-why b{color:var(--ink)}
+.d-count{font-size:15px;color:var(--ink-2);margin-top:12px}
+.d-count b{color:var(--ink);font-weight:600}
 @media (max-width:900px){.canyon,.det{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.steps{grid-template-columns:minmax(0,1fr)}.corr-grid{grid-template-columns:minmax(0,1fr)}.corr .cam{display:block}.corr .cam canvas{width:140px}.game-top{align-items:flex-start}}
 
@@ -822,8 +824,9 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <div class="det-q game">
         <div class="qprog" id="d-prog">Вопрос 1 из 3</div>
         <h3 id="d-q">Где деловой центр города?</h3>
+        <p class="d-count num" id="d-count" aria-live="polite"></p>
         <p id="d-why" aria-live="polite">Нажмите на квартал на карте.</p>
-        <button class="chip go" id="d-next" type="button" hidden>Следующий вопрос</button>
+        <div class="row"><button class="chip go" id="d-next" type="button" hidden>Следующий вопрос</button><button class="chip" id="d-reveal" type="button">Показать ответ</button></div>
       </div>
     </div>
   </div>
@@ -936,7 +939,7 @@ const ACH=(function(){
     {id:'robot', t:'Глазами робота', d:'Найдите себя на карте без ошибки при помехах от 35%'},
     {id:'wave',  t:'Зелёная волна', d:'Проедьте пять светофоров без единой остановки'},
     {id:'tunnel',t:'Знаток сигналов', d:'Угадайте верный источник во всех четырёх местах'},
-    {id:'detective',t:'Картограф-детектив', d:'Ответьте верно на все три вопроса карты'},
+    {id:'detective',t:'Картограф-детектив', d:'Найдите все верные кварталы без единого промаха'},
     {id:'seer',  t:'Провидец', d:'Угадайте все четыре прогноза о городе будущего'},
     {id:'letter',t:'Письмо в 2056', d:'Соберите свою статью из будущего'},
   ];
@@ -1599,41 +1602,58 @@ try{(function detective(){
   MAP.forEach((row,y)=>row.forEach((t,x)=>{ for(const k in pts){ for(let i=0;i<TYPES[t][k];i++) pts[k].push([(x+.08+r()*.84)*cw,(y+.08+r()*.84)*ch]) } }));
   const on={o:true,c:true,s:true,h:true};
   const Q=[
-    {q:'Где деловой центр города?',ok:(x,y)=>MAP[y][x]==='center',why:'Здесь больше всего офисов и кафе, и сюда сходятся остановки. Днём в этих кварталах тысячи людей.'},
+    {q:'Где деловой центр города?',ok:(x,y)=>MAP[y][x]==='center',why:'Здесь больше всего офисов и кафе, и сюда сходятся остановки. Днём в этих кварталах тысячи людей.',n:'квартала делового центра'},
     {q:'Где спальный район?',ok:(x,y)=>MAP[y][x]==='res',why:'Почти одни жилые дома и мало офисов. Утром отсюда все уезжают, а вечером возвращаются.'},
     {q:'Где лучше открыть кофейню?',ok:(x,y)=>MAP[y][x]==='biz',why:'Много офисов и остановок, а кафе почти нет. Людям негде выпить кофе, значит здесь есть спрос.'},
   ];
-  let qi=0, score=0, pick=null, hover=null, answered=false;
-  const qEl=$('#d-q'), prog=$('#d-prog'), why=$('#d-why'), next=$('#d-next');
+  const total=q=>MAP.reduce((a,row,y)=>a+row.filter((t,x)=>q.ok(x,y)).length,0);
+  let qi=0, clean=0, found=new Set(), miss=0, flash=null, done=false, revealed=false, hover=null;
+  const qEl=$('#d-q'), prog=$('#d-prog'), why=$('#d-why'), next=$('#d-next'), cnt=$('#d-count'), rev=$('#d-reveal');
+  const box=(x,y,col,lw,dash)=>{ ctx.strokeStyle=col; ctx.lineWidth=lw; ctx.setLineDash(dash||[]); ctx.strokeRect(x*cw+3,y*ch+3,cw-6,ch-6); ctx.setLineDash([]) };
   function draw(){
     ctx.fillStyle=css('--card'); ctx.fillRect(0,0,W,H);
     MAP.forEach((row,y)=>row.forEach((t,x)=>{ if(t==='park'){ ctx.fillStyle='rgba(25,170,30,.14)'; ctx.fillRect(x*cw+3,y*ch+3,cw-6,ch-6) } }));
     ctx.strokeStyle=css('--rule'); ctx.lineWidth=1;
     for(let x=1;x<COLS;x++){ctx.beginPath();ctx.moveTo(x*cw,0);ctx.lineTo(x*cw,H);ctx.stroke()}
     for(let y=1;y<ROWS;y++){ctx.beginPath();ctx.moveTo(0,y*ch);ctx.lineTo(W,y*ch);ctx.stroke()}
-    if(hover&&!answered){ ctx.fillStyle='rgba(0,115,250,.08)'; ctx.fillRect(hover[0]*cw,hover[1]*ch,cw,ch) }
+    found.forEach(k=>{ const [x,y]=k.split(',').map(Number); ctx.fillStyle='rgba(25,170,30,.16)'; ctx.fillRect(x*cw+3,y*ch+3,cw-6,ch-6) });
+    if(hover&&!done){ ctx.fillStyle='rgba(0,115,250,.08)'; ctx.fillRect(hover[0]*cw,hover[1]*ch,cw,ch) }
+    if(flash){ ctx.fillStyle='rgba(240,80,60,.18)'; ctx.fillRect(flash[0]*cw+3,flash[1]*ch+3,cw-6,ch-6) }
     for(const k of ['h','o','c','s']){ if(!on[k]) continue; ctx.fillStyle=css(LAY[k].c);
       for(const [a,b] of pts[k]){ ctx.beginPath(); if(k==='s'){ctx.rect(a-3.5,b-3.5,7,7)} else ctx.arc(a,b,k==='h'?3:3.6,0,Math.PI*2); ctx.fill() } }
-    if(answered){
-      MAP.forEach((row,y)=>row.forEach((t,x)=>{ if(Q[qi].ok(x,y)){ ctx.strokeStyle=css('--green'); ctx.lineWidth=4; ctx.strokeRect(x*cw+3,y*ch+3,cw-6,ch-6) } }));
-      if(pick && !Q[qi].ok(pick[0],pick[1])){ ctx.strokeStyle='#F0503C'; ctx.lineWidth=4; ctx.setLineDash([8,6]); ctx.strokeRect(pick[0]*cw+3,pick[1]*ch+3,cw-6,ch-6); ctx.setLineDash([]) }
-    }
+    found.forEach(k=>{ const [x,y]=k.split(',').map(Number); box(x,y,css('--green'),4) });
+    if(flash) box(flash[0],flash[1],'#F0503C',4);
+    if(revealed && qi<Q.length) MAP.forEach((row,y)=>row.forEach((t,x)=>{ if(Q[qi].ok(x,y)&&!found.has(x+','+y)) box(x,y,css('--green'),3,[8,6]) }));
   }
+  function counter(){ const q=Q[qi]; cnt.innerHTML=`Найдено <b>${found.size} из ${total(q)}</b>`+(miss?` · промахов: ${miss}`:''); }
   function render(){
     if(qi>=Q.length){
-      prog.textContent=`Готово: ${score} из ${Q.length}`; qEl.textContent=score===Q.length?'Вы настоящий картограф-детектив':'Неплохое расследование';
-      why.innerHTML='Так работает геоаналитика: на карте не написано «здесь нужна кофейня», но данные это показывают. В 2ГИС Про такие вопросы можно задать карте словами, как в зале 5.';
-      next.textContent='Пройти заново'; next.hidden=false; if(score===Q.length) ACH.unlock('detective'); return;
+      prog.textContent='Готово'; qEl.textContent=`Без промахов: ${clean} из ${Q.length}`; cnt.textContent='';
+      why.innerHTML=(clean===Q.length?'Вы настоящий картограф-детектив. ':'')+'Так работает геоаналитика: на карте не написано «здесь нужна кофейня», но данные это показывают. В 2ГИС Про такие вопросы можно задать карте словами, как в зале 5.';
+      next.textContent='Пройти заново'; next.hidden=false; rev.hidden=true; if(clean===Q.length) ACH.unlock('detective'); found=new Set(); draw(); return;
     }
-    prog.textContent=`Вопрос ${qi+1} из ${Q.length}`; qEl.textContent=Q[qi].q; why.textContent='Нажмите на квартал на карте.'; next.hidden=true; answered=false; pick=null; draw();
+    found=new Set(); miss=0; flash=null; done=false; revealed=false;
+    const t=total(Q[qi]);
+    prog.textContent=`Вопрос ${qi+1} из ${Q.length}`; qEl.textContent=Q[qi].q;
+    const word=t%10>=2&&t%10<=4&&(t%100<12||t%100>14)?'верных квартала':'верных кварталов';
+    why.textContent=t>1?`Здесь ${t} ${word}. Нажимайте на кварталы, пока не найдёте все.`:'Здесь один верный квартал. Нажмите на него.';
+    next.hidden=true; rev.hidden=false; counter(); draw();
+  }
+  function finish(byReveal){
+    done=true; revealed=byReveal; if(!byReveal&&miss===0) clean++;
+    why.innerHTML=`<b>${byReveal?'Вот все верные кварталы.':miss?'Все найдены!':'Все найдены без промахов!'}</b> ${Q[qi].why}`;
+    next.textContent=qi===Q.length-1?'Узнать итог':'Следующий вопрос'; next.hidden=false; rev.hidden=true; counter(); draw();
   }
   const cell=e=>{const b=cv.getBoundingClientRect(); const x=Math.floor((e.clientX-b.left)/b.width*COLS), y=Math.floor((e.clientY-b.top)/b.height*ROWS); return [Math.max(0,Math.min(COLS-1,x)),Math.max(0,Math.min(ROWS-1,y))]};
-  cv.addEventListener('pointermove',e=>{ if(answered||qi>=Q.length) return; hover=cell(e); draw() });
+  cv.addEventListener('pointermove',e=>{ if(done||qi>=Q.length) return; hover=cell(e); draw() });
   cv.addEventListener('pointerleave',()=>{hover=null;draw()});
-  cv.addEventListener('click',e=>{ if(answered||qi>=Q.length) return; pick=cell(e); answered=true; hover=null;
-    const ok=Q[qi].ok(pick[0],pick[1]); if(ok) score++;
-    why.innerHTML=`<b>${ok?'Верно.':'Не совсем.'}</b> ${Q[qi].why}`; next.textContent=qi===Q.length-1?'Узнать итог':'Следующий вопрос'; next.hidden=false; draw(); });
-  next.onclick=()=>{ if(qi>=Q.length){ qi=0; score=0 } else qi++; render() };
+  let ft;
+  cv.addEventListener('click',e=>{ if(done||qi>=Q.length) return; const [x,y]=cell(e), k=x+','+y; if(found.has(k)) return;
+    if(Q[qi].ok(x,y)){ found.add(k); flash=null; if(found.size===total(Q[qi])) return finish(false); why.textContent='Верно! Ищите дальше.' }
+    else { miss++; flash=[x,y]; why.textContent='Не тот квартал. Посмотрите на точки внимательнее.'; clearTimeout(ft); ft=setTimeout(()=>{flash=null;draw()},700) }
+    counter(); draw(); });
+  rev.onclick=()=>{ if(!done&&qi<Q.length) finish(true) };
+  next.onclick=()=>{ if(qi>=Q.length){ qi=0; clean=0 } else qi++; render() };
   document.querySelectorAll('#d-layers [data-l]').forEach(b=>b.addEventListener('click',()=>{ const k=b.dataset.l; on[k]=!on[k]; b.setAttribute('aria-pressed',on[k]); draw() }));
   render();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
