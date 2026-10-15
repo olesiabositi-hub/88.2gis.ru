@@ -173,9 +173,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tip{min-height:22px;font-size:14px;color:var(--ink-2);padding:0 4px 10px}
 .node{cursor:pointer}
 .node circle{transition:fill .15s,stroke .15s}
-.node:hover circle.c,.node:focus-visible circle.c{stroke:var(--green);stroke-width:4}
-.node.done circle.c{fill:var(--ink)}
-.node.done text{fill:var(--paper)}
+
+
+
 .node:focus{outline:none}
 
 .printout{position:relative;background-color:var(--card);background-image:repeating-linear-gradient(180deg,var(--band) 0 48px,transparent 48px 96px);background-position:0 18px;border:1px solid var(--rule);border-radius:3px;padding:18px 46px;font:400 13px/24px var(--mono);text-transform:uppercase;letter-spacing:.02em;color:var(--ink);min-height:540px;max-height:640px;overflow:auto;white-space:pre-wrap;word-break:break-word}
@@ -473,6 +473,33 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .feat em{font-style:normal;font-size:14px;font-weight:500;color:var(--green-ink);text-decoration:underline;text-underline-offset:4px;margin-top:auto}
 @media (max-width:700px){.feat{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.a-chip,.a-phrase mark{transition:none}}
+
+/* hall 1: EVM screen */
+.crt{position:relative;border-radius:10px;overflow:hidden;background:#07120C;box-shadow:inset 0 0 60px rgba(70,224,106,.10),0 0 0 1px rgba(70,224,106,.18)}
+.crt svg{display:block;width:100%;height:auto}
+.crt::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);opacity:.55}
+.crt.booting::before{content:"";position:absolute;left:0;right:0;height:35%;top:-35%;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(70,224,106,.22),transparent);animation:sweep 1.5s ease-out forwards}
+.crt.booting svg{animation:flick 1s steps(8) 1}
+@keyframes sweep{to{top:100%}}
+@keyframes flick{0%{opacity:.2}20%{opacity:.9}30%{opacity:.4}50%{opacity:1}60%{opacity:.7}100%{opacity:1}}
+.crt.flash{animation:flash .8s ease-out}
+@keyframes flash{0%{box-shadow:inset 0 0 120px rgba(255,211,107,.55),0 0 0 2px #FFD36B}100%{box-shadow:inset 0 0 60px rgba(70,224,106,.10),0 0 0 1px rgba(70,224,106,.18)}}
+.node.pre{opacity:0}
+.node.pop{animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}100%{opacity:1;transform:scale(1)}}
+.node{transform-box:fill-box;transform-origin:center}
+.node:hover circle.c,.node:focus-visible circle.c{stroke:#fff;stroke-width:3}
+.node .halo{opacity:0;transform-box:fill-box;transform-origin:center}
+.node.pulse .halo{animation:halo 1.3s ease-out infinite}
+@keyframes halo{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(2.1)}}
+.trail{stroke-dasharray:10 6;animation:trail .9s linear infinite}
+@keyframes trail{to{stroke-dashoffset:-16}}
+.evm-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2);padding:10px 4px 2px}
+.evm-legend span{display:inline-flex;align-items:center;gap:6px}
+.evm-legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.chip.race{background:#FFD36B;border-color:#FFD36B;color:#1b1300}
+.chip.race:hover{background:#F5C24A;color:#1b1300}
+@media (prefers-reduced-motion:reduce){.trail,.node.pulse .halo,.node.pop,.crt.booting::before,.crt.booting svg,.crt.flash{animation:none}}
 /* trip progress */
 .trip{display:flex;gap:12px;font:400 12px/1 var(--mono);color:var(--night-muted);margin-left:8px;white-space:nowrap}
 #trip-where{color:var(--night-text)}
@@ -593,11 +620,13 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
           <div id="u-km-box"><small id="u-km-l">Ваш путь сейчас</small><b id="u-km">0 км</b></div>
           <div><small>Магазинов</small><b id="u-cnt">0 из 12</b></div>
         </div>
-        <svg id="evm-svg" viewBox="0 0 600 520" role="group" aria-label="Схема Москвы с 12 магазинами. Нажимайте на магазины по порядку обхода."></svg>
+        <div class="crt"><svg id="evm-svg" viewBox="0 0 600 520" role="group" aria-label="Схема Москвы с 12 магазинами. Нажимайте на магазины по порядку обхода."></svg></div>
+        <div class="evm-legend" aria-hidden="true"><span><i style="background:#FFD36B"></i>ваш путь</span><span><i style="background:#46E06A"></i>ЭВМ 1972</span><span><i style="background:#5CA4FF"></i>лучший на схеме</span></div>
         <div class="tip" id="evm-tip" aria-live="polite">Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.</div>
         <div class="row">
           <button class="chip" id="b-undo" type="button">Шаг назад</button>
           <button class="chip" id="b-reset" type="button">Заново</button>
+          <button class="chip race" id="b-race" type="button" hidden>Гонка с ЭВМ 1972</button>
           <button class="chip go" id="b-evm" type="button">Запустить ЭВМ 1972</button>
           <button class="chip" id="b-exact" type="button">Лучший маршрут на этой схеме</button>
         </div>
@@ -1207,7 +1236,7 @@ try{(function evm(){
   const hav=(a,b)=>{const R=6371,toR=Math.PI/180;const dLat=(b.lat-a.lat)*toR,dLon=(b.lon-a.lon)*toR;const x=Math.sin(dLat/2)**2+Math.cos(a.lat*toR)*Math.cos(b.lat*toR)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
   const D0=S.map(a=>S.map(b=>hav(a,b)));
   const EVM_ORDER=[0,1,2,3,4,5,6,7,8,9,10,11,12,0];
-  // One measure for everything: straight-line distances on the schematic scaled so the 1972 EVM route equals 33 km, as in the article
+  // One measure for everything: schematic distances scaled so the 1972 EVM route equals 33 km, as in the article
   const KS=33/EVM_ORDER.slice(1).reduce((a,v,k)=>a+D0[EVM_ORDER[k]][v],0);
   const D=D0.map(r=>r.map(v=>v*KS));
   // fisheye projection around the Kremlin
@@ -1215,52 +1244,77 @@ try{(function evm(){
   const proj=(lat,lon)=>{const dx=(lon-C.lon)*kx, dy=(lat-C.lat)*ky; const r=Math.hypot(dx,dy)||1e-9; const rr=Math.pow(r,.38); return [dx/r*rr, -dy/r*rr]};
   const P=S.map(s=>proj(s.lat,s.lon));
   const xs=P.map(p=>p[0]), ys=P.map(p=>p[1]);
-  const pad=30, vw=600, vh=520;
+  const pad=34, vw=600, vh=520;
   const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
   const sc=Math.min((vw-2*pad)/(maxx-minx),(vh-2*pad)/(maxy-miny));
   const ox=(vw-(maxx-minx)*sc)/2-minx*sc, oy=(vh-(maxy-miny)*sc)/2-miny*sc;
+  const toXY=(lat,lon)=>{const [x,y]=proj(lat,lon);return [x*sc+ox,y*sc+oy]};
   const XY=P.map(([x,y])=>[x*sc+ox,y*sc+oy]);
   for(let it=0;it<60;it++) for(let i=0;i<XY.length;i++) for(let j=i+1;j<XY.length;j++){const dx=XY[j][0]-XY[i][0], dy=XY[j][1]-XY[i][1], d=Math.hypot(dx,dy)||1; if(d<30){const m=(30-d)/2, ux=dx/d, uy=dy/d; XY[i][0]-=ux*m; XY[i][1]-=uy*m; XY[j][0]+=ux*m; XY[j][1]+=uy*m}}
-  const ringR=km=>Math.pow(km,.38)*sc; const [kxp,kyp]=[ox,oy];
-  const svg=$('#evm-svg'), NS='http://www.w3.org/2000/svg';
+  const ringR=km=>Math.pow(km,.38)*sc; const kxp=ox, kyp=oy;
+  const svg=$('#evm-svg'), crt=svg.parentElement, NS='http://www.w3.org/2000/svg';
   const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
-  // context: Boulevard ring ~1.4 km, Garden ring ~2.3 km, Kremlin
-  el('circle',{cx:kxp,cy:kyp,r:ringR(1.4),fill:'none',stroke:'var(--rule)','stroke-width':1.5,'stroke-dasharray':'2 5'});
-  el('circle',{cx:kxp,cy:kyp,r:ringR(2.3),fill:'none',stroke:'var(--rule)','stroke-width':2});
-  el('circle',{cx:kxp,cy:kyp,r:ringR(7),fill:'none',stroke:'var(--rule)','stroke-width':1,'stroke-dasharray':'1 6'});
-  const lbl=(x,y,t,anchor='start')=>{const e=el('text',{x,y,'font-size':11,fill:'var(--ink-2)','text-anchor':anchor,'font-family':'var(--sans)'});e.textContent=t;return e};
-  lbl(kxp+ringR(2.3)*.72+4,kyp+ringR(2.3)*.72+12,'Садовое кольцо');
-  el('rect',{x:kxp-5,y:kyp-5,width:10,height:10,fill:'var(--ink-2)',transform:`rotate(45 ${kxp} ${kyp})`});
-  lbl(kxp+10,kyp+4,'Кремль');
+  const PH='#46E06A', DIM='rgba(70,224,106,.30)', AMB='#FFD36B', BLU='#5CA4FF', TXT='#7FD992';
+  // ---------- scene ----------
+  const defs=el('defs',{}); const f=el('filter',{id:'evm-glow',x:'-50%',y:'-50%',width:'200%',height:'200%'},defs);
+  el('feGaussianBlur',{stdDeviation:'2.6',result:'b'},f); const fm=el('feMerge',{},f); el('feMergeNode',{in:'b'},fm); el('feMergeNode',{in:'SourceGraphic'},fm);
+  el('rect',{x:0,y:0,width:vw,height:vh,fill:'#07120C'});
+  const grid=el('g',{stroke:'rgba(70,224,106,.07)','stroke-width':1});
+  for(let x=20;x<vw;x+=40) el('line',{x1:x,y1:0,x2:x,y2:vh},grid);
+  for(let y=20;y<vh;y+=40) el('line',{x1:0,y1:y,x2:vw,y2:y},grid);
+  const base=el('g',{});
+  el('circle',{cx:kxp,cy:kyp,r:ringR(9.4),fill:'rgba(70,224,106,.045)',stroke:'rgba(70,224,106,.16)','stroke-width':1,'stroke-dasharray':'2 6',class:'draw'},base);
+  const pathOf=pts=>'M'+pts.map(([a,b])=>toXY(a,b).map(v=>v.toFixed(1)).join(' ')).join(' L');
+  const river=[[55.758,37.520],[55.748,37.553],[55.735,37.556],[55.719,37.556],[55.713,37.575],[55.722,37.591],[55.733,37.602],[55.742,37.607],[55.7465,37.612],[55.749,37.622],[55.7475,37.640],[55.738,37.651],[55.727,37.662]];
+  el('path',{d:pathOf(river),fill:'none',stroke:'rgba(60,130,170,.32)','stroke-width':11,'stroke-linecap':'round','stroke-linejoin':'round',class:'draw'},base);
+  el('circle',{cx:kxp,cy:kyp,r:ringR(1.4),fill:'none',stroke:DIM,'stroke-width':1.6,'stroke-dasharray':'3 5',class:'draw'},base);
+  el('circle',{cx:kxp,cy:kyp,r:ringR(2.3),fill:'none',stroke:DIM,'stroke-width':2.4,class:'draw'},base);
+  const streets={tver:[[55.7565,37.6135],[55.7650,37.6040],[55.7700,37.5965],[55.7765,37.5830]],arb:[[55.7522,37.6005],[55.7497,37.5905],[55.7478,37.5850]],
+    len:[[55.7290,37.6115],[55.7100,37.5860],[55.6960,37.5680],[55.6840,37.5480],[55.6760,37.5350]],kir:[[55.7590,37.6270],[55.7652,37.6366],[55.7690,37.6420]]};
+  for(const k in streets) el('path',{d:pathOf(streets[k]),fill:'none',stroke:k==='len'?'rgba(70,224,106,.55)':DIM,'stroke-width':k==='len'?3:2,'stroke-linecap':'round',class:'draw'},base);
+  const lbl=(x,y,t,o={})=>{const {p,...rest}=o; const e=el('text',Object.assign({x,y,'font-size':11,fill:TXT,'font-family':'var(--mono)','letter-spacing':'.04em','pointer-events':'none',class:'lbl'},rest),p||base);e.textContent=t;return e};
+  const Lp=toXY(55.722,37.6010); lbl(Lp[0]+8,Lp[1]+2,'ЛЕНИНСКИЙ ПР-Т',{transform:`rotate(46 ${Lp[0]+8} ${Lp[1]+2})`});
+  const Rp=toXY(55.716,37.548); lbl(Rp[0]-60,Rp[1]+16,'МОСКВА-РЕКА',{fill:'#6FA9C8'});
+  const Tp=toXY(55.772,37.592); lbl(Tp[0]+6,Tp[1]-6,'ТВЕРСКАЯ');
+  lbl(kxp+ringR(2.3)*.7+6,kyp+ringR(2.3)*.72+10,'САДОВОЕ КОЛЬЦО');
+  el('rect',{x:kxp-5,y:kyp-5,width:10,height:10,fill:TXT,transform:`rotate(45 ${kxp} ${kyp})`,class:'lbl'},base);
+  lbl(kxp+10,kyp+4,'КРЕМЛЬ');
   const gEvm=el('g',{}), gOpt=el('g',{}), gUser=el('g',{});
-  const userPath=el('polyline',{fill:'none',stroke:'var(--ink)','stroke-width':3,'stroke-dasharray':'7 6','stroke-linejoin':'round','stroke-linecap':'round'},gUser);
-  const gNodes=el('g',{});
+  const userPath=el('polyline',{fill:'none',stroke:AMB,'stroke-width':3.2,'stroke-linejoin':'round','stroke-linecap':'round',filter:'url(#evm-glow)',class:'trail'},gUser);
+  const gNodes=el('g',{}), gRace=el('g',{});
   const tip=$('#evm-tip');
   let route=[0], done=false;
   const nodeEls=S.map((s,i)=>{
     const g=el('g',{class:'node',tabindex:i?0:-1,role:'button','aria-label':`${i?i+'. ':''}${s.n}, ${s.a}`},gNodes);
     const [x,y]=XY[i];
-    el('circle',{cx:x,cy:y,r:16,fill:'transparent'},g);
-    el('circle',{class:'c',cx:x,cy:y,r:i?13:16,fill:i?'var(--card)':'var(--blue)',stroke:i?'var(--ink)':'#fff','stroke-width':i?2.5:3},g);
-    const t=el('text',{x,y:y+4,'font-size':i?12:14,'font-weight':600,'text-anchor':'middle',fill:i?'var(--ink)':'#fff','font-family':'var(--sans)','pointer-events':'none'},g); t.textContent=i?i:'А';
-    const side=x>vw*.62?'end':'start'; const lx=side==='end'?x-16:x+16;
-    if(i===8||i===6) lbl(lx,y-12,s.s,side).setAttribute('pointer-events','none');
+    el('circle',{class:'halo',cx:x,cy:y,r:14,fill:'none',stroke:AMB,'stroke-width':2},g);
+    el('circle',{cx:x,cy:y,r:18,fill:'transparent'},g);
+    el('circle',{class:'c',cx:x,cy:y,r:i?12.5:15,fill:i?'#0B1A10':BLU,stroke:i?PH:'#fff','stroke-width':i?2.4:3,filter:'url(#evm-glow)'},g);
+    const t=el('text',{x,y:y+4,'font-size':i?12:14,'font-weight':600,'text-anchor':'middle',fill:i?PH:'#fff','font-family':'var(--sans)','pointer-events':'none'},g); t.textContent=i?i:'А';
+    const side=x>vw*.62?'end':'start', lx=side==='end'?x-18:x+18;
+    if(i===8||i===6) lbl(lx,y-14,s.s.toUpperCase(),{'text-anchor':side,p:g});
     g.addEventListener('mouseenter',()=>{if(!done) tip.textContent=`${i?i+'. ':''}${s.n}, ${s.a}`});
     g.addEventListener('click',()=>pick(i));
     g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(i)}});
     return g;
   });
   const len=r=>{let s=0;for(let i=1;i<r.length;i++)s+=D[r[i-1]][r[i]];return s};
-  const ukm=$('#u-km'), ucnt=$('#u-cnt'), you=$('#b-you'), youBox=$('#b-you-box');
+  const ukm=$('#u-km'), ucnt=$('#u-cnt'), you=$('#b-you'), youBox=$('#b-you-box'), raceB=$('#b-race');
+  const shortName=i=>`№${i} — ${S[i].a}`;
   function draw(){
     userPath.setAttribute('points',route.map(i=>XY[i].join(',')).join(' '));
-    nodeEls.forEach((g,i)=>g.classList.toggle('done',i>0&&route.includes(i)));
-    ukm.textContent=fmt(len(route))+' км'; ucnt.textContent=`${Math.min(12,new Set(route).size-1)} из 12`;
-    you.textContent=done?fmt(len(route))+' км':'—';
+    const picked=new Set(route);
+    nodeEls.forEach((g,i)=>{ g.classList.toggle('done',i>0&&picked.has(i)); g.classList.toggle('pulse',!done&&i>0&&!picked.has(i)&&route.length>=10) });
+    nodeEls.forEach((g,i)=>{ if(i===0) return; const c=g.querySelector('.c'), t=g.querySelector('text'); const on=picked.has(i); c.setAttribute('fill',on?AMB:'#0B1A10'); c.setAttribute('stroke',on?AMB:PH); t.setAttribute('fill',on?'#1b1300':PH) });
+    const L=len(route);
+    ukm.textContent=fmt(L)+' км'; ucnt.textContent=`${Math.min(12,picked.size-1)} из 12`;
+    you.textContent=done?fmt(L)+' км':'—';
     $('#u-km-l').textContent=done?'Итог':'Ваш путь сейчас';
-    const kb=$('#u-km-box'); kb.classList.toggle('win',done&&len(route)<32.95); kb.classList.toggle('lose',done&&len(route)>33.05);
-    youBox.classList.toggle('win',done&&len(route)<32.95); youBox.classList.toggle('lose',done&&len(route)>33.05);
-    if(!done&&route.length>1) tip.textContent='Отлично. Продолжайте: выберите следующий магазин.';
+    const kb=$('#u-km-box'); kb.classList.toggle('win',done&&L<32.95); kb.classList.toggle('lose',done&&L>33.05);
+    youBox.classList.toggle('win',done&&L<32.95); youBox.classList.toggle('lose',done&&L>33.05);
+    raceB.hidden=!done;
+    if(!done&&route.length>1){ const left=[]; for(let i=1;i<N;i++) if(!picked.has(i)) left.push(i);
+      tip.textContent=left.length<=3?'Осталось: '+left.map(shortName).join('; ')+'.':'Отлично. Продолжайте: выберите следующий магазин.'; }
   }
   function pick(i){
     if(done||i===0||route.includes(i)) return;
@@ -1268,10 +1322,11 @@ try{(function evm(){
     if(route.length===N){ route.push(0); done=true; finishUser(); }
     draw();
   }
-  $('#b-undo').onclick=()=>{ if(done){ route.pop(); done=false } if(route.length>1) route.pop(); draw(); };
-  $('#b-reset').onclick=()=>{ route=[0]; done=false; gEvm.replaceChildren(); gOpt.replaceChildren(); draw(); tip.textContent='Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.'; };
+  function clearRace(){ cancelAnimationFrame(raceRaf); gRace.replaceChildren() }
+  $('#b-undo').onclick=()=>{ clearRace(); if(done){ route.pop(); done=false } if(route.length>1) route.pop(); draw(); };
+  $('#b-reset').onclick=()=>{ clearRace(); route=[0]; done=false; gEvm.replaceChildren(); gOpt.replaceChildren(); draw(); tip.textContent='Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.'; };
 
-  // printout
+  // ---------- printout ----------
   const pr=$('#printout'); let q=Promise.resolve();
   const line=(t,cls)=>{const d=document.createElement('div'); if(cls){const s=document.createElement('span');s.className=cls;s.textContent=t;d.appendChild(s)} else d.textContent=t; return d};
   function print(lines,delay=RM?0:70){
@@ -1286,24 +1341,29 @@ try{(function evm(){
   }
   const pad2=n=>String(n).padStart(2,'0');
   const padR=(s,n)=>(s+' '.repeat(n)).slice(0,n);
-  print(['ВЦ Главмосавтотранса    1972','Задача: кратчайший маршрут','по 12 букинистическим магазинам','Старт и финиш: редакция, ул. Кирова','Вариантов обхода: 479 001 600','—','Жду ваш маршрут']);
 
   function finishUser(){
     const L=len(route), tie=Math.abs(L-33)<.05, beat=!tie&&L<33;
-    tip.textContent=tie?'Ваш маршрут 33,0 км — ровно как у ЭВМ 1972 года! Попробуйте найти путь ещё короче.':beat?`Ваш маршрут ${fmt(L)} км — короче, чем у ЭВМ 1972 года! Посмотрите лучший маршрут на этой схеме.`:`Ваш маршрут ${fmt(L)} км. ЭВМ 1972 года нашла путь короче — 33 км. Нажмите «Запустить ЭВМ 1972», чтобы увидеть её маршрут.`;
+    tip.textContent=tie?'Ваш маршрут 33,0 км — ровно как у ЭВМ 1972 года! Устройте гонку с машиной.':beat?`Ваш маршрут ${fmt(L)} км — короче, чем у ЭВМ 1972 года! Устройте гонку и убедитесь сами.`:`Ваш маршрут ${fmt(L)} км. Нажмите «Гонка с ЭВМ 1972» и посмотрите, кто приедет первым.`;
     if(beat) ACH.unlock('beat');
     print(['—',['Ваш маршрут','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[route[k]][i])}`),['Итого: '+fmt(L)+' км','y'],tie?'Ровно как у ЭВМ 1972!':beat?'Короче, чем у ЭВМ 1972!':'ЭВМ 1972: 33,0 км']);
   }
   const evmRoute=EVM_ORDER;
-  function drawRoute(g,r,color,w,dash){
+  // plotter-style drawing with a moving pen
+  function plot(g,r,color,w,dur){
     g.replaceChildren();
-    const p=el('polyline',{points:r.map(i=>XY[i].join(',')).join(' '),fill:'none',stroke:color,'stroke-width':w,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':dash||''},g);
-    if(!RM){const L=p.getTotalLength(); if(!dash){p.style.strokeDasharray=L; p.style.strokeDashoffset=L; p.getBoundingClientRect(); p.style.transition='stroke-dashoffset 1.6s ease'; p.style.strokeDashoffset=0;}}
+    const p=el('polyline',{points:r.map(i=>XY[i].join(',')).join(' '),fill:'none',stroke:color,'stroke-width':w,'stroke-linejoin':'round','stroke-linecap':'round',filter:'url(#evm-glow)'},g);
+    if(RM) return;
+    const L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
+    const pen=el('circle',{r:6,fill:'#fff',filter:'url(#evm-glow)'},g); const t0=performance.now();
+    const step=now=>{ const k=Math.min(1,(now-t0)/dur); p.style.strokeDashoffset=L*(1-k); const pt=p.getPointAtLength(L*k); pen.setAttribute('cx',pt.x); pen.setAttribute('cy',pt.y);
+      if(k<1) requestAnimationFrame(step); else { p.style.strokeDasharray=''; pen.remove() } };
+    requestAnimationFrame(step);
   }
   $('#b-evm').onclick=()=>{
-    drawRoute(gEvm,evmRoute,'var(--green)',6);
+    plot(gEvm,evmRoute,PH,5,2200);
     print(['—',['Маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[evmRoute[k]][i])}`),
-      ['Итого: 33,0 км','y'],'Инженер вручную: 35,6 км, ~1 час']);
+      ['Итого: 33,0 км','y'],'Инженер вручную: 35,6 км, ~1 час'],150);
   };
   $('#b-exact').onclick=()=>{
     const n=N-1, FULL=(1<<n)-1, dp=new Float64Array((1<<n)*n).fill(Infinity), par=new Int8Array((1<<n)*n).fill(-1);
@@ -1315,12 +1375,60 @@ try{(function evm(){
     const order=[]; let m=FULL, j=bj; while(j>=0){ order.push(j+1); const pj=par[m*n+j]; m&=~(1<<j); j=pj; }
     order.reverse(); const r=[0,...order,0];
     const dt=performance.now()-t0;
-    drawRoute(gOpt,r,'var(--blue)',3,'2 7');
+    plot(gOpt,r,BLU,3,2400);
     print(['—',['Лучший маршрут на этой схеме','hl'],'Компьютер перебрал варианты',`за ${fmt(dt,1)} мс в вашем браузере`,
       ...r.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${S[i].s}`),
       ['Итого: '+fmt(best)+' км','y'],
-      'На реальных улицах лучший','маршрут может быть другим']);
+      'На реальных улицах лучший','маршрут может быть другим'],150);
   };
+
+  // ---------- race ----------
+  let raceRaf=0;
+  const MIN_PER_KM=2; // 30 km/h, same speed for both
+  function cum(r){ const a=[0]; for(let i=1;i<r.length;i++) a.push(a[i-1]+D[r[i-1]][r[i]]); return a }
+  function posAt(r,c,km){ if(km>=c[c.length-1]) return XY[r[r.length-1]]; let i=1; while(c[i]<km) i++; const k=(km-c[i-1])/((c[i]-c[i-1])||1), a=XY[r[i-1]], b=XY[r[i]]; return [a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k] }
+  raceB.onclick=()=>{
+    if(!done) return; clearRace();
+    if(!gEvm.firstChild) plot(gEvm,evmRoute,'rgba(70,224,106,.45)',3,10);
+    const cu=cum(route), ce=cum(evmRoute), Lu=cu[cu.length-1], Le=ce[ce.length-1], Lmax=Math.max(Lu,Le);
+    const dotE=el('circle',{r:8,fill:PH,stroke:'#07120C','stroke-width':2,filter:'url(#evm-glow)'},gRace);
+    const dotU=el('circle',{r:8,fill:AMB,stroke:'#07120C','stroke-width':2,filter:'url(#evm-glow)'},gRace);
+    const tagE=lbl(0,0,'ЭВМ',{fill:PH,'font-size':12,'font-weight':600,p:gRace}), tagU=lbl(0,0,'ВЫ',{fill:AMB,'font-size':12,'font-weight':600,p:gRace});
+    const clock=el('text',{x:16,y:30,'font-size':18,fill:'#E8F0E8','font-family':'var(--mono)'},gRace);
+    const DUR=RM?0:8000, t0=performance.now(); let saidE=false, saidU=false;
+    print(['—',['Гонка: вы против ЭВМ 1972','hl'],'Скорость у обоих 30 км/ч','Старт: редакция, ул. Кирова'],40);
+    const fin=(who,km)=>print([`${who} в редакции: ${Math.round(km*MIN_PER_KM)} мин`],0);
+    const step=now=>{
+      const k=DUR?Math.min(1,(now-t0)/DUR):1, km=Lmax*k;
+      const pe=posAt(evmRoute,ce,Math.min(km,Le)), pu=posAt(route,cu,Math.min(km,Lu));
+      dotE.setAttribute('cx',pe[0]); dotE.setAttribute('cy',pe[1]); dotU.setAttribute('cx',pu[0]); dotU.setAttribute('cy',pu[1]);
+      tagE.setAttribute('x',pe[0]+11); tagE.setAttribute('y',pe[1]-9); tagU.setAttribute('x',pu[0]+11); tagU.setAttribute('y',pu[1]+18);
+      clock.textContent=`В ПУТИ: ${Math.round(km*MIN_PER_KM)} МИН`;
+      if(!saidE&&km>=Le){ saidE=true; fin('ЭВМ',Le) }
+      if(!saidU&&km>=Lu){ saidU=true; fin('Вы',Lu) }
+      if(k<1){ raceRaf=requestAnimationFrame(step); return }
+      const dm=Math.round((Lu-Le)*MIN_PER_KM);
+      const res=Math.abs(dm)<1?'Ничья! Вы приехали одновременно с ЭВМ.':dm>0?`ЭВМ приехала раньше на ${dm} мин.`:`Вы приехали раньше ЭВМ на ${-dm} мин!`;
+      print([[res,'y']],0); tip.textContent=res+(dm>0?' Попробуйте другой порядок: «Заново».':'');
+      crt.classList.remove('flash'); void crt.offsetWidth; crt.classList.add('flash');
+    };
+    raceRaf=requestAnimationFrame(step);
+  };
+
+  // ---------- boot sequence ----------
+  let booted=false;
+  function boot(){
+    if(booted) return; booted=true;
+    print(['ВЦ Главмосавтотранса    1972','Загрузка карты Москвы...','Кольца: ОК   Река: ОК   Улицы: ОК','Магазинов: 12','Задача: кратчайший маршрут','Старт и финиш: редакция, ул. Кирова','Вариантов обхода: 479 001 600','—','Жду ваш маршрут'],RM?0:110);
+    if(RM) return;
+    crt.classList.add('booting');
+    base.querySelectorAll('.draw').forEach((p,i)=>{ const L=p.getTotalLength?p.getTotalLength():0; if(!L) return; p.style.strokeDasharray=L; p.style.strokeDashoffset=L; p.getBoundingClientRect(); p.style.transition=`stroke-dashoffset 1.1s ease ${.15+i*.12}s`; p.style.strokeDashoffset=0;
+      setTimeout(()=>{p.style.strokeDasharray='';p.style.transition=''},1600+i*120) });
+    base.querySelectorAll('.lbl').forEach(t=>{ t.style.opacity=0; t.style.transition='opacity .5s ease 1.3s'; t.getBoundingClientRect(); t.style.opacity=1 });
+    nodeEls.forEach((g,i)=>{ g.classList.add('pre'); setTimeout(()=>{ g.classList.remove('pre'); g.classList.add('pop') },900+(i===0?0:i*110)) });
+    setTimeout(()=>crt.classList.remove('booting'),2600);
+  }
+  if('IntersectionObserver' in window){ const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); boot() } },{threshold:.35}); io.observe(svg) } else boot();
   draw();
 })();}catch(err){console.error('section failed',err)}
 
