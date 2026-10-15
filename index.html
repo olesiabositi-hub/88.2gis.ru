@@ -37,23 +37,24 @@
   --paper:#EEF1EB; --paper-2:#E2E8DE; --card:#F8FAF6; --ink:#131C16; --ink-2:#4B5950; --rule:#C4CEC2; --band:#DCEBD5;
   --green:#19AA1E; --green-ink:#0B6A1C; --blue:#0073FA; --blue-ink:#0058C4; --yellow:#FFB81C; --yellow-ink:#8A5A00; --lime:#82D714;
   --night:#0B130F; --night-2:#121D17; --night-line:#22322A; --night-text:#E8F0E8; --night-muted:#90A396;
-  --scan-bg:#FFFFFF; --road:#D3DBD1; --road-line:#FFFFFF;
+  --scan-bg:#FFFFFF; --road:#D3DBD1; --road-line:#FFFFFF; --sky:#DCE9F2;
   --sans:"SB Sans Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --mono:"PT Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --gutter:clamp(16px,4vw,40px);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#0F1612; --paper-2:#16201A; --card:#1A251F; --ink:#E3EBE3; --ink-2:#9BA99F; --rule:#2B3830; --band:#14241A;
-  --green-ink:#4FCF59; --blue-ink:#5CA4FF; --yellow-ink:#FFC94D; --scan-bg:#E9ECE6; --road:#26322B; --road-line:#5D6E63; color-scheme:dark}}
+  --green-ink:#4FCF59; --blue-ink:#5CA4FF; --yellow-ink:#FFC94D; --scan-bg:#E9ECE6; --road:#26322B; --road-line:#5D6E63; --sky:#18242C; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#0F1612; --paper-2:#16201A; --card:#1A251F; --ink:#E3EBE3; --ink-2:#9BA99F; --rule:#2B3830; --band:#14241A;
-  --green-ink:#4FCF59; --blue-ink:#5CA4FF; --yellow-ink:#FFC94D; --scan-bg:#E9ECE6; --road:#26322B; --road-line:#5D6E63; color-scheme:dark}
+  --green-ink:#4FCF59; --blue-ink:#5CA4FF; --yellow-ink:#FFC94D; --scan-bg:#E9ECE6; --road:#26322B; --road-line:#5D6E63; --sky:#18242C; color-scheme:dark}
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{max-width:100%;height:auto;display:block}
+[hidden]{display:none!important}
 a{color:inherit}
 h1,h2,h3,h4,h5{margin:0;font-weight:600;letter-spacing:-.03em;text-wrap:balance;line-height:1.08}
 p{margin:0}
@@ -395,6 +396,37 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 #d-why b{color:var(--ink)}
 @media (max-width:900px){.canyon,.det{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.steps{grid-template-columns:minmax(0,1fr)}.corr-grid{grid-template-columns:minmax(0,1fr)}.corr .cam{display:block}.corr .cam canvas{width:140px}.game-top{align-items:flex-start}}
+
+/* hall 4: which signal */
+.sig-steps{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--ink-2);margin-bottom:14px}
+.sig-steps .cur{color:var(--ink);font-weight:600}
+.sig-steps .done{color:var(--green-ink)}
+.sig-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px;align-items:start}
+.sig-scene svg{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule)}
+#s-svg.dark .pb{fill:#E8F0E8}
+#s-svg.dark .pl{stroke:#E8F0E8}
+#s-svg .lt path{stroke:#E8F0E8}
+#s-svg .flow{stroke-dasharray:10 8;animation:flow .8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-18}}
+.sig-side h3{font-size:clamp(20px,2vw,26px);letter-spacing:-.02em}
+.sig-opts{display:grid;gap:10px;margin-top:16px}
+.sig-opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:transparent;border:1.5px solid var(--rule);border-radius:12px;padding:12px 16px;font-size:17px;font-weight:500;color:var(--ink);transition:border-color .15s,background .15s}
+.sig-opt svg{width:40px;height:28px;flex:none}
+.sig-opt:hover:not(:disabled){border-color:var(--ink)}
+.sig-opt:disabled{cursor:default}
+.sig-opt.right{border-color:var(--green);background:color-mix(in srgb,var(--green) 14%,transparent)}
+.sig-opt.wrong{border-color:#F0503C;background:color-mix(in srgb,#F0503C 10%,transparent)}
+.sig-res{margin:16px 0}
+.verdict-line{font-size:16px}
+.verdict-line b{font-weight:600}
+.sig-list{list-style:none;padding:0;margin:12px 0}
+.sig-list li{display:flex;align-items:center;gap:10px;font-size:14.5px;padding:6px 0;border-top:1px solid var(--rule)}
+.sig-list li span{margin-left:auto;color:var(--ink-2)}
+.sig-list i{width:10px;height:10px;border-radius:50%;background:#F0503C;flex:none}
+.sig-list .ok i{background:#19AA1E}.sig-list .weak i{background:#E0A000}
+.sig-res .why{font-size:15px;color:var(--ink-2);line-height:1.5}
+@media (max-width:900px){.sig-grid{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){#s-svg .flow{animation:none}}
 /* trip progress */
 .trip{display:flex;gap:12px;font:400 12px/1 var(--mono);color:var(--night-muted);margin-left:8px;white-space:nowrap}
 #trip-where{color:var(--night-text)}
@@ -490,7 +522,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <a href="#hall-1"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 1 · 1972</span><h3>Как посчитать путь?</h3><p>Обгоните ЭВМ на маршруте по Москве</p></a>
       <a href="#hall-2"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 2 · 1980</span><h3>Как проехать без остановок?</h3><p>Поймайте зелёную волну</p></a>
       <a href="#hall-3"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 3 · 1980</span><h3>Где я?</h3><p>Найдите себя на карте быстрее робота</p></a>
-      <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · 1975</span><h3>Без спутников</h3><p>Выведите машину из тоннеля вслепую</p></a>
+      <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · сегодня</span><h3>Кому верить телефону?</h3><p>Угадайте, какой сигнал выручит</p></a>
       <a href="#hall-5"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 5 · 1984</span><h3>Что вокруг?</h3><p>Карта как модель данных</p></a>
       <a href="#hall-6"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 6 · 1984</span><h3>Карта-детектив</h3><p>Найдите центр города по точкам</p></a>
       <a href="#hall-7"><span class="y"><span class="dot" style="background:var(--lime)"></span>Зал 7 · 1938–1980</span><h3>Каким будет город?</h3><p>Проверьте прогнозы прошлого</p></a>
@@ -658,32 +690,31 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
   </div>
 </section>
 
-<!-- ================= HALL 4: NO SATELLITES ================= -->
+<!-- ================= HALL 4: WHICH SIGNAL ================= -->
 <section class="hall" id="hall-4" style="--c:var(--blue)" aria-labelledby="h-hall4">
   <div class="rail"><div class="stop">4</div></div>
   <div class="hall-body">
     <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 4</b> 1975 → 2026</div><h2 id="h-hall4">Без спутников</h2></div>
-      <p>Птицы находят дорогу без карт и спутников. Об этом в 1975 году писал Г. Николаев в «Науке и жизни», и на его статью потом ссылались авторы «Робота-штурмана». Машине труднее: в тоннеле сигнал спутников пропадает, и навигатор считает по памяти, зная только скорость и время.</p>
+      <div><div class="kicker"><i></i><b>Зал 4</b> сегодня</div><h2 id="h-hall4">Кому верить телефону?</h2></div>
+      <p>Обычно телефон узнаёт, где вы, по спутникам. Но в тоннеле их сигнал пропадает, а между высоток отражается от стен. Тогда выручают другие источники: Wi‑Fi и сотовые вышки. Угадайте, что поможет в каждом месте.</p>
     </div>
-    <div class="game">
-      <p class="task"><b>Задача:</b> нажмите «Выехала!» ровно в тот момент, когда машина выедет из тоннеля. Внутри её не видно. Подсказка только одна: спидометр.</p>
-      <div class="game-top">
-        <div class="big-num"><small>Спидометр</small><b><span id="t-speed">0</span> км/ч</b></div>
-        <div class="row"><button class="chip blue big" id="t-go" type="button">Въехать в тоннель</button><button class="chip go big" id="t-now" type="button" disabled>Выехала!</button></div>
+    <div class="game sig-game">
+      <div class="sig-steps" id="s-steps" aria-hidden="true"></div>
+      <div class="sig-grid">
+        <div class="sig-scene"><svg id="s-svg" viewBox="0 0 600 300" role="img" aria-label="Иллюстрация места: человек с телефоном и источники сигнала"></svg></div>
+        <div class="sig-side">
+          <h3 id="s-q" aria-live="polite"></h3>
+          <div class="sig-opts" id="s-opts" role="group" aria-label="Варианты ответа">
+            <button type="button" class="sig-opt" data-k="sat"><svg viewBox="-34 -20 68 40" aria-hidden="true"><rect x="-9" y="-7" width="18" height="14" rx="3" fill="currentColor"/><rect x="-30" y="-6" width="18" height="12" fill="var(--blue)"/><rect x="12" y="-6" width="18" height="12" fill="var(--blue)"/></svg>Спутник</button>
+            <button type="button" class="sig-opt" data-k="wifi"><svg viewBox="-20 -16 40 32" aria-hidden="true"><rect x="-16" y="4" width="32" height="10" rx="3" fill="currentColor"/><path d="M-10 -2 a14 14 0 0 1 20 0 M-5 3 a7 7 0 0 1 10 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Wi‑Fi</button>
+            <button type="button" class="sig-opt" data-k="cell"><svg viewBox="-20 -40 40 62" aria-hidden="true"><path d="M0 -26 L-12 18 M0 -26 L12 18 M-8 4 L8 4 M-5 -8 L5 -8" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M-10 -32 a12 12 0 0 1 20 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Сотовая вышка</button>
+          </div>
+          <div class="sig-res" id="s-res" aria-live="polite" hidden></div>
+          <button type="button" class="chip go" id="s-next" hidden>Следующее место</button>
+        </div>
       </div>
-      <div class="road-wrap"><svg id="t-svg" viewBox="0 0 1000 195" role="img" aria-label="Дорога с тоннелем длиной 900 метров"></svg></div>
-      <p class="game-out" id="t-out" aria-live="polite">Скорость внутри тоннеля каждый раз меняется по-новому, так что запомнить ответ не получится.</p>
     </div>
     <p class="punch">Вот почему навигация в тоннелях и между высоток до сих пор трудная задача.</p>
-    <div class="canyon">
-      <div><canvas id="t-canyon" width="640" height="300" aria-label="Схема: координаты GPS между высотными домами"></canvas></div>
-      <div>
-        <h3>А что между высоток?</h3>
-        <p>Спутник есть, но сигнал отражается от стен. Красные точки — сырые координаты: они прыгают на десятки метров и иногда оказываются прямо в домах. Зелёный пунктир — где человек идёт на самом деле, синяя линия — что получается, если отбросить выбросы.</p>
-        <div class="row" style="margin-top:14px"><button class="chip" id="t-canyon-new" type="button">Ещё раз</button></div>
-      </div>
-    </div>
     <div class="today">
       <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
       <div class="items one">
@@ -878,7 +909,7 @@ const ACH=(function(){
     {id:'beat',  t:'Обогнал ЭВМ', d:'Проложите маршрут по 12 магазинам короче, чем ЭВМ в 1972 году'},
     {id:'robot', t:'Глазами робота', d:'Найдите себя на карте без ошибки при помехах от 35%'},
     {id:'wave',  t:'Зелёная волна', d:'Проедьте пять светофоров без единой остановки'},
-    {id:'tunnel',t:'Штурман в тоннеле', d:'Угадайте выезд из тоннеля точнее чем на 50 м'},
+    {id:'tunnel',t:'Знаток сигналов', d:'Угадайте верный источник во всех четырёх местах'},
     {id:'detective',t:'Картограф-детектив', d:'Ответьте верно на все три вопроса карты'},
     {id:'seer',  t:'Провидец', d:'Угадайте все четыре прогноза о городе будущего'},
     {id:'letter',t:'Письмо в 2056', d:'Соберите свою статью из будущего'},
@@ -915,7 +946,7 @@ const ACH=(function(){
    ========================================================= */
 try{(function trip(){
   const fill=$('#trip-fill'), km=$('#trip-km'), where=$('#trip-where');
-  const halls=[['top','Старт'],['hall-1','Зал 1 · Путь'],['hall-2','Зал 2 · Зелёная волна'],['hall-3','Зал 3 · Где я'],['hall-4','Зал 4 · Без спутников'],['hall-5','Зал 5 · Что вокруг'],['hall-6','Зал 6 · Детектив'],['hall-7','Зал 7 · Прогнозы'],['letter','Финал · 2056']].map(([id,n])=>[document.getElementById(id),n,id]);
+  const halls=[['top','Старт'],['hall-1','Зал 1 · Путь'],['hall-2','Зал 2 · Зелёная волна'],['hall-3','Зал 3 · Где я'],['hall-4','Зал 4 · Кому верить'],['hall-5','Зал 5 · Что вокруг'],['hall-6','Зал 6 · Детектив'],['hall-7','Зал 7 · Прогнозы'],['letter','Финал · 2056']].map(([id,n])=>[document.getElementById(id),n,id]);
   const links=[...document.querySelectorAll('.bar nav a')];
   let raf=0;
   function upd(){
@@ -1378,111 +1409,88 @@ try{(function wave(){
   setCar(0); paintLights(0); if(!RM) requestAnimationFrame(frame);
 })();}catch(err){console.error('section failed',err)}
 
-try{(function tunnel(){
-  const svg=$('#t-svg'), NS='http://www.w3.org/2000/svg';
-  const el=(t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
-  const APP=230, TUN=900, EXIT=170, TOTAL=APP+TUN+EXIT, K=8;
-  const VW=svg.getBoundingClientRect().width<640?560:1000; svg.setAttribute('viewBox',`0 0 ${VW} 195`);
-  const X0=30, X1=VW-30, px=m=>X0+(m/TOTAL)*(X1-X0);
-  const T0=APP, T1=APP+TUN;
-  // scene
-  el('rect',{x:0,y:110,width:VW,height:44,fill:'var(--road)'});
-  el('line',{x1:0,y1:132,x2:VW,y2:132,stroke:'var(--road-line)','stroke-width':2,'stroke-dasharray':'14 12'});
-  const gTrace=el('g',{});
-  const car=el('g',{});
-  el('rect',{x:-20,y:-10,width:40,height:20,rx:6,fill:'var(--blue)'},car);
-  el('rect',{x:5,y:-7,width:9,height:14,rx:2,fill:'rgba(255,255,255,.75)'},car);
-  // tunnel drawn on top of car
-  el('path',{d:`M${px(T0)} 160 L${px(T0)} 82 Q${px(T0)} 64 ${px(T0)+18} 64 L${px(T1)-18} 64 Q${px(T1)} 64 ${px(T1)} 82 L${px(T1)} 160 Z`,fill:'var(--night)'});
-  for(let m=T0+60;m<T1-30;m+=90) el('circle',{cx:px(m),cy:76,r:2.5,fill:'#FFD36B',opacity:.55});
-  const lbl=(x,y,t,fill='var(--ink-2)',anchor='middle')=>{const e=el('text',{x,y,'text-anchor':anchor,'font-size':13,fill,'font-family':'var(--sans)'});e.textContent=t;return e};
-  lbl(px(T0),182,'въезд'); lbl(px(T1),182,'выезд'); lbl((px(T0)+px(T1))/2,100,'900 м без спутников','#90A396');
-  const sat=lbl(px(40),40,'Спутник: есть','var(--green-ink)','start');
-  const gMarks=el('g',{});
-  const spEl=$('#t-speed'), out=$('#t-out'), bGo=$('#t-go'), bNow=$('#t-now');
-  let prof=null, running=false, simT=0, last=0, pressX=null, bias=0, done=false;
-  function makeProfile(){
-    // piecewise speeds (km/h) by distance inside the tunnel, random each round
-    const n=3+Math.floor(Math.random()*2), cuts=[0]; for(let i=1;i<n;i++) cuts.push(Math.round(TUN*(i/n+(Math.random()-.5)*.12))); cuts.push(TUN);
-    const sp=[]; for(let i=0;i<n;i++) sp.push([20,25,30,40,50,60,70][Math.floor(Math.random()*7)]);
-    if(sp.every(s=>s===sp[0])) sp[1]=sp[0]>40?25:60;
-    return {cuts,sp,app:60,exit:sp[n-1]};
-  }
-  function speedAt(x){ // km/h, smoothed over 40 m
-    if(x<T0) return prof.app; if(x>=T1) return prof.exit;
-    const d=x-T0; let i=0; while(i<prof.sp.length-1&&d>=prof.cuts[i+1]) i++;
-    const v=prof.sp[i], prev=i?prof.sp[i-1]:prof.app, into=d-prof.cuts[i];
-    return into<40?prev+(v-prev)*into/40:v;
-  }
-  // integrate position over sim time
-  let x=0;
-  function step(dt){ let rem=dt; while(rem>0){ const h=Math.min(rem,.05); x+=speedAt(x)/3.6*h; rem-=h } }
-  function draw(){
-    car.setAttribute('transform',`translate(${px(Math.min(x,TOTAL))},121)`);
-    spEl.textContent=Math.round(speedAt(x));
-    const inside=x>=T0&&x<T1; sat.textContent=inside?'Спутник: нет сигнала':'Спутник: есть'; sat.setAttribute('fill',inside?'#F0503C':'var(--green-ink)');
-  }
-  function mark(m,color,text,y){ const X=px(Math.max(0,Math.min(TOTAL,m)));
-    el('line',{x1:X,y1:y,x2:X,y2:160,stroke:color,'stroke-width':3,'stroke-linecap':'round'},gMarks);
-    el('circle',{cx:X,cy:y,r:6,fill:color},gMarks);
-    const t=el('text',{x:X,y:y-12,'text-anchor':'middle','font-size':13,'font-weight':600,fill:color,'font-family':'var(--sans)'},gMarks); t.textContent=text; }
-  function frame(ts){
-    const dt=last?Math.min(.05,(ts-last)/1000):0; last=ts;
-    if(running){ step(dt*K); simT+=dt*K; draw();
-      if(x>=T0 && bNow.disabled && pressX==null) bNow.disabled=false;
-      if(x>=T1+speedAt(T1)/3.6*1.6*K && pressX==null) end(null);
-      if(x>=TOTAL) running=false;
-    }
-    if(running) requestAnimationFrame(frame);
-  }
-  function end(px_){
-    if(done) return; done=true;
-    const p=px_==null?x:px_; pressX=p; bNow.disabled=true; bGo.disabled=false; bGo.textContent='Ещё раз';
-    const err=p-T1, navErr=Math.abs(bias)*TUN, a=Math.abs(err);
-    gMarks.replaceChildren();
-    mark(T1,'var(--green)','выезд',78);
-    mark(T1+(bias*TUN),'var(--blue)','навигатор',50);
-    mark(p,'#E0A000','вы',24);
-    const side=err<0?'до выезда':'после выезда';
-    out.innerHTML=(px_==null?'<b>Машина уже выехала, а кнопка не нажата.</b> ':'')+
-      `Вы нажали, когда машина была в <b>${intf(Math.round(a))} м ${side}</b>. Навигатор, который считал по скорости и времени, ошибся на <b>${intf(Math.round(navErr))} м</b>. `+
-      (a<50?'Отличное чутьё штурмана!':'Внутри тоннеля скорость менялась, и считать в уме трудно.')+' Ошибка растёт с каждой секундой без спутника.';
-    if(a<50) ACH.unlock('tunnel');
-  }
-  bGo.onclick=()=>{
-    prof=makeProfile(); bias=(Math.random()<.5?-1:1)*(.03+Math.random()*.03);
-    x=0; simT=0; pressX=null; done=false; gMarks.replaceChildren(); out.textContent='Машина едет к тоннелю. Следите за спидометром.';
-    bGo.disabled=true; bNow.disabled=true; last=0;
-    if(RM){ out.textContent='Анимация отключена в настройках системы, поэтому игра недоступна. Ниже объясняем, в чём её смысл.'; bGo.disabled=false; return }
-    running=true; draw(); requestAnimationFrame(frame);
+try{(function signals(){
+  const svg=$('#s-svg'), qEl=$('#s-q'), opts=$('#s-opts'), res=$('#s-res'), steps=$('#s-steps'), nextB=$('#s-next');
+  const P=[300,222]; // phone
+  const ICON={
+    sat:'<g><rect x="-9" y="-7" width="18" height="14" rx="3" fill="var(--ink)"/><rect x="-30" y="-6" width="18" height="12" fill="var(--blue)"/><rect x="12" y="-6" width="18" height="12" fill="var(--blue)"/><line x1="-12" y1="0" x2="-9" y2="0" stroke="var(--ink)" stroke-width="2"/><line x1="9" y1="0" x2="12" y2="0" stroke="var(--ink)" stroke-width="2"/></g>',
+    wifi:'<g><rect x="-16" y="2" width="32" height="10" rx="3" fill="var(--ink)"/><path d="M-10 -4 a14 14 0 0 1 20 0 M-5 1 a7 7 0 0 1 10 0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="7" r="1.8" fill="#2BD13A"/></g>',
+    cell:'<g><path d="M0 -26 L-12 18 M0 -26 L12 18 M-8 4 L8 4 M-5 -8 L5 -8" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M-10 -32 a12 12 0 0 1 20 0 M-16 -36 a20 20 0 0 1 32 0" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></g>'
   };
-  bNow.onclick=()=>{ if(pressX!=null) return; end(x) };
-  x=0; prof={cuts:[0,TUN],sp:[50],app:60,exit:50}; draw(); spEl.textContent='0';
+  const NAME={sat:'Спутник',wifi:'Wi‑Fi',cell:'Сотовая вышка'};
+  const ST={ok:['есть','ok'],weak:['слабый','weak'],bounce:['отражается от стен','bad'],blocked:['не проходит','bad'],none:['нет рядом','bad']};
+  const person=`<g class="person" transform="translate(${P[0]},${P[1]})"><circle class="pb" cx="0" cy="-34" r="9" fill="var(--ink)"/><path class="pb" d="M-10 -22 h20 v26 h-20z" fill="var(--ink)"/><path class="pl" d="M-8 4 l-3 26 M8 4 l3 26" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><rect x="10" y="-22" width="9" height="15" rx="2" fill="var(--blue)" stroke="#fff" stroke-width="1.5"/></g>`;
+  const use=(k,x,y,s=1,o=1)=>`<g transform="translate(${x},${y}) scale(${s})" opacity="${o}">${ICON[k]}</g>`;
+  const ground=(c='var(--road)')=>`<rect x="0" y="252" width="600" height="48" fill="${c}"/>`;
+  const PH=[P[0]+14,P[1]-14];
+  const SC=[
+    {id:'field', title:'В поле', q:'Вы гуляете в поле. Как телефону понять, где вы?', ans:'sat',
+     why:'Над головой открытое небо: сигнал спутников доходит до телефона без помех. Это самый точный источник, когда ему ничего не мешает.',
+     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground('#9BCB8A')}
+       <circle cx="470" cy="236" r="22" fill="#6FAE5E"/><rect x="467" y="236" width="6" height="18" fill="#6B5A43"/><circle cx="130" cy="240" r="16" fill="#6FAE5E"/>
+       ${use('sat',80,48)}${use('cell',548,206,.7)}`,
+     sig:{sat:{t:'ok',d:`M80 48 L${PH}`},wifi:{t:'none'},cell:{t:'weak',d:`M548 196 L${PH}`}}},
+    {id:'canyon', title:'Между высоток', q:'Вы идёте между небоскрёбами. Как телефону понять, где вы?', ans:'wifi',
+     why:'Спутниковый сигнал отражается от стен и приходит с опозданием, поэтому точка на карте «прыгает» на десятки метров. А роутеров Wi‑Fi в домах вокруг много, и по ним место определяется точнее.',
+     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground()}
+       <rect x="120" y="20" width="120" height="232" fill="var(--ink-2)"/><rect x="360" y="40" width="130" height="212" fill="var(--ink-2)"/>
+       ${[0,1,2,3,4,5,6].map(i=>`<rect x="136" y="${36+i*30}" width="88" height="10" fill="rgba(255,255,255,.18)"/><rect x="376" y="${56+i*27}" width="98" height="9" fill="rgba(255,255,255,.18)"/>`).join('')}
+       ${use('sat',60,40)}${use('wifi',205,150,.9)}${use('wifi',400,118,.9)}${use('cell',548,206,.7)}`,
+     sig:{sat:{t:'bounce',d:'M60 40 L238 118 L362 170 L322 198'},wifi:{t:'ok',d:`M205 150 L${PH} M400 118 L${PH}`},cell:{t:'ok',d:`M548 196 L${PH}`}}},
+    {id:'tunnel', title:'В тоннеле', q:'Вы едете по тоннелю. Как телефону понять, где вы?', ans:'cell',
+     why:'Спутник сквозь землю и бетон не пробьётся, Wi‑Fi в тоннеле обычно нет. Зато в тоннелях ставят антенны сотовой связи: по ним место видно примерно, а остальное навигатор досчитывает по скорости и времени.',
+     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground()}
+       <path d="M60 252 L60 150 Q60 112 98 112 L502 112 Q540 112 540 150 L540 252 Z" fill="#5E6B62"/><path d="M90 252 L90 160 Q90 140 110 140 L490 140 Q510 140 510 160 L510 252 Z" fill="var(--night)"/>
+       <rect x="0" y="92" width="600" height="22" fill="#9BCB8A"/>
+       ${use('sat',80,40)}<g class="lt">${use('cell',190,172,.6)}</g>`,
+     sig:{sat:{t:'blocked',d:'M80 40 L170 100',x:[170,100]},wifi:{t:'none'},cell:{t:'ok',d:`M190 172 L${PH}`}}, dark:true},
+    {id:'mall', title:'В торговом центре', q:'Вы в торговом центре. Как телефону понять, где вы?', ans:'wifi',
+     why:'Крыша и стены не пропускают спутниковый сигнал, а вышка снаружи даёт лишь примерное место. Зато в ТЦ десятки роутеров Wi‑Fi. А в некоторых ТЦ 2ГИС находит вас даже по фото с камеры, как в зале 3.',
+     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground()}
+       <path d="M70 252 L70 96 L300 56 L530 96 L530 252 Z" fill="var(--card)" stroke="var(--ink-2)" stroke-width="4"/>
+       <rect x="120" y="150" width="70" height="60" fill="var(--paper-2)"/><rect x="410" y="150" width="70" height="60" fill="var(--paper-2)"/>
+       ${use('sat',70,30)}${use('wifi',160,128,.8)}${use('wifi',300,100,.8)}${use('wifi',450,128,.8)}${use('cell',575,206,.6)}`,
+     sig:{sat:{t:'blocked',d:'M70 30 L178 76',x:[178,76]},wifi:{t:'ok',d:`M160 128 L${PH} M300 100 L${PH} M450 128 L${PH}`},cell:{t:'weak',d:`M575 196 L${PH}`}}},
+  ];
+  let i=0, score=0, answered=false;
+  function drawScene(reveal){
+    const s=SC[i]; let sig='';
+    if(reveal) for(const k of ['sat','wifi','cell']){ const g=s.sig[k]; if(!g.d) continue;
+      const col=g.t==='ok'?'#19AA1E':g.t==='weak'?'#E0A000':'#F0503C';
+      sig+=`<path d="${g.d}" fill="none" stroke="${col}" stroke-width="${g.t==='ok'?4:3}" stroke-linecap="round" stroke-linejoin="round" ${g.t==='ok'?'class="flow"':'stroke-dasharray="7 7"'}/>`;
+      if(g.x) sig+=`<g transform="translate(${g.x[0]},${g.x[1]})"><circle r="11" fill="#F0503C"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></g>`; }
+    svg.innerHTML=s.draw()+sig+person; svg.classList.toggle('dark',!!s.dark);
+  }
+  function render(){
+    answered=false; const s=SC[i];
+    steps.innerHTML=SC.map((x,k)=>`<span class="${k<i?'done':k===i?'cur':''}">${k+1}. ${x.title}</span>`).join('');
+    qEl.textContent=s.q; res.hidden=true; nextB.hidden=true;
+    opts.querySelectorAll('button').forEach(b=>{ b.disabled=false; b.className='sig-opt' });
+    drawScene(false);
+  }
+  opts.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    if(answered) return; answered=true; const s=SC[i], k=b.dataset.k, ok=k===s.ans; if(ok) score++;
+    opts.querySelectorAll('button').forEach(x=>{ x.disabled=true; if(x.dataset.k===s.ans) x.classList.add('right'); });
+    if(!ok) b.classList.add('wrong');
+    drawScene(true);
+    res.innerHTML=`<p class="verdict-line"><b>${ok?'Верно!':'Не совсем.'}</b> Навигатор выберет: <b>${NAME[s.ans]}</b>.</p>
+      <ul class="sig-list">${['sat','wifi','cell'].map(q=>{const st=ST[s.sig[q].t];return `<li class="${st[1]}"><i></i>${NAME[q]}<span>${st[0]}</span></li>`}).join('')}</ul>
+      <p class="why">${s.why}</p>`;
+    res.hidden=false; nextB.hidden=false; nextB.textContent=i<SC.length-1?'Следующее место':'Узнать итог';
+  }));
+  nextB.addEventListener('click',()=>{
+    if(i<SC.length-1){ i++; render(); return }
+    if(nextB.dataset.done){ delete nextB.dataset.done; i=0; score=0; render(); return }
+    steps.innerHTML=SC.map(x=>`<span class="done">${x.title}</span>`).join('');
+    qEl.textContent=`Ваш результат: ${score} из ${SC.length}`;
+    res.innerHTML=`<p class="why">${score===SC.length?'Вы рассуждаете как навигатор.':'Выбирать непросто, и навигатору тоже.'} Каждую секунду он решает ту же задачу: какому источнику сейчас верить. Если ошибиться, точка на карте уедет в соседний дом, а маршрут начнёт перестраиваться.</p>`;
+    opts.querySelectorAll('button').forEach(b=>b.disabled=true);
+    nextB.textContent='Пройти заново'; nextB.dataset.done='1';
+    if(score===SC.length) ACH.unlock('tunnel');
+  });
+  render();
 })();}catch(err){console.error('section failed',err)}
 
-try{(function canyon(){
-  const cv=$('#t-canyon'), ctx=cv.getContext('2d');
-  function draw(){
-    const W=cv.width, H=cv.height, r=Math.random;
-    ctx.fillStyle=css('--paper-2'); ctx.fillRect(0,0,W,H);
-    // two rows of tall buildings with a street between
-    const sy=H*.42, sh=H*.16;
-    ctx.fillStyle=css('--card'); ctx.fillRect(0,sy,W,sh);
-    let x=8; ctx.fillStyle=css('--ink-2');
-    while(x<W){ const w=40+r()*50; ctx.globalAlpha=.85; ctx.fillRect(x,8,w,sy-16); ctx.fillRect(x+6,sy+sh+8,w-4,H-sy-sh-16); x+=w+10 }
-    ctx.globalAlpha=1;
-    // true path
-    ctx.strokeStyle=css('--green'); ctx.lineWidth=3; ctx.setLineDash([6,6]); ctx.beginPath(); ctx.moveTo(10,sy+sh/2); ctx.lineTo(W-10,sy+sh/2); ctx.stroke(); ctx.setLineDash([]);
-    // raw GPS points: jitter + reflections into buildings
-    const pts=[]; for(let i=0;i<34;i++){ const px=20+i*(W-40)/33; let py=sy+sh/2+(r()-.5)*sh*1.2; if(r()<.25) py+=(r()<.5?-1:1)*(sh*1.2+r()*sh*1.6); pts.push([px,py]) }
-    ctx.fillStyle='#F0503C'; pts.forEach(([a,b])=>{ctx.beginPath();ctx.arc(a,b,4,0,Math.PI*2);ctx.fill()});
-    // filtered estimate
-    ctx.strokeStyle=css('--blue'); ctx.lineWidth=3.5; ctx.beginPath();
-    let est=sy+sh/2; pts.forEach(([a,b],i)=>{ const d=b-est; if(Math.abs(d)<sh) est+=d*.25; i?ctx.lineTo(a,est):ctx.moveTo(a,est) }); ctx.stroke();
-  }
-  $('#t-canyon-new').onclick=draw; draw();
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
-})();}catch(err){console.error('section failed',err)}
 
 try{(function detective(){
   const cv=$('#d-map'), ctx=cv.getContext('2d'), COLS=6, ROWS=4, W=cv.width, H=cv.height, cw=W/COLS, ch=H/ROWS;
