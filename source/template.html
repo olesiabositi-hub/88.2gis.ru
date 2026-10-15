@@ -378,8 +378,13 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .det{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:24px;align-items:start}
 .det canvas{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule);cursor:pointer;touch-action:manipulation}
 .layers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.layers button{display:inline-flex;gap:8px;align-items:center;border:1.5px solid var(--rule);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:500}
-.layers button[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
+.layers-t{font-size:13.5px;color:var(--ink-2);align-self:center;margin-right:2px}
+.layers button{display:inline-flex;gap:8px;align-items:center;border:1.5px solid var(--rule);background:var(--card);border-radius:999px;padding:6px 12px 6px 8px;font-size:13.5px;font-weight:500;color:var(--ink)}
+.layers button::before{content:"";width:16px;height:16px;border-radius:4px;border:2px solid var(--ink-2);background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;border-color:var(--ink);flex:none}
+.layers button:hover{border-color:var(--ink)}
+.layers button[aria-pressed="false"]{color:var(--ink-2)}
+.layers button[aria-pressed="false"]::before{background:transparent;border-color:var(--ink-2)}
+.layers button[aria-pressed="false"] i{opacity:.35}
 .layers i{width:10px;height:10px;border-radius:50%;display:inline-block}
 .qprog{font-size:13.5px;color:var(--ink-2)}
 .det-q h3{font-size:clamp(22px,2.2vw,28px);margin-top:8px}
@@ -806,13 +811,13 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
     <div class="det">
       <div>
         <canvas id="d-map" width="720" height="480" aria-label="Условный город из 24 кварталов с точками офисов, кафе, остановок и жилых домов"></canvas>
-        <div class="layers" id="d-layers" role="group" aria-label="Слои карты">
+        <div class="layers" id="d-layers" role="group" aria-label="Слои карты"><span class="layers-t">Показать на карте:</span>
           <button type="button" data-l="o" aria-pressed="true"><i style="background:var(--blue)"></i>Офисы</button>
           <button type="button" data-l="c" aria-pressed="true"><i style="background:var(--yellow)"></i>Кафе</button>
           <button type="button" data-l="s" aria-pressed="true"><i style="background:var(--green);border-radius:2px"></i>Остановки</button>
           <button type="button" data-l="h" aria-pressed="true"><i style="background:var(--ink-2)"></i>Жилые дома</button>
         </div>
-        <p class="muted" style="font-size:13px;margin-top:8px">Слои можно выключать, чтобы лучше видеть.</p>
+        <p class="muted" style="font-size:13px;margin-top:8px">Нажмите на слой, чтобы скрыть его точки с карты. Нажмите ещё раз, чтобы вернуть.</p>
       </div>
       <div class="det-q game">
         <div class="qprog" id="d-prog">Вопрос 1 из 3</div>
