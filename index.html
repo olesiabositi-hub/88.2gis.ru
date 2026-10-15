@@ -171,6 +171,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 .evm-stats div{min-width:0}
 .evm-stats small{display:block;font-size:13px;color:var(--ink-2)}
 .evm-stats b{font-size:clamp(26px,3vw,36px);font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:14px;border-top:2px solid var(--ink)}
+.board div{padding:10px 10px 4px 0}
+.board div+div{padding-left:12px;border-left:1px solid var(--rule)}
+.board small{display:block;font-size:12.5px;color:var(--ink-2)}
+.board b{font-size:clamp(20px,2.2vw,26px);font-weight:600;letter-spacing:-.02em}
+.board .you b{color:var(--ink)}
+.board .you.win b{color:var(--green-ink)}
+.board .you.lose b{color:#D2452F}
 .tip{min-height:22px;font-size:14px;color:var(--ink-2);padding:0 4px 10px}
 .node{cursor:pointer}
 .node circle{transition:fill .15s,stroke .15s}
@@ -506,7 +514,8 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .ach-panel li em{font-style:normal;font-size:12px;color:var(--green-ink)}
 #ach-reset{background:none;border:0;color:var(--ink-2);font-size:12.5px;text-decoration:underline;text-underline-offset:3px;padding:6px 0}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);z-index:40;display:flex;gap:12px;align-items:center;background:var(--night);color:var(--night-text);border:1px solid rgba(130,215,20,.55);border-radius:14px;padding:12px 20px 12px 14px;box-shadow:0 20px 40px -16px rgba(0,0,0,.6);transition:transform .4s cubic-bezier(.2,.9,.3,1.15);pointer-events:none;max-width:calc(100vw - 32px);font-weight:600;font-size:15px}
-.toast.show{transform:translate(-50%,0)}
+.toast:not(.show){visibility:hidden;transform:translate(-50%,calc(100% + 60px));transition:transform .4s,visibility 0s .4s}
+.toast.show{transform:translate(-50%,0);visibility:visible}
 .toast i{width:28px;height:28px;border-radius:50%;background:var(--green);flex:none;position:relative}
 .toast small{display:block;color:var(--night-muted);font-size:12px;font-weight:400}
 @media (max-width:700px){.toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
@@ -586,27 +595,33 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
   <div class="hall-body">
     <div class="hh">
       <div><div class="kicker"><i></i><b>Зал 1</b> 1972 → 2026</div><h2 id="h-hall1">Как посчитать путь?</h2></div>
-      <p>В 1972 году «Наука и жизнь» дала Вычислительному центру Главмосавтотранса задачу: обойти 12 букинистических магазинов и вернуться в редакцию. ЭВМ получила 33&nbsp;км. Автор статьи считал вручную около часа и получил 35,6&nbsp;км. Попробуйте сами.</p>
+      <p>В 1972 году журнал «Наука и жизнь» провёл эксперимент. Нужно было составить самый короткий маршрут по 12 букинистическим магазинам Москвы с возвращением в редакцию. Задачу решали двое: ЭВМ Вычислительного центра Главмосавтотранса и инженер О. Налбандян, автор статьи об этом эксперименте. Машина справилась за секунды и нашла путь в 33&nbsp;км. Инженер считал вручную около часа, и его маршрут вышел длиннее — 35,6&nbsp;км.</p>
     </div>
 
     <div class="evm">
       <div class="evm-map">
+        <p class="task" style="padding:2px 4px 10px"><b>Теперь ваша очередь.</b> Нажимайте на магазины на схеме в том порядке, в котором объехали бы их сами, и попробуйте проложить путь короче 33&nbsp;км.</p>
         <div class="evm-stats num">
-          <div><small>Ваш маршрут, по прямой</small><b id="u-km">0 км</b></div>
+          <div><small>Ваш маршрут</small><b id="u-km">0 км</b></div>
           <div><small>Магазинов</small><b id="u-cnt">0 из 12</b></div>
         </div>
         <svg id="evm-svg" viewBox="0 0 600 520" role="group" aria-label="Схема Москвы с 12 магазинами. Нажимайте на магазины по порядку обхода."></svg>
-        <div class="tip" id="evm-tip" aria-live="polite">Начните от редакции (А) и нажимайте на магазины в том порядке, в котором обошли бы их сами.</div>
+        <div class="tip" id="evm-tip" aria-live="polite">Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.</div>
         <div class="row">
           <button class="chip" id="b-undo" type="button">Шаг назад</button>
           <button class="chip" id="b-reset" type="button">Заново</button>
           <button class="chip go" id="b-evm" type="button">Запустить ЭВМ 1972</button>
-          <button class="chip" id="b-exact" type="button">Точное решение</button>
+          <button class="chip" id="b-exact" type="button">Лучший маршрут на этой схеме</button>
+        </div>
+        <div class="board num" aria-live="polite">
+          <div><small>ЭВМ 1972</small><b>33,0 км</b></div>
+          <div><small>Инженер вручную</small><b>35,6 км</b></div>
+          <div class="you" id="b-you-box"><small>Вы</small><b id="b-you">—</b></div>
         </div>
       </div>
       <div class="printout" id="printout" aria-live="polite" tabindex="0" aria-label="Распечатка вычислительного центра"></div>
     </div>
-    <p class="muted" style="font-size:13px;margin-top:12px;max-width:80ch">Магазины расставлены по адресам 1972 года приблизительно, центр схемы увеличен. Мы считаем расстояния по прямой, а ЭВМ считала по улицам, поэтому наши километры меньше журнальных.</p>
+    <p class="muted" style="font-size:13px;margin-top:12px;max-width:80ch">Расстояния примерные: магазины расставлены по адресам 1972 года, центр схемы увеличен.</p>
 
     <div class="pull">
       <div>
@@ -1202,7 +1217,11 @@ try{(function evm(){
   ];
   const N=S.length;
   const hav=(a,b)=>{const R=6371,toR=Math.PI/180;const dLat=(b.lat-a.lat)*toR,dLon=(b.lon-a.lon)*toR;const x=Math.sin(dLat/2)**2+Math.cos(a.lat*toR)*Math.cos(b.lat*toR)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(x))};
-  const D=S.map(a=>S.map(b=>hav(a,b)));
+  const D0=S.map(a=>S.map(b=>hav(a,b)));
+  const EVM_ORDER=[0,1,2,3,4,5,6,7,8,9,10,11,12,0];
+  // One measure for everything: straight-line distances on the schematic scaled so the 1972 EVM route equals 33 km, as in the article
+  const KS=33/EVM_ORDER.slice(1).reduce((a,v,k)=>a+D0[EVM_ORDER[k]][v],0);
+  const D=D0.map(r=>r.map(v=>v*KS));
   // fisheye projection around the Kremlin
   const C={lat:55.7520,lon:37.6175}, kx=111.32*Math.cos(C.lat*Math.PI/180), ky=110.57;
   const proj=(lat,lon)=>{const dx=(lon-C.lon)*kx, dy=(lat-C.lat)*ky; const r=Math.hypot(dx,dy)||1e-9; const rr=Math.pow(r,.38); return [dx/r*rr, -dy/r*rr]};
@@ -1244,11 +1263,14 @@ try{(function evm(){
     return g;
   });
   const len=r=>{let s=0;for(let i=1;i<r.length;i++)s+=D[r[i-1]][r[i]];return s};
-  const ukm=$('#u-km'), ucnt=$('#u-cnt');
+  const ukm=$('#u-km'), ucnt=$('#u-cnt'), you=$('#b-you'), youBox=$('#b-you-box');
   function draw(){
     userPath.setAttribute('points',route.map(i=>XY[i].join(',')).join(' '));
     nodeEls.forEach((g,i)=>g.classList.toggle('done',i>0&&route.includes(i)));
     ukm.textContent=fmt(len(route))+' км'; ucnt.textContent=`${Math.min(12,new Set(route).size-1)} из 12`;
+    you.textContent=done?fmt(len(route))+' км':'—';
+    youBox.classList.toggle('win',done&&len(route)<32.95); youBox.classList.toggle('lose',done&&len(route)>33.05);
+    if(!done&&route.length>1) tip.textContent='Отлично. Продолжайте: выберите следующий магазин.';
   }
   function pick(i){
     if(done||i===0||route.includes(i)) return;
@@ -1257,7 +1279,7 @@ try{(function evm(){
     draw();
   }
   $('#b-undo').onclick=()=>{ if(done){ route.pop(); done=false } if(route.length>1) route.pop(); draw(); };
-  $('#b-reset').onclick=()=>{ route=[0]; done=false; gEvm.replaceChildren(); gOpt.replaceChildren(); draw(); tip.textContent='Начните от редакции (А) и нажимайте на магазины по порядку.'; };
+  $('#b-reset').onclick=()=>{ route=[0]; done=false; gEvm.replaceChildren(); gOpt.replaceChildren(); draw(); tip.textContent='Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.'; };
 
   // printout
   const pr=$('#printout'); let q=Promise.resolve();
@@ -1274,15 +1296,15 @@ try{(function evm(){
   }
   const pad2=n=>String(n).padStart(2,'0');
   const padR=(s,n)=>(s+' '.repeat(n)).slice(0,n);
-  print(['ВЦ Главмосавтотранса    1972','Задача: маршрут по 12 букинистам','Старт и финиш: редакция, ул. Кирова','Вариантов обхода: 479 001 600','—','Ожидаю маршрут оператора']);
+  print(['ВЦ Главмосавтотранса    1972','Задача: кратчайший маршрут','по 12 букинистическим магазинам','Старт и финиш: редакция, ул. Кирова','Вариантов обхода: 479 001 600','—','Жду ваш маршрут']);
 
   function finishUser(){
-    const beat=len(route)<len(evmRoute)-1e-9;
-    tip.textContent=beat?'Ваш маршрут короче маршрута ЭВМ 1972 года. Проверьте, насколько он близок к оптимуму.':'Готово. Теперь запустите ЭВМ 1972 года и точное решение.';
+    const L=len(route), tie=Math.abs(L-33)<.05, beat=!tie&&L<33;
+    tip.textContent=tie?'Ваш маршрут 33,0 км — ровно как у ЭВМ 1972 года! Попробуйте найти путь ещё короче.':beat?`Ваш маршрут ${fmt(L)} км — короче, чем у ЭВМ 1972 года! Посмотрите лучший маршрут на этой схеме.`:`Ваш маршрут ${fmt(L)} км. ЭВМ 1972 года нашла путь короче — 33 км. Нажмите «Запустить ЭВМ 1972», чтобы увидеть её маршрут.`;
     if(beat) ACH.unlock('beat');
-    print(['—',['Маршрут оператора принят','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[route[k]][i])}`),`Итого по прямой: ${fmt(len(route))} км`]);
+    print(['—',['Ваш маршрут','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[route[k]][i])}`),['Итого: '+fmt(L)+' км','y'],tie?'Ровно как у ЭВМ 1972!':beat?'Короче, чем у ЭВМ 1972!':'ЭВМ 1972: 33,0 км']);
   }
-  const evmRoute=[0,1,2,3,4,5,6,7,8,9,10,11,12,0];
+  const evmRoute=EVM_ORDER;
   function drawRoute(g,r,color,w,dash){
     g.replaceChildren();
     const p=el('polyline',{points:r.map(i=>XY[i].join(',')).join(' '),fill:'none',stroke:color,'stroke-width':w,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':dash||''},g);
@@ -1290,8 +1312,8 @@ try{(function evm(){
   }
   $('#b-evm').onclick=()=>{
     drawRoute(gEvm,evmRoute,'var(--green)',6);
-    print(['—',['Запуск: маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[evmRoute[k]][i])}`),
-      `По прямой: ${fmt(len(evmRoute))} км`,['По улицам, данные статьи: 33,0 км','y'],'Человек вручную: 35,6 км, ~1 час', done?`Ваш маршрут по прямой: ${fmt(len(route))} км`:'Ваш маршрут ещё не закончен']);
+    print(['—',['Маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[evmRoute[k]][i])}`),
+      ['Итого: 33,0 км','y'],'Инженер вручную: 35,6 км, ~1 час']);
   };
   $('#b-exact').onclick=()=>{
     const n=N-1, FULL=(1<<n)-1, dp=new Float64Array((1<<n)*n).fill(Infinity), par=new Int8Array((1<<n)*n).fill(-1);
@@ -1304,12 +1326,10 @@ try{(function evm(){
     order.reverse(); const r=[0,...order,0];
     const dt=performance.now()-t0;
     drawRoute(gOpt,r,'var(--blue)',3,'2 7');
-    const diffEvm=(len(evmRoute)/best-1)*100;
-    print(['—',['Точное решение: Held–Karp','hl'],`Состояний: ${intf((1<<n)*n)}`,`Время в вашем браузере: ${fmt(dt,1)} мс`,
+    print(['—',['Лучший маршрут на этой схеме','hl'],'Компьютер перебрал варианты',`за ${fmt(dt,1)} мс в вашем браузере`,
       ...r.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${S[i].s}`),
-      ['Оптимум по прямой: '+fmt(best)+' км','y'],
-      `ЭВМ 1972 по прямой длиннее на ${fmt(diffEvm)}%`,'(ЭВМ считала по улицам,','поэтому порядок может отличаться)',
-      done?`Ваш маршрут длиннее оптимума на ${fmt((len(route)/best-1)*100)}%`:'Закончите свой маршрут для сравнения']);
+      ['Итого: '+fmt(best)+' км','y'],
+      'На реальных улицах лучший','маршрут может быть другим']);
   };
   draw();
 })();}catch(err){console.error('section failed',err)}
