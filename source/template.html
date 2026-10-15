@@ -407,7 +407,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .sig-steps{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--ink-2);margin-bottom:14px}
 .sig-steps .cur{color:var(--ink);font-weight:600}
 .sig-steps .done{color:var(--green-ink)}
-.sig-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px;align-items:start}
+.sig-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:center}
 .sig-scene svg{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule)}
 #s-svg.dark .pb{fill:#E8F0E8}
 #s-svg.dark .pl{stroke:#E8F0E8}
@@ -500,6 +500,74 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .chip.race{background:#FFD36B;border-color:#FFD36B;color:#1b1300}
 .chip.race:hover{background:#F5C24A;color:#1b1300}
 @media (prefers-reduced-motion:reduce){.trail,.node.pulse .halo,.node.pop,.crt.booting::before,.crt.booting svg,.crt.flash{animation:none}}
+
+/* hall 4: live phone (dark) */
+.game.dark{background:var(--night);color:var(--night-text);border-color:var(--night-line);box-shadow:0 30px 60px -40px rgba(0,0,0,.7)}
+.sig-game.dark .sig-steps{color:var(--night-muted)}
+.sig-game.dark .sig-steps .cur{color:#fff}
+.sig-game.dark .sig-steps .done{color:#7FD992}
+.sig-game.dark .sig-opt{border-color:rgba(255,255,255,.18);color:var(--night-text);background:rgba(255,255,255,.03)}
+.sig-game.dark .sig-opt:hover:not(:disabled){border-color:#fff}
+.sig-game.dark .sig-opt.right{border-color:#2BD13A;background:rgba(43,209,58,.14)}
+.sig-game.dark .sig-opt.wrong{border-color:#F0503C;background:rgba(240,80,60,.14)}
+.sig-game.dark .sig-list li{border-top-color:rgba(255,255,255,.1)}
+.sig-game.dark .sig-list li span{color:var(--night-muted)}
+.sig-game.dark .sig-res .why{color:#C3D0C6}
+.sig-hint{font-size:14px;color:var(--night-muted);margin-top:8px}
+.sig-stage svg{width:100%;height:auto;display:block;border-radius:12px}
+#s-svg .ray{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:9 9;animation:rayflow .9s linear infinite}
+#s-svg .ray.bad{animation:none;stroke-dasharray:6 6;opacity:.85}
+@keyframes rayflow{to{stroke-dashoffset:-18}}
+#s-svg .ring{transform-box:fill-box;transform-origin:center;animation:ring 1.8s ease-out infinite}
+@keyframes ring{0%{opacity:.85;transform:scale(.5)}100%{opacity:0;transform:scale(4.2)}}
+#s-svg .wave{animation:wave 1.5s ease-out infinite}
+@keyframes wave{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(2.3)}}
+#s-svg .spin{transform-box:fill-box;transform-origin:center;animation:spin 1s linear infinite}
+#s-svg .phone.buzz{animation:buzz .32s linear 2}
+@keyframes buzz{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+#ph-route.reroute{animation:rer .45s steps(2) infinite}
+@keyframes rer{50%{opacity:.12}}
+@media (prefers-reduced-motion:reduce){#s-svg .ray,#s-svg .ring,#s-svg .wave,#s-svg .spin,#s-svg .phone.buzz,#ph-route.reroute{animation:none}}
+
+/* hall 3: optical correlator (dark device) */
+.corr.dev{background:var(--night);color:var(--night-text);border-color:var(--night-line);box-shadow:0 30px 60px -40px rgba(0,0,0,.7)}
+.corr.dev .steps li{color:#B9C6BC}
+.corr.dev .steps strong{color:#fff}
+.corr.dev label{color:var(--night-muted)}
+.corr.dev .corr-out{color:#C3D0C6}
+.corr.dev .corr-out b{color:#fff}
+.corr.dev .chip:not(.blue){border-color:rgba(255,255,255,.4);color:var(--night-text)}
+.corr.dev .chip:not(.blue):hover{background:var(--night-text);color:var(--night)}
+.corr.dev figcaption{color:#7FD992;font:400 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.corr.dev figure{margin:0}
+.cor-grid{display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:18px;align-items:start}
+.cor-map{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 40px rgba(127,182,232,.15)}
+.cor-map canvas{display:block;width:100%;height:auto}
+.film{position:absolute;width:20.8333%;height:31.25%;border:2px dashed #FFD36B;border-radius:3px;cursor:grab;touch-action:none;box-shadow:0 0 0 2000px rgba(6,16,10,.18),0 0 18px rgba(255,211,107,.6);transition:box-shadow .2s}
+.film canvas{width:100%;height:100%;display:block;opacity:.55;image-rendering:pixelated}
+.film.grab{cursor:grabbing}
+.film.hit{border:3px solid #2BD13A;box-shadow:0 0 0 2000px rgba(6,16,10,.05),0 0 30px rgba(43,209,58,.9)}
+.film.scan{border-color:#5CA4FF;box-shadow:0 0 0 2000px rgba(6,16,10,.1),0 0 20px rgba(92,164,255,.8)}
+.film:focus-visible{outline:3px solid #5CA4FF;outline-offset:2px}
+.plane canvas{width:100%;height:auto;display:block;border-radius:50%;box-shadow:0 0 0 1px rgba(70,224,106,.25),0 0 40px rgba(255,211,107,.12)}
+.cor-meter{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;font-size:13px;color:var(--night-muted)}
+.cor-meter b{font-size:26px;color:#FFD36B;font-weight:600}
+@media (max-width:640px){.cor-grid{grid-template-columns:minmax(0,1fr)}.plane{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}.plane figcaption{grid-column:1/-1}.cor-meter{flex-direction:column;gap:2px}}
+
+/* letter: printing press + stamp */
+.paper{position:relative}
+.paper:has(.stamp){padding-bottom:128px}
+@media(max-width:700px){.paper:has(.stamp){padding-bottom:104px}.stamp{right:16px;bottom:18px}.stamp b{font-size:22px}}
+.paper.printing .mast,.paper.printing h3,.paper.printing .deck,.paper.printing .by,.paper.printing .cols p{animation:ink .7s cubic-bezier(.3,.7,.3,1) both;animation-delay:var(--d,0s)}
+@keyframes ink{from{clip-path:inset(0 0 100% 0);opacity:.15;filter:blur(1.5px)}to{clip-path:inset(0 0 0 0);opacity:1;filter:none}}
+.stamp{position:absolute;right:22px;bottom:22px;transform:rotate(-12deg);border:4px double rgba(200,40,30,.85);color:rgba(200,40,30,.88);padding:8px 14px;text-align:center;border-radius:4px;mix-blend-mode:multiply;pointer-events:none}
+.stamp b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.05}
+.stamp span{display:block;font-size:11.5px;font-weight:500;margin-top:2px}
+.paper.printing .stamp{animation:stampdrop .38s cubic-bezier(.5,0,.9,.4) both;animation-delay:var(--d,0s)}
+@keyframes stampdrop{from{opacity:0;transform:rotate(-12deg) scale(2.6)}to{opacity:1;transform:rotate(-12deg) scale(1)}}
+.paper.thud{animation:thud .35s ease-out}
+@keyframes thud{0%{transform:rotate(-1deg) translateY(0)}35%{transform:rotate(-1.4deg) translateY(4px)}100%{transform:rotate(-1deg) translateY(0)}}
+@media (prefers-reduced-motion:reduce){.paper.printing *,.paper.thud{animation:none!important}}
 /* trip progress */
 .trip{display:flex;gap:12px;font:400 12px/1 var(--mono);color:var(--night-muted);margin-left:8px;white-space:nowrap}
 #trip-where{color:var(--night-text)}
@@ -536,7 +604,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .toast.show{transform:translate(-50%,0);visibility:visible}
 .toast i{width:28px;height:28px;border-radius:50%;background:var(--green);flex:none;position:relative}
 .toast small{display:block;color:var(--night-muted);font-size:12px;font-weight:400}
-@media (max-width:700px){.toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
+@media (max-width:700px){.toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}.ach-pill{padding:9px 12px 9px 10px;gap:7px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}.ach-word{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}.ach-pill.bump{animation:none}}
 
 </style>
@@ -727,16 +795,19 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       </div>
       <div>
         <p class="lead2">Представьте: вас высадили в незнакомом месте с бумажной картой. GPS нет. Вы смотрите вокруг: слева пруд, справа широкая улица. И ищете на карте место, где всё выглядит так же. Именно так в 1980 году предлагали ориентироваться роботу: хранить карту в памяти и сравнивать с ней то, что он видит.</p>
-        <div class="corr">
+        <div class="corr dev">
           <ol class="steps">
-            <li><b>1</b><span><strong>Карта</strong> в памяти робота. Серое — дома, светлые полосы — улицы, синее — река и пруд, зелёное — парк.</span></li>
-            <li><b>2</b><span><strong>Кадр с камеры:</strong> что робот видит прямо сейчас. Где он, робот не знает.</span></li>
-            <li><b>3</b><span><strong>Ваш ход:</strong> найдите это место на карте и нажмите на него.</span></li>
-            <li><b>4</b><span><strong>Ход робота:</strong> он приложит кадр к каждому месту карты, как трафарет. Совпадения подсветятся синим.</span></li>
+            <li><b>1</b><span>Перетащите <strong>плёнку с кадром робота</strong> по карте.</span></li>
+            <li><b>2</b><span>Следите за <strong>пятном света</strong> справа: оно смещено туда, куда нужно двигать плёнку, и становится ярче по мере приближения.</span></li>
+            <li><b>3</b><span>Найдите место, где пятно <strong>вспыхнет звездой</strong>.</span></li>
           </ol>
-          <div class="corr-grid">
-            <figure><figcaption><b>1</b>Карта в памяти робота</figcaption><canvas id="corr-map" width="576" height="384" aria-label="Карта района. Нажмите на место, которое видит робот"></canvas></figure>
-            <figure class="cam"><figcaption><b>2</b>Кадр с камеры</figcaption><canvas id="corr-cam" width="160" height="160" aria-label="Кадр с камеры робота"></canvas></figure>
+          <div class="cor-grid">
+            <figure><figcaption>Карта в памяти робота</figcaption>
+              <div class="cor-map" id="cor-map"><canvas id="corr-map" width="576" height="384" aria-label="Карта района"></canvas>
+                <div class="film" id="film" tabindex="0" role="slider" aria-label="Плёнка с кадром робота. Перетащите её или двигайте стрелками"><canvas id="corr-cam" width="120" height="120"></canvas></div></div>
+            </figure>
+            <figure class="plane"><figcaption>Корреляционная плоскость</figcaption><canvas id="cor-plane" width="240" height="240" aria-label="Пятно света показывает, насколько совпадает кадр"></canvas>
+              <div class="cor-meter"><span>Сила сигнала</span><b id="cor-pct" class="num">0%</b></div></figure>
           </div>
           <div class="corr-out" id="corr-out" aria-live="polite"></div>
           <div class="row" style="margin-top:12px">
@@ -777,12 +848,13 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
       <div><div class="kicker"><i></i><b>Зал 4</b> сегодня</div><h2 id="h-hall4">Как телефон определяет геолокацию</h2></div>
       <p>Обычно телефон узнаёт, где вы, по спутникам. Но в тоннеле их сигнал пропадает, а между высоток отражается от стен. Тогда выручают другие источники: Wi‑Fi и сотовые вышки. Угадайте, что поможет в каждом месте.</p>
     </div>
-    <div class="game sig-game">
+    <div class="game sig-game dark">
       <div class="sig-steps" id="s-steps" aria-hidden="true"></div>
       <div class="sig-grid">
-        <div class="sig-scene"><svg id="s-svg" viewBox="0 0 600 300" role="img" aria-label="Иллюстрация места: человек с телефоном и источники сигнала"></svg></div>
+        <div class="sig-stage"><svg id="s-svg" viewBox="0 0 640 400" role="img" aria-label="Ночная сцена: телефон с картой и источники сигнала вокруг"></svg></div>
         <div class="sig-side">
           <h3 id="s-q" aria-live="polite"></h3>
+          <p class="sig-hint">Выберите источник и посмотрите, что покажет телефон.</p>
           <div class="sig-opts" id="s-opts" role="group" aria-label="Варианты ответа">
             <button type="button" class="sig-opt" data-k="sat"><svg viewBox="-34 -20 68 40" aria-hidden="true"><rect x="-9" y="-7" width="18" height="14" rx="3" fill="currentColor"/><rect x="-30" y="-6" width="18" height="12" fill="var(--blue)"/><rect x="12" y="-6" width="18" height="12" fill="var(--blue)"/></svg>Спутник</button>
             <button type="button" class="sig-opt" data-k="wifi"><svg viewBox="-20 -16 40 32" aria-hidden="true"><rect x="-16" y="4" width="32" height="10" rx="3" fill="currentColor"/><path d="M-10 -2 a14 14 0 0 1 20 0 M-5 3 a7 7 0 0 1 10 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Wi‑Fi</button>
@@ -943,7 +1015,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
   </div>
 </footer>
 
-<button class="ach-pill" id="ach-pill" type="button" aria-expanded="false" aria-controls="ach-panel"><span class="ach-ico" aria-hidden="true"></span>Достижения <b id="ach-count" class="num">0/11</b></button>
+<button class="ach-pill" id="ach-pill" type="button" aria-expanded="false" aria-controls="ach-panel"><span class="ach-ico" aria-hidden="true"></span><span class="ach-word">Достижения</span> <b id="ach-count" class="num">0/11</b></button>
 <div class="ach-panel" id="ach-panel" hidden>
   <h4>Достижения</h4>
   <p>Открываются, пока вы гуляете по залам. Хранятся только в этом браузере.</p>
@@ -1436,71 +1508,96 @@ try{(function evm(){
    HALL 2: correlation-extremal localisation
    ========================================================= */
 try{(function corr(){
-  const mc=$('#corr-map'), cc=$('#corr-cam'), mx=mc.getContext('2d'), cx=cc.getContext('2d');
-  const W=96, H=64, P=20, CELL_M=10; // one cell = 10 m
+  const mc=$('#corr-map'), cc=$('#corr-cam'), pc=$('#cor-plane'), mx=mc.getContext('2d'), cx=cc.getContext('2d'), px=pc.getContext('2d');
+  const film=$('#film'), box=$('#cor-map'), pct=$('#cor-pct');
+  const W=96, H=64, P=20, CELL_M=10;
   const out=$('#corr-out'), noise=$('#noise'), nv=$('#noise-v'), runB=$('#c-run');
-  let map, patch, tx, ty, guess=null, robot=null, heat=null, busy=false;
-  // 0 ground, 1 building, 2 road, 3 water, 4 park
+  let map, patch, tx, ty, fx=4, fy=4, sc=null, mn=0, mxs=1, found=false, busy=false, heatN=0, robot=null, burst=0;
   function genMap(){
     const r=rng(1980); map=new Uint8Array(W*H);
     const set=(x,y,v)=>{ if(x>=0&&y>=0&&x<W&&y<H) map[y*W+x]=v };
     const rect=(x0,y0,w,h,v)=>{ for(let y=y0;y<y0+h;y++)for(let x=x0;x<x0+w;x++) set(x,y,v) };
-    // buildings everywhere first, with yards
     for(let y=0;y<H;y+=4)for(let x=0;x<W;x+=4){ if(r()<.72){ const w=2+Math.floor(r()*3), h=2+Math.floor(r()*3); rect(x,y,w,h,1) } }
-    // park with pond
     rect(30,22,14,12,4); for(let y=25;y<31;y++)for(let x=34;x<41;x++){ if(((x-37.5)**2)/9+((y-28)**2)/6<1) set(x,y,3) }
-    // river
     for(let x=0;x<W;x++){ const c=46+Math.sin(x/9)*4+x*.05; for(let d=-2;d<=2;d++) set(x,Math.round(c+d),3) }
-    // streets
-    [7,19,35,58].forEach(y=>rect(0,y,W,2,2));
-    [9,25,47,63,80].forEach(x=>rect(x,0,2,H,2));
-    for(let t=0;t<130;t++){ const x=Math.round(t*.74), y=Math.round(62-t*.42); rect(x,y,2,2,2) } // diagonal avenue
-    rect(70,40,10,2,2); rect(52,24,2,10,2); // side streets
-    // round square
+    [7,19,35,58].forEach(y=>rect(0,y,W,2,2)); [9,25,47,63,80].forEach(x=>rect(x,0,2,H,2));
+    for(let t=0;t<130;t++){ rect(Math.round(t*.74),Math.round(62-t*.42),2,2,2) }
+    rect(70,40,10,2,2); rect(52,24,2,10,2);
     for(let y=0;y<H;y++)for(let x=0;x<W;x++){ const d=Math.hypot(x-64,y-20); if(d<5.5&&d>3.5) set(x,y,2); if(d<=3.5) set(x,y,4) }
   }
-  const pal=()=>({g:css('--paper-2'),b:css('--ink-2'),r:css('--card'),w:'#5EA8F5',p:'#7BC86C',blue:css('--blue'),green:css('--green'),y:'#E0A000'});
-  function drawCells(ctx,data,w,h,s){ const c=pal(), col=[c.g,c.b,c.r,c.w,c.p];
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){ ctx.fillStyle=col[data[y*w+x]]; ctx.fillRect(x*s,y*s,s+.5,s+.5) } }
-  function box(x,y,color,dash,lw){ const s=mc.width/W; mx.lineWidth=lw||3; mx.strokeStyle=color; mx.setLineDash(dash||[]); mx.strokeRect(x*s+1.5,y*s+1.5,P*s-3,P*s-3); mx.setLineDash([]) }
-  function tag(x,y,text,color){ const s=mc.width/W; mx.font='600 13px "SB Sans Text",sans-serif'; const tw=mx.measureText(text).width+10; let X=x*s, Y=y*s-20; if(Y<2) Y=(y+P)*s+2; mx.fillStyle=color; mx.fillRect(X,Y,tw,18); mx.fillStyle='#fff'; mx.fillText(text,X+5,Y+13) }
-  function drawMap(upto){
-    const s=mc.width/W; drawCells(mx,map,W,H,s); const c=pal();
-    if(heat){ const cw=W-P+1; const n=upto==null?heat.length:upto; for(let i=0;i<n;i++){ const v=heat[i]; if(v<=.02) continue; const x=i%cw, y=(i/cw)|0; mx.fillStyle=`rgba(0,115,250,${Math.min(.85,v*.85)})`; mx.fillRect((x+P/2)*s,(y+P/2)*s,s*1.6,s*1.6) } }
-    if(guess){ box(guess[0],guess[1],c.y,null,3); tag(guess[0],guess[1],'вы',c.y) }
-    if(robot){ box(robot[0],robot[1],c.blue,null,3); tag(robot[0],robot[1],'робот',c.blue); box(tx,ty,c.green,[6,5],2.5) }
+  const COL=['#E4E9E1','#7D8B82','#FFFFFF','#7FB6E8','#93CF83'];
+  function cells(ctx,data,w,h,s){ for(let y=0;y<h;y++)for(let x=0;x<w;x++){ ctx.fillStyle=COL[data[y*w+x]]; ctx.fillRect(x*s,y*s,s+.5,s+.5) } }
+  function drawMap(){
+    const s=mc.width/W; cells(mx,map,W,H,s);
+    if(heatN){ const cw=W-P+1; for(let i=0;i<heatN;i++){ const v=Math.pow((sc[i]-mn)/((mxs-mn)||1),6); if(v<.03) continue; const x=i%cw, y=(i/cw)|0; mx.fillStyle=`rgba(0,115,250,${Math.min(.8,v*.8)})`; mx.fillRect((x+P/2)*s,(y+P/2)*s,s*1.6,s*1.6) } }
+    if(robot){ mx.setLineDash([6,5]); mx.lineWidth=2.5; mx.strokeStyle='#19AA1E'; mx.strokeRect(tx*s+1,ty*s+1,P*s-2,P*s-2); mx.setLineDash([]) }
   }
+  function placeFilm(){ film.style.left=(fx/W*100)+'%'; film.style.top=(fy/H*100)+'%'; film.setAttribute('aria-valuetext',`x ${fx}, y ${fy}`) }
+  function score(x,y){ return sc[y*(W-P+1)+x] }
+  function computeAll(){
+    const cw=W-P+1, ch=H-P+1; sc=new Float32Array(cw*ch); let lo=1,hi=0;
+    const t0=performance.now();
+    for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){ let m=0; for(let j=0;j<P;j++){ const row=(y+j)*W+x, pr=j*P; for(let i=0;i<P;i++) if(map[row+i]===patch[pr+i]) m++ } const v=m/(P*P); sc[y*cw+x]=v; if(v<lo)lo=v; if(v>hi)hi=v }
+    mn=lo; mxs=hi; return performance.now()-t0;
+  }
+  // correlation plane: bright spot shifted by the mismatch, as in the 1980 diagram
+  function drawPlane(x,y,flash){
+    const S=pc.width, c=S/2; px.clearRect(0,0,S,S);
+    px.fillStyle='#06100A'; px.beginPath(); px.arc(c,c,c-2,0,Math.PI*2); px.fill();
+    px.strokeStyle='rgba(70,224,106,.18)'; px.lineWidth=1; px.beginPath(); px.moveTo(c,8); px.lineTo(c,S-8); px.moveTo(8,c); px.lineTo(S-8,c); px.stroke();
+    [.25,.5,.75].forEach(k=>{ px.beginPath(); px.arc(c,c,(c-6)*k,0,Math.PI*2); px.stroke() });
+    const dist=Math.hypot(tx-x,ty-y), prox=1-Math.min(1,dist/45), peak=Math.pow(Math.max(0,(score(x,y)-mn)/((mxs-mn)||1)),3);
+    const b=Math.min(1,Math.max(.4+.5*prox*prox, dist===0?1:peak*.95));
+    const dx=(tx-x)/(W-P)*(c-24)*1.6, dy=(ty-y)/(H-P)*(c-24)*1.6;
+    const sx=c+Math.max(-c+16,Math.min(c-16,dx)), sy=c+Math.max(-c+16,Math.min(c-16,dy));
+    for(let k=3;k>=1;k--){ px.strokeStyle=`rgba(255,226,140,${.12*b*k})`; px.lineWidth=1.5; px.beginPath(); px.ellipse(sx,sy,10+k*12*(1.2-b),8+k*10*(1.2-b),0,0,Math.PI*2); px.stroke() }
+    const g=px.createRadialGradient(sx,sy,0,sx,sy,14+30*b); g.addColorStop(0,`rgba(255,247,214,${.25+.75*b})`); g.addColorStop(.4,`rgba(255,211,107,${.5*b})`); g.addColorStop(1,'rgba(255,211,107,0)');
+    px.fillStyle=g; px.beginPath(); px.arc(sx,sy,14+30*b,0,Math.PI*2); px.fill();
+    if(flash){ px.save(); px.translate(c,c); px.strokeStyle=`rgba(255,247,214,${flash})`; px.lineWidth=2.5; for(let a=0;a<8;a++){ px.rotate(Math.PI/4); px.beginPath(); px.moveTo(12,0); px.lineTo(26+60*flash,0); px.stroke() } px.restore() }
+    pct.textContent=(dist===0?100:Math.min(99,Math.round(b*100)))+'%';
+  }
+  function star(){ if(RM){ drawPlane(fx,fy,.8); return } let t=0; const step=()=>{ t+=.04; drawPlane(fx,fy,Math.max(0,1-t)); if(t<1) requestAnimationFrame(step) }; requestAnimationFrame(step) }
   function newFrame(){
     tx=2+Math.floor(Math.random()*(W-P-4)); ty=2+Math.floor(Math.random()*(H-P-4));
     const p=+noise.value/100; patch=new Uint8Array(P*P);
     for(let y=0;y<P;y++)for(let x=0;x<P;x++){ let v=map[(ty+y)*W+tx+x]; if(Math.random()<p) v=Math.floor(Math.random()*5); patch[y*P+x]=v }
-    guess=null; robot=null; heat=null; drawMap(); drawCells(cx,patch,P,P,cc.width/P);
-    out.innerHTML='<b>Шаг 3.</b> Найдите на карте место, которое видит робот, и нажмите на него.';
+    cells(cx,patch,P,P,cc.width/P);
+    computeAll(); found=false; robot=null; heatN=0;
+    do{ fx=Math.floor(Math.random()*(W-P)); fy=Math.floor(Math.random()*(H-P)) } while(Math.abs(fx-tx)+Math.abs(fy-ty)<30);
+    film.classList.remove('hit'); placeFilm(); drawMap(); drawPlane(fx,fy);
+    out.innerHTML='Перетащите плёнку по карте. Пятно света справа подскажет направление: двигайте плёнку туда, куда оно смещено.';
   }
-  mc.addEventListener('click',e=>{ if(busy) return; const b=mc.getBoundingClientRect(); const x=Math.floor((e.clientX-b.left)/b.width*W-P/2), y=Math.floor((e.clientY-b.top)/b.height*H-P/2);
-    guess=[Math.max(0,Math.min(W-P,x)),Math.max(0,Math.min(H-P,y))]; robot=null; heat=null; drawMap();
-    out.innerHTML='Ваш ответ отмечен жёлтой рамкой. <b>Шаг 4.</b> Нажмите «Пусть ищет робот».'; });
+  function check(){
+    drawPlane(fx,fy);
+    if(!found && Math.abs(fx-tx)<=1 && Math.abs(fy-ty)<=1){ fx=tx; fy=ty; placeFilm(); found=true; film.classList.add('hit'); star();
+      out.innerHTML='<b>Вы нашли место!</b> Пятно света вспыхнуло в центре плоскости: так в 1980 году робот понимал, что совпадение полное. Теперь посмотрите, как ищет сам робот.' }
+  }
+  // drag
+  let drag=null;
+  film.addEventListener('pointerdown',e=>{ if(busy) return; e.preventDefault(); film.setPointerCapture(e.pointerId); const r=box.getBoundingClientRect(); drag={x:e.clientX,y:e.clientY,fx,fy,w:r.width,h:r.height}; film.classList.add('grab') });
+  film.addEventListener('pointermove',e=>{ if(!drag) return; const nx=Math.round(drag.fx+(e.clientX-drag.x)/drag.w*W), ny=Math.round(drag.fy+(e.clientY-drag.y)/drag.h*H);
+    const cx2=Math.max(0,Math.min(W-P,nx)), cy2=Math.max(0,Math.min(H-P,ny)); if(cx2!==fx||cy2!==fy){ fx=cx2; fy=cy2; placeFilm(); if(found){ found=false; film.classList.remove('hit') } drawPlane(fx,fy) } });
+  const up=()=>{ if(!drag) return; drag=null; film.classList.remove('grab'); check() };
+  film.addEventListener('pointerup',up); film.addEventListener('pointercancel',up);
+  film.addEventListener('keydown',e=>{ const d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key]; if(!d||busy) return; e.preventDefault(); fx=Math.max(0,Math.min(W-P,fx+d[0])); fy=Math.max(0,Math.min(H-P,fy+d[1])); placeFilm(); check() });
+  // robot search: raster sweep of the film across the map
   function run(){
     if(busy) return; busy=true; runB.disabled=true;
-    const cw=W-P+1, chh=H-P+1, sc=new Float32Array(cw*chh), n=P*P; let best=-1,bx=0,by=0,mn=1;
-    const t0=performance.now();
-    for(let y=0;y<chh;y++)for(let x=0;x<cw;x++){ let m=0; for(let j=0;j<P;j++){ const row=(y+j)*W+x, pr=j*P; for(let i=0;i<P;i++) if(map[row+i]===patch[pr+i]) m++ } const v=m/n; sc[y*cw+x]=v; if(v>best){best=v;bx=x;by=y} if(v<mn) mn=v }
-    const dt=performance.now()-t0;
-    heat=sc.map(v=>Math.pow((v-mn)/((best-mn)||1),6));
-    const fin=()=>{ robot=[bx,by]; drawMap(); busy=false; runB.disabled=false;
-      const re=Math.max(Math.abs(bx-tx),Math.abs(by-ty))*CELL_M, ue=guess?Math.max(Math.abs(guess[0]-tx),Math.abs(guess[1]-ty))*CELL_M:null;
-      out.innerHTML=`Робот приложил свой кадр к <b>${intf(cw*chh)}</b> местам карты за <b>${fmt(dt,1)} мс</b>. Лучшее совпадение ${Math.round(best*100)}% клеток. `+
-        (re===0?'<b>Робот нашёл себя точно.</b> ':`<b>Робот ошибся на ${re} м:</b> помехи сбили его с толку. `)+
-        (ue==null?'Вы не делали свою попытку.':ue===0?'<b>Вы тоже угадали точно!</b>':`Вы ошиблись на ${intf(ue)} м.`)+
-        ' Зелёный пунктир — где робот на самом деле.';
+    const dt=computeAll(), cw=W-P+1, ch=H-P+1, total=cw*ch; let bi=0; for(let i=1;i<total;i++) if(sc[i]>sc[bi]) bi=i;
+    const bx=bi%cw, by=(bi/cw)|0, userWas=found;
+    const fin=()=>{ heatN=total; fx=bx; fy=by; placeFilm(); robot=[bx,by]; drawMap(); star(); busy=false; runB.disabled=false;
+      const re=Math.max(Math.abs(bx-tx),Math.abs(by-ty))*CELL_M;
+      out.innerHTML=`Робот приложил плёнку к <b>${intf(total)}</b> местам карты за <b>${fmt(dt,1)} мс</b>. `+(re===0?'<b>Робот нашёл себя точно.</b>':`<b>Робот ошибся на ${re} м:</b> грязь на объективе сбила его с толку.`)+(userWas?' Вы тоже справились!':'')+' Зелёный пунктир — где робот на самом деле.';
       if(re===0 && +noise.value>=35) ACH.unlock('robot'); };
-    if(RM){fin();return}
-    let k=0; const stepN=Math.ceil(heat.length/36); const anim=()=>{ k=Math.min(heat.length,k+stepN); drawMap(k); if(k<heat.length) requestAnimationFrame(anim); else fin() }; anim();
+    if(RM){ fin(); return }
+    film.classList.add('scan'); let k=0; const per=Math.ceil(total/90);
+    const step=()=>{ k=Math.min(total,k+per); heatN=k; const i=k-1; fx=i%cw; fy=(i/cw)|0; placeFilm(); drawMap(); drawPlane(fx,fy);
+      if(k<total) requestAnimationFrame(step); else { film.classList.remove('scan'); fin() } };
+    requestAnimationFrame(step);
   }
   noise.oninput=()=>{nv.textContent=noise.value+'%'}; noise.onchange=newFrame;
   runB.onclick=run; $('#c-new').onclick=newFrame;
   genMap(); newFrame();
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{drawMap();drawCells(cx,patch,P,P,cc.width/P)});
 })();}catch(err){console.error('section failed',err)}
 
 try{(function wave(){
@@ -1570,74 +1667,129 @@ try{(function wave(){
 
 try{(function signals(){
   const svg=$('#s-svg'), qEl=$('#s-q'), opts=$('#s-opts'), res=$('#s-res'), steps=$('#s-steps'), nextB=$('#s-next');
-  const P=[300,222]; // phone
-  const ICON={
-    sat:'<g><rect x="-9" y="-7" width="18" height="14" rx="3" fill="var(--ink)"/><rect x="-30" y="-6" width="18" height="12" fill="var(--blue)"/><rect x="12" y="-6" width="18" height="12" fill="var(--blue)"/><line x1="-12" y1="0" x2="-9" y2="0" stroke="var(--ink)" stroke-width="2"/><line x1="9" y1="0" x2="12" y2="0" stroke="var(--ink)" stroke-width="2"/></g>',
-    wifi:'<g><rect x="-16" y="2" width="32" height="10" rx="3" fill="var(--ink)"/><path d="M-10 -4 a14 14 0 0 1 20 0 M-5 1 a7 7 0 0 1 10 0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="7" r="1.8" fill="#2BD13A"/></g>',
-    cell:'<g><path d="M0 -26 L-12 18 M0 -26 L12 18 M-8 4 L8 4 M-5 -8 L5 -8" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M-10 -32 a12 12 0 0 1 20 0 M-16 -36 a20 20 0 0 1 32 0" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></g>'
-  };
+  const NS='http://www.w3.org/2000/svg';
+  const W=640, H=400;
+  // phone geometry
+  const PX=235, PY=34, PW=170, PH=332, SX=PX+9, SY=PY+30, SW=PW-18, SH=PH-48;
+  const TRUE=[PX+PW/2, SY+SH*.62];
   const NAME={sat:'Спутник',wifi:'Wi‑Fi',cell:'Сотовая вышка'};
-  const ST={ok:['есть','ok'],weak:['слабый','weak'],bounce:['отражается от стен','bad'],blocked:['не проходит','bad'],none:['нет рядом','bad']};
-  const person=`<g class="person" transform="translate(${P[0]},${P[1]})"><circle class="pb" cx="0" cy="-34" r="9" fill="var(--ink)"/><path class="pb" d="M-10 -22 h20 v26 h-20z" fill="var(--ink)"/><path class="pl" d="M-8 4 l-3 26 M8 4 l3 26" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><rect x="10" y="-22" width="9" height="15" rx="2" fill="var(--blue)" stroke="#fff" stroke-width="1.5"/></g>`;
-  const use=(k,x,y,s=1,o=1)=>`<g transform="translate(${x},${y}) scale(${s})" opacity="${o}">${ICON[k]}</g>`;
-  const ground=(c='var(--road)')=>`<rect x="0" y="252" width="600" height="48" fill="${c}"/>`;
-  const PH=[P[0]+14,P[1]-14];
+  const ST={ok:['точно','ok'],best:['примерно, но лучше нет','ok'],coarse:['примерно','weak'],bounce:['отражается от стен','bad'],none:['нет сигнала','bad']};
+  const SAT='<g><rect x="-9" y="-7" width="18" height="14" rx="3" fill="#E8F0E8"/><rect x="-30" y="-6" width="18" height="12" fill="#5CA4FF"/><rect x="12" y="-6" width="18" height="12" fill="#5CA4FF"/></g>';
+  const ROUTER='<g><rect x="-14" y="2" width="28" height="9" rx="3" fill="#E8F0E8"/><circle cx="8" cy="6.5" r="1.8" fill="#2BD13A"/></g>';
+  const TOWER='<g><path d="M0 -26 L-12 18 M0 -26 L12 18 M-8 4 L8 4 M-5 -8 L5 -8" stroke="#E8F0E8" stroke-width="3" fill="none" stroke-linecap="round"/></g>';
+  const rings=(x,y,col,n=3,cls='ring')=>Array.from({length:n},(_,i)=>`<circle class="${cls}" cx="${x}" cy="${y}" r="10" fill="none" stroke="${col}" stroke-width="2" style="animation-delay:${i*.6}s"/>`).join('');
+  const arcs=(x,y)=>Array.from({length:3},(_,i)=>`<path class="wave" d="M${x-14} ${y-30} a20 20 0 0 1 28 0" fill="none" stroke="#FFB81C" stroke-width="2.4" stroke-linecap="round" style="animation-delay:${i*.5}s;transform-origin:${x}px ${y-24}px"/>`).join('');
+  const toPhone=[PX+PW/2, PY+12];
   const SC=[
-    {id:'field', title:'В поле', q:'Вы гуляете в поле. Как телефону понять, где вы?', ans:'sat',
-     why:'Над головой открытое небо: сигнал спутников доходит до телефона без помех. Это самый точный источник, когда ему ничего не мешает.',
-     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground('#9BCB8A')}
-       <circle cx="470" cy="236" r="22" fill="#6FAE5E"/><rect x="467" y="236" width="6" height="18" fill="#6B5A43"/><circle cx="130" cy="240" r="16" fill="#6FAE5E"/>
-       ${use('sat',80,48)}${use('cell',548,206,.7)}`,
-     sig:{sat:{t:'ok',d:`M80 48 L${PH}`},wifi:{t:'none'},cell:{t:'weak',d:`M548 196 L${PH}`}}},
-    {id:'canyon', title:'Между высоток', q:'Вы идёте между небоскрёбами. Как телефону понять, где вы?', ans:'wifi',
-     why:'Спутниковый сигнал отражается от стен и приходит с опозданием, поэтому точка на карте «прыгает» на десятки метров. А роутеров Wi‑Fi в домах вокруг много, и по ним место определяется точнее.',
-     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground()}
-       <rect x="120" y="20" width="120" height="232" fill="var(--ink-2)"/><rect x="360" y="40" width="130" height="212" fill="var(--ink-2)"/>
-       ${[0,1,2,3,4,5,6].map(i=>`<rect x="136" y="${36+i*30}" width="88" height="10" fill="rgba(255,255,255,.18)"/><rect x="376" y="${56+i*27}" width="98" height="9" fill="rgba(255,255,255,.18)"/>`).join('')}
-       ${use('sat',60,40)}${use('wifi',205,150,.9)}${use('wifi',400,118,.9)}${use('cell',548,206,.7)}`,
-     sig:{sat:{t:'bounce',d:'M60 40 L238 118 L362 170 L322 198'},wifi:{t:'ok',d:`M205 150 L${PH} M400 118 L${PH}`},cell:{t:'ok',d:`M548 196 L${PH}`}}},
-    {id:'tunnel', title:'В тоннеле', q:'Вы едете по тоннелю. Как телефону понять, где вы?', ans:'cell',
+    {title:'В поле', q:'Вы гуляете в поле. Как телефону понять, где вы?', ans:'sat',
+     why:'Над головой открытое небо: сигнал спутников доходит без помех. Это самый точный источник, когда ему ничего не мешает.',
+     sig:{sat:{t:'ok',acc:5},wifi:{t:'none'},cell:{t:'coarse',acc:300,off:[26,-18]}},
+     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}<rect y="330" width="${W}" height="70" fill="#14301C"/>
+       <circle cx="110" cy="318" r="22" fill="#1F4A2A"/><circle cx="530" cy="322" r="18" fill="#1F4A2A"/>
+       <g transform="translate(90,60)">${SAT}</g>
+       <path class="ray" d="M90 60 L${toPhone}" stroke="#5CA4FF"/>
+       <g transform="translate(580,300) scale(.8)">${TOWER}</g>${arcs(580,300)}`},
+    {title:'Между высоток', q:'Вы идёте между небоскрёбами. Как телефону понять, где вы?', ans:'wifi',
+     why:'Сигнал спутников отражается от стен и приходит с опозданием, поэтому точка «прыгает» в соседний дом. А роутеров Wi‑Fi вокруг много, и по ним место определяется точнее.',
+     sig:{sat:{t:'bounce',acc:80,jump:[44,-92]},wifi:{t:'ok',acc:10},cell:{t:'coarse',acc:250,off:[-30,20]}},
+     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}<rect y="340" width="${W}" height="60" fill="#1B2620"/>
+       ${tower(40,30,150,310)}${tower(460,60,150,280)}
+       <g transform="translate(60,40)">${SAT}</g>
+       <path class="ray bad" d="M60 40 L188 120 L232 150" stroke="#F0503C"/>
+       <g transform="translate(150,170)">${ROUTER}</g>${rings(150,175,'#46E06A')}
+       <g transform="translate(520,140)">${ROUTER}</g>${rings(520,145,'#46E06A')}`},
+    {title:'В тоннеле', q:'Вы едете по тоннелю. Как телефону понять, где вы?', ans:'cell',
      why:'Спутник сквозь землю и бетон не пробьётся, Wi‑Fi в тоннеле обычно нет. Зато в тоннелях ставят антенны сотовой связи: по ним место видно примерно, а остальное навигатор досчитывает по скорости и времени.',
-     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground()}
-       <path d="M60 252 L60 150 Q60 112 98 112 L502 112 Q540 112 540 150 L540 252 Z" fill="#5E6B62"/><path d="M90 252 L90 160 Q90 140 110 140 L490 140 Q510 140 510 160 L510 252 Z" fill="var(--night)"/>
-       <rect x="0" y="92" width="600" height="22" fill="#9BCB8A"/>
-       ${use('sat',80,40)}<g class="lt">${use('cell',190,172,.6)}</g>`,
-     sig:{sat:{t:'blocked',d:'M80 40 L170 100',x:[170,100]},wifi:{t:'none'},cell:{t:'ok',d:`M190 172 L${PH}`}}, dark:true},
-    {id:'mall', title:'В торговом центре', q:'Вы в торговом центре. Как телефону понять, где вы?', ans:'wifi',
+     sig:{sat:{t:'none'},wifi:{t:'none'},cell:{t:'best',acc:150}},
+     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}
+       <rect y="96" width="${W}" height="28" fill="#1F4A2A"/>
+       <path d="M0 400 L0 150 Q0 124 26 124 L614 124 Q640 124 640 150 L640 400 Z" fill="#2A3530"/>
+       <path d="M24 400 L24 168 Q24 150 42 150 L598 150 Q616 150 616 168 L616 400 Z" fill="#05090A"/>
+       ${Array.from({length:7},(_,i)=>`<circle cx="${60+i*86}" cy="162" r="3" fill="#FFD36B" opacity=".55"/>`).join('')}
+       <g transform="translate(80,48)">${SAT}</g>
+       <path class="ray bad" d="M80 48 L150 112" stroke="#F0503C"/><g transform="translate(150,112)"><circle r="10" fill="#F0503C"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.5"/></g>
+       <g transform="translate(110,250) scale(.7)">${TOWER}</g>${arcs(110,250)}`},
+    {title:'В торговом центре', q:'Вы в торговом центре. Как телефону понять, где вы?', ans:'wifi',
      why:'Крыша и стены не пропускают спутниковый сигнал, а вышка снаружи даёт лишь примерное место. Зато в ТЦ десятки роутеров Wi‑Fi. А в некоторых ТЦ 2ГИС находит вас даже по фото с камеры, как в зале 3.',
-     draw:()=>`<rect width="600" height="252" fill="var(--sky)"/>${ground()}
-       <path d="M70 252 L70 96 L300 56 L530 96 L530 252 Z" fill="var(--card)" stroke="var(--ink-2)" stroke-width="4"/>
-       <rect x="120" y="150" width="70" height="60" fill="var(--paper-2)"/><rect x="410" y="150" width="70" height="60" fill="var(--paper-2)"/>
-       ${use('sat',70,30)}${use('wifi',160,128,.8)}${use('wifi',300,100,.8)}${use('wifi',450,128,.8)}${use('cell',575,206,.6)}`,
-     sig:{sat:{t:'blocked',d:'M70 30 L178 76',x:[178,76]},wifi:{t:'ok',d:`M160 128 L${PH} M300 100 L${PH} M450 128 L${PH}`},cell:{t:'weak',d:`M575 196 L${PH}`}}},
+     sig:{sat:{t:'none'},wifi:{t:'ok',acc:8},cell:{t:'coarse',acc:200,off:[-22,-26]}},
+     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}
+       <path d="M10 400 L10 110 L320 60 L630 110 L630 400 Z" fill="#17211C" stroke="#46E06A" stroke-opacity=".35" stroke-width="3"/>
+       ${[[60,150],[130,150],[510,150],[580,150],[60,250],[130,250],[510,250],[580,250]].map(([x,y])=>`<rect x="${x-26}" y="${y}" width="52" height="60" rx="4" fill="#24332A"/><rect x="${x-26}" y="${y}" width="52" height="8" fill="#FFD36B" opacity=".35"/>`).join('')}
+       <g transform="translate(70,36)">${SAT}</g>
+       <path class="ray bad" d="M70 36 L150 92" stroke="#F0503C"/><g transform="translate(150,92)"><circle r="10" fill="#F0503C"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.5"/></g>
+       <g transform="translate(100,210)">${ROUTER}</g>${rings(100,215,'#46E06A')}
+       <g transform="translate(545,210)">${ROUTER}</g>${rings(545,215,'#46E06A')}
+       <g transform="translate(320,120)">${ROUTER}</g>${rings(320,125,'#46E06A')}`},
   ];
-  let i=0, score=0, answered=false;
-  function drawScene(reveal){
-    const s=SC[i]; let sig='';
-    if(reveal) for(const k of ['sat','wifi','cell']){ const g=s.sig[k]; if(!g.d) continue;
-      const col=g.t==='ok'?'#19AA1E':g.t==='weak'?'#E0A000':'#F0503C';
-      sig+=`<path d="${g.d}" fill="none" stroke="${col}" stroke-width="${g.t==='ok'?4:3}" stroke-linecap="round" stroke-linejoin="round" ${g.t==='ok'?'class="flow"':'stroke-dasharray="7 7"'}/>`;
-      if(g.x) sig+=`<g transform="translate(${g.x[0]},${g.x[1]})"><circle r="11" fill="#F0503C"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></g>`; }
-    svg.innerHTML=s.draw()+sig+person; svg.classList.toggle('dark',!!s.dark);
+  function stars(){ let s=''; const r=rng(7); for(let i=0;i<40;i++) s+=`<circle cx="${(r()*W).toFixed(0)}" cy="${(r()*110).toFixed(0)}" r="${(r()*1.3+.3).toFixed(1)}" fill="#fff" opacity="${(.2+r()*.6).toFixed(2)}"/>`; return s }
+  function tower(x,y,w,h){ let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#1E2B24"/>`; const r=rng(x); for(let yy=y+14;yy<y+h-10;yy+=22) for(let xx=x+12;xx<x+w-14;xx+=24) s+=`<rect x="${xx}" y="${yy}" width="12" height="9" fill="#FFD36B" opacity="${r()<.45?.75:.08}"/>`; return s }
+  // phone screen (mini map)
+  function phone(){
+    const r=rng(42); let m='';
+    for(let y=SY+12;y<SY+SH;y+=46) m+=`<rect x="${SX}" y="${y}" width="${SW}" height="7" fill="#FFFFFF"/>`;
+    for(let x=SX+18;x<SX+SW;x+=48) m+=`<rect x="${x}" y="${SY}" width="7" height="${SH}" fill="#FFFFFF"/>`;
+    for(let y=SY+22;y<SY+SH-10;y+=46) for(let x=SX+28;x<SX+SW-10;x+=48) if(r()<.85) m+=`<rect x="${x}" y="${y}" width="${30+r()*6}" height="${30}" rx="2" fill="#D9DED6"/>`;
+    return `<g class="phone" id="ph">
+      <rect x="${PX-3}" y="${PY-3}" width="${PW+6}" height="${PH+6}" rx="30" fill="#000" opacity=".5" filter="url(#soft)"/>
+      <rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="28" fill="#0D0F10" stroke="#3A4440" stroke-width="2"/>
+      <rect x="${PX+PW/2-24}" y="${PY+10}" width="48" height="8" rx="4" fill="#1E2422"/>
+      <clipPath id="scr"><rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" rx="6"/></clipPath>
+      <g clip-path="url(#scr)">
+        <rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" fill="#EEF1EB"/>${m}
+        <path id="ph-route" d="M${TRUE[0]} ${TRUE[1]} L${TRUE[0]} ${SY+108} L${SX+SW-24} ${SY+108} L${SX+SW-24} ${SY+30}" fill="none" stroke="#19AA1E" stroke-width="5" stroke-linejoin="round" opacity=".9"/>
+        <circle id="ph-acc" cx="${TRUE[0]}" cy="${TRUE[1]}" r="40" fill="rgba(0,115,250,.16)" stroke="rgba(0,115,250,.5)" stroke-width="1.5"/>
+        <circle id="ph-dot" cx="${TRUE[0]}" cy="${TRUE[1]}" r="7" fill="#0073FA" stroke="#fff" stroke-width="3"/>
+        <g id="ph-spin" opacity="0"><circle cx="${TRUE[0]}" cy="${TRUE[1]}" r="16" fill="none" stroke="#9AA7A0" stroke-width="3" stroke-dasharray="20 80" class="spin"/></g>
+        <rect x="${SX}" y="${SY}" width="${SW}" height="26" fill="rgba(255,255,255,.92)"/>
+        <text id="ph-bar" x="${SX+10}" y="${SY+17}" font-size="11" font-weight="600" fill="#131C16" font-family="var(--sans)">Определяю место…</text>
+        <g id="ph-banner" opacity="0"><rect x="${SX+8}" y="${SY+SH-40}" width="${SW-16}" height="30" rx="8" fill="#131C16"/><text id="ph-btxt" x="${SX+SW/2}" y="${SY+SH-20}" font-size="11.5" font-weight="600" fill="#fff" text-anchor="middle" font-family="var(--sans)"></text></g>
+      </g>
+    </g>`;
   }
+  let i=0, score=0, answered=false, anim=0;
   function render(){
     answered=false; const s=SC[i];
     steps.innerHTML=SC.map((x,k)=>`<span class="${k<i?'done':k===i?'cur':''}">${k+1}. ${x.title}</span>`).join('');
     qEl.textContent=s.q; res.hidden=true; nextB.hidden=true;
     opts.querySelectorAll('button').forEach(b=>{ b.disabled=false; b.className='sig-opt' });
-    drawScene(false);
+    svg.innerHTML=`<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050B12"/><stop offset="1" stop-color="#0B1A14"/></linearGradient>
+      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>`+s.scene()+phone();
+    setPhone({x:TRUE[0],y:TRUE[1],r:46,bar:'Определяю место…',banner:null,spin:false,instant:true});
   }
+  function setPhone(o){
+    const dot=$('#ph-dot'), acc=$('#ph-acc'), bar=$('#ph-bar'), ban=$('#ph-banner'), btx=$('#ph-btxt'), spin=$('#ph-spin'), route=$('#ph-route');
+    bar.textContent=o.bar; spin.setAttribute('opacity',o.spin?1:0);
+    dot.setAttribute('opacity',o.spin?0:1); acc.setAttribute('opacity',o.spin?0:1);
+    if(o.banner){ ban.setAttribute('opacity',1); btx.textContent=o.banner } else ban.setAttribute('opacity',0);
+    route.classList.toggle('reroute',!!o.reroute);
+    cancelAnimationFrame(anim);
+    const fx=+dot.getAttribute('cx'), fy=+dot.getAttribute('cy'), fr=+acc.getAttribute('r');
+    if(o.instant||RM){ dot.setAttribute('cx',o.x); dot.setAttribute('cy',o.y); acc.setAttribute('cx',o.x); acc.setAttribute('cy',o.y); acc.setAttribute('r',o.r); return }
+    const t0=performance.now(), D=700;
+    const step=now=>{ const k=Math.min(1,(now-t0)/D), e=1-Math.pow(1-k,3), j=o.jitter&&k<1?(Math.random()-.5)*10:0;
+      const x=fx+(o.x-fx)*e+j, y=fy+(o.y-fy)*e+j; dot.setAttribute('cx',x); dot.setAttribute('cy',y); acc.setAttribute('cx',x); acc.setAttribute('cy',y); acc.setAttribute('r',fr+(o.r-fr)*e);
+      if(k<1) anim=requestAnimationFrame(step) };
+    anim=requestAnimationFrame(step);
+  }
+  const accR=m=>Math.max(7,Math.min(92,m*.3));
   opts.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
-    if(answered) return; answered=true; const s=SC[i], k=b.dataset.k, ok=k===s.ans; if(ok) score++;
-    opts.querySelectorAll('button').forEach(x=>{ x.disabled=true; if(x.dataset.k===s.ans) x.classList.add('right'); });
+    if(answered) return; answered=true; const s=SC[i], k=b.dataset.k, ok=k===s.ans, g=s.sig[k]; if(ok) score++;
+    opts.querySelectorAll('button').forEach(x=>{ x.disabled=true; if(x.dataset.k===s.ans) x.classList.add('right') });
     if(!ok) b.classList.add('wrong');
-    drawScene(true);
+    const ph=$('#ph');
+    if(g.t==='none') setPhone({x:TRUE[0],y:TRUE[1],r:46,bar:'Нет сигнала',banner:'Ищу сигнал…',spin:true});
+    else if(g.t==='bounce') setPhone({x:TRUE[0]+g.jump[0],y:TRUE[1]+g.jump[1],r:accR(g.acc*3),bar:`Точность: ${g.acc} м`,banner:'Пересчитываю путь…',reroute:true,jitter:true});
+    else if(g.t==='coarse'||g.t==='best'){ const o=g.off||[0,0]; setPhone({x:TRUE[0]+o[0],y:TRUE[1]+o[1],r:accR(g.acc),bar:`Точность: ~${g.acc} м`,banner:ok?'Примерно здесь':'Где-то в этом районе'}) }
+    else { setPhone({x:TRUE[0],y:TRUE[1],r:accR(g.acc),bar:`Точность: ${g.acc} м`,banner:'Вы здесь'}); if(!RM){ ph.classList.remove('buzz'); void ph.getBoundingClientRect(); ph.classList.add('buzz') } }
+    if(ok&&g.t==='ok'&&!RM){ ph.classList.remove('buzz'); void ph.getBoundingClientRect(); ph.classList.add('buzz') }
+    svg.classList.add('answered'); svg.dataset.pick=k;
     res.innerHTML=`<p class="verdict-line"><b>${ok?'Верно!':'Не совсем.'}</b> Навигатор выберет: <b>${NAME[s.ans]}</b>.</p>
       <ul class="sig-list">${['sat','wifi','cell'].map(q=>{const st=ST[s.sig[q].t];return `<li class="${st[1]}"><i></i>${NAME[q]}<span>${st[0]}</span></li>`}).join('')}</ul>
       <p class="why">${s.why}</p>`;
     res.hidden=false; nextB.hidden=false; nextB.textContent=i<SC.length-1?'Следующее место':'Узнать итог';
   }));
   nextB.addEventListener('click',()=>{
+    svg.classList.remove('answered');
     if(i<SC.length-1){ i++; render(); return }
     if(nextB.dataset.done){ delete nextB.dataset.done; i=0; score=0; render(); return }
     steps.innerHTML=SC.map(x=>`<span class="done">${x.title}</span>`).join('');
@@ -1870,18 +2022,38 @@ try{(function letter(){
     quiz.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ ans[step]=+b.dataset.i; b.classList.add('sel'); setTimeout(()=>{step++;render()},RM?0:220) });
     const back=$('#q-back'); if(back) back.onclick=()=>{step=Math.max(0,step-1);render()};
   }
+  // 9 headlines (Q2 x Q1), 9 decks (Q3 x Q4), 3 endings (Q7): every screenshot looks different
+  const HEAD=[
+    ['Личный навигатор видит спутники даже между небоскрёбами','Город подсказывает вашему навигатору, где вы','Навигатор научился смотреть по сторонам'],
+    ['Спутники и город поделили дороги','Город прокладывает маршруты сам','Улицы сами подсказывают дорогу'],
+    ['Машины находят дорогу по спутникам без водителя','Город везёт вас сам','Транспорт смотрит на дорогу за вас']];
+  const DECK=[
+    ['Скажите, куда, и вы уже в пути','Карта торопится раньше вас','Быстро, как всегда, и по-прежнему просто'],
+    ['Спокойный путь теперь можно попросить словами','Карта бережёт нервы ещё до выезда','Без спешки и без сюрпризов'],
+    ['Карта понимает, что вы имели в виду','Карта знает вас лучше, чем вы сами','Свой путь у каждого, а кнопки по-прежнему общие']];
+  const END=['Тридцать лет назад, в 2026 году, это казалось фантастикой. Впрочем, в 1956-м так же думали о машине, которая сама прокладывает маршрут.',
+    'В 2026 году в это поверил бы не каждый. Но инженеры 1956 года тоже писали «из будущего», и многое из написанного сбылось.',
+    'Проверим через тридцать лет. Инженеры из 1956-го, которые первыми написали письмо в будущее, уже ждут ответа.'];
+  const issueNo=()=>1+ans.reduce((a,v,i)=>a+v*Math.pow(3,i),0);
+  const TOTAL=Math.pow(3,Q.length);
   function article(){
     const s=i=>Q[i].o[ans[i]][1];
-    return {head:Q[1].h[ans[1]], deck:Q[2].d[ans[2]],
-      paras:[`${s(0)} ${s(1)}`,`${s(2)} ${s(3)} ${s(4)}`,`${s(5)} ${s(6)}`,'Тридцать лет назад, в 2026 году, это казалось фантастикой. Впрочем, в 1956-м так же думали о машине, которая сама прокладывает маршрут.']};
+    return {head:HEAD[ans[1]][ans[0]], deck:DECK[ans[2]][ans[3]], no:issueNo(),
+      paras:[`${s(0)} ${s(1)}`,`${s(2)} ${s(3)} ${s(4)}`,`${s(5)} ${s(6)}`,END[ans[6]]]};
   }
   function paperHTML(a){
-    return `<div class="mast"><span>Из статей, опубликованных в 2056 году</span><span>№ 1</span></div>
+    return `<div class="mast"><span>Из статей, опубликованных в 2056 году</span><span>${a.no?'№ '+intf(a.no):'№ …'}</span></div>
       <h3>${a.head}</h3><p class="deck">${a.deck}</p><p class="by">Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956</p>
-      <div class="cols">${a.paras.map(p=>`<p>${p}</p>`).join('')}</div>`;
+      <div class="cols">${a.paras.map(p=>`<p>${p}</p>`).join('')}</div>`+(a.no?`<div class="stamp"><b>№ ${intf(a.no)}</b><span>из ${intf(TOTAL)} вариантов</span></div>`:'');
+  }
+  function printIn(){
+    if(RM) return;
+    const parts=[...paper.querySelectorAll('.mast,h3,.deck,.by,.cols p')]; let d=0;
+    paper.classList.add('printing'); parts.forEach(el=>{ el.style.setProperty('--d',d+'s'); d+=el.tagName==='P'&&el.parentElement.classList.contains('cols')?.55:.35 });
+    const st=paper.querySelector('.stamp'); if(st){ st.style.setProperty('--d',(d+.2)+'s'); setTimeout(()=>{ paper.classList.remove('thud'); void paper.offsetWidth; paper.classList.add('thud') },(d+.2+.32)*1000) }
   }
   function result(){
-    const a=article(); paper.classList.remove('ghost'); paper.innerHTML=paperHTML(a); acts.hidden=false; ACH.unlock('letter');
+    const a=article(); paper.classList.remove('ghost','printing','thud'); paper.innerHTML=paperHTML(a); printIn(); acts.hidden=false; ACH.unlock('letter');
     quiz.innerHTML=`<div class="qtop"><span>Готово</span><button type="button" id="q-back">Изменить ответы</button></div>
       <div class="bars" aria-hidden="true">${Q.map(()=>'<i class="on"></i>').join('')}</div>
       <h3>Ваша статья из 2056 года готова</h3><p style="margin-top:12px;color:var(--ink-2)">Сохраните её и вернитесь через тридцать лет проверить. Инженеры из 1956-го уже ждут.</p>`;
@@ -1892,21 +2064,27 @@ try{(function letter(){
   paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Георгий Бабат в 1956 году описал термоядерную ТЭЦ и другие технологии «из 2056 года». Ваша статья будет о том, как люди будут находить дорогу.','Каждый ответ добавит в неё абзац.']});
   $('#r-again').onclick=()=>{step=0;ans=[];paper.classList.add('ghost');acts.hidden=true;note.textContent='';
     paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Каждый ответ добавит в неё абзац.']}); render()};
-  $('#r-copy').onclick=async()=>{const a=article(); const t=`${a.head}\n${a.deck}\n\n${a.paras.join('\n\n')}\n\nИз статей, опубликованных в 2056 году`;
+  $('#r-copy').onclick=async()=>{const a=article(); const t=`${a.head}\n${a.deck}\n\n${a.paras.join('\n\n')}\n\nИз статей, опубликованных в 2056 году. Выпуск № ${intf(a.no)} из ${intf(TOTAL)}`;
     try{await navigator.clipboard.writeText(t); note.textContent='Текст скопирован.'}catch(e){ const r=document.createRange(); r.selectNodeContents(paper); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); note.textContent='Текст выделен, скопируйте его сочетанием клавиш.'}};
   $('#r-save').onclick=()=>{
-    const a=article(), c=document.createElement('canvas'), w=1080, h=1350; c.width=w; c.height=h; const x=c.getContext('2d');
+    const a=article(), w=1080, L=150, MW=w-2*L, c=document.createElement('canvas'); let x=c.getContext('2d'), y=0, dry=true;
+    const wrap=(t,font,lh,col)=>{x.font=font; x.fillStyle=col; const words=t.split(' '); let ln=''; for(const wd of words){const tt=ln?ln+' '+wd:wd; if(x.measureText(tt).width>MW&&ln){ if(!dry) x.fillText(ln,L,y); y+=lh; ln=wd }else ln=tt} if(ln){ if(!dry) x.fillText(ln,L,y); y+=lh }};
+    const PT=90;
+    const body=()=>{ y=PT+80;
+      if(!dry){ x.fillStyle='#16130E'; x.font='600 21px "SB Sans Text", sans-serif'; x.fillText('ИЗ СТАТЕЙ, ОПУБЛИКОВАННЫХ В 2056 ГОДУ',L,y); x.fillRect(L,y+20,MW,5) }
+      y+=100;
+      wrap(a.head,'600 68px "SB Sans Text", sans-serif',74,'#16130E'); y+=10;
+      wrap(a.deck,'500 32px "SB Sans Text", sans-serif',40,'#3A352B'); y+=6;
+      wrap('Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956','400 21px "SB Sans Text", sans-serif',30,'#6A6355'); y+=22;
+      a.paras.forEach(p=>{ wrap(p,'400 25px "SB Sans Text", sans-serif',36,'#16130E'); y+=12 });
+      return y };
+    const textEnd=body(), PB=textEnd+190, h=Math.max(1350,PB+110); c.width=w; c.height=h; x=c.getContext('2d'); dry=false;
     x.fillStyle='#0B130F'; x.fillRect(0,0,w,h);
-    x.save(); x.translate(w/2,h/2); x.rotate(-.012); x.fillStyle='#F6F4EC'; x.fillRect(-460,-560,920,1080); x.restore();
-    const L=110; let y=150;
-    x.fillStyle='#16130E'; x.font='600 22px "SB Sans Text", sans-serif'; x.fillText('ИЗ СТАТЕЙ, ОПУБЛИКОВАННЫХ В 2056 ГОДУ',L,y); x.textAlign='right'; x.fillText('№ 1',w-L,y); x.textAlign='left';
-    y+=20; x.fillRect(L,y,w-2*L,5); y+=80;
-    const wrap=(t,font,lh,maxW,col)=>{x.font=font; x.fillStyle=col; const words=t.split(' '); let ln=''; for(const wd of words){const tt=ln?ln+' '+wd:wd; if(x.measureText(tt).width>maxW&&ln){x.fillText(ln,L,y);y+=lh;ln=wd}else ln=tt} if(ln){x.fillText(ln,L,y);y+=lh}};
-    wrap(a.head,'600 74px "SB Sans Text", sans-serif',78,w-2*L,'#16130E'); y+=8;
-    wrap(a.deck,'500 34px "SB Sans Text", sans-serif',42,w-2*L,'#3A352B'); y+=6;
-    wrap('Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956','400 22px "SB Sans Text", sans-serif',30,w-2*L,'#6A6355'); y+=20;
-    a.paras.forEach(p=>{wrap(p,'400 27px "SB Sans Text", sans-serif',38,w-2*L,'#16130E'); y+=14});
-    x.fillStyle='#19AA1E'; x.font='500 22px "SB Sans Text", sans-serif'; x.fillText('Маршрут строится 88 лет · 2ГИС',L,h-120);
+    x.save(); x.translate(w/2,(PT+PB)/2); x.rotate(-.01); x.fillStyle='#F6F4EC'; x.fillRect(-(w/2-80),-(PB-PT)/2,w-160,PB-PT); x.restore();
+    body();
+    x.save(); x.translate(w-L-140,PB-95); x.rotate(-.2); x.strokeStyle='rgba(200,40,30,.85)'; x.fillStyle='rgba(200,40,30,.85)'; x.lineWidth=5; x.strokeRect(-135,-56,270,112); x.lineWidth=2; x.strokeRect(-125,-46,250,92);
+    x.textAlign='center'; x.font='600 42px "SB Sans Text", sans-serif'; x.fillText('№ '+intf(a.no),0,4); x.font='500 19px "SB Sans Text", sans-serif'; x.fillText('из '+intf(TOTAL)+' вариантов',0,34); x.restore(); x.textAlign='left';
+    x.fillStyle='#46E06A'; x.font='500 24px "SB Sans Text", sans-serif'; x.fillText('Маршрут строится 88 лет · 2ГИС',L-70,h-48);
     c.toBlob(b=>{ if(!b){note.textContent='Не удалось собрать картинку.';return} const u=URL.createObjectURL(b); const l=document.createElement('a'); l.href=u; l.download='pismo-2056.png'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); note.textContent='Картинка сохранена в загрузки.'; },'image/png');
   };
   render();
