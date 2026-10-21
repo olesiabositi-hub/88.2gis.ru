@@ -73,7 +73,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .bar nav{display:flex;gap:4px;margin-left:auto}
 .bar nav a{font-size:14px;text-decoration:none;color:var(--night-muted);padding:7px 10px;border-radius:999px}
 .bar nav a:hover{color:var(--night-text);background:var(--night-line)}
-.bar .tg{font-size:14px;text-decoration:none;color:var(--night-text);border:1px solid var(--night-line);padding:7px 12px;border-radius:999px}
+.bar .tg{margin-left:auto;font-size:14px;text-decoration:none;color:var(--night-text);border:1px solid var(--night-line);padding:7px 12px;border-radius:999px}
 @media (max-width:900px){.bar nav{display:none}.bar .tg{margin-left:auto}}
 
 /* ---------- hero ---------- */
@@ -83,11 +83,11 @@ button{font:inherit;color:inherit;cursor:pointer}
   background:linear-gradient(90deg,var(--night) 0%,rgba(11,19,15,.86) 32%,rgba(11,19,15,.15) 62%,rgba(11,19,15,0) 100%),linear-gradient(0deg,var(--night) 0%,rgba(11,19,15,0) 22%)}
 .hero-in{position:relative;min-height:clamp(600px,86vh,820px);display:grid;grid-template-rows:1fr auto;padding-block:clamp(40px,7vh,84px) 0;pointer-events:none}
 .hero-in a,.hero-in button{pointer-events:auto}
-.hero-copy{max-width:600px;align-self:center}
+.hero-copy{max-width:660px;align-self:center}
 .status{display:inline-flex;align-items:center;gap:12px;background:rgba(25,170,30,.14);border:1px solid rgba(25,170,30,.45);color:#BFF0C1;padding:8px 14px 8px 10px;border-radius:999px;font-size:14px;font-weight:500}
 .status i{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(130,215,20,.3);border-top-color:var(--lime);animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.hero h1{font-size:clamp(54px,8.6vw,124px);line-height:.9;letter-spacing:-.05em;margin-top:22px}
+.hero h1{font-size:clamp(44px,6.4vw,92px);line-height:.94;letter-spacing:-.045em;text-wrap:balance}
 .hero h1 .yrs{display:block;color:var(--lime)}
 .hero .lede{font-size:clamp(17px,1.5vw,20px);line-height:1.5;color:#C9D6CC;margin-top:24px;max-width:46ch}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
@@ -142,7 +142,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .kicker{display:flex;align-items:center;gap:10px;font-weight:500;font-size:15px;color:var(--ink-2);margin-bottom:14px}
 .kicker b{color:var(--ink);font-weight:600}
 .kicker i{width:10px;height:10px;border-radius:50%;background:var(--c)}
-.hh h2{font-size:clamp(46px,7vw,96px);line-height:.92;letter-spacing:-.045em}
+.hh h2{font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.04em;text-wrap:balance}
+.hh .src{font-size:14px;margin-top:12px}
+.hh .src a{color:var(--green-ink);text-underline-offset:3px}
 .hh p{font-size:clamp(17px,1.4vw,19px);color:var(--ink-2);max-width:52ch}
 @media (max-width:800px){.hh{grid-template-columns:1fr;align-items:start;gap:18px}}
 
@@ -351,13 +353,15 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .seg [data-mode="close"][aria-pressed="true"],.seg [data-mode="jam"][aria-pressed="true"]{background:#F0503C;color:#fff}
 .sb-foot{display:flex;gap:14px;align-items:center;font-size:13px;color:var(--night-muted);flex-wrap:wrap;justify-content:flex-end}
 .sb-foot button{background:none;border:0;color:var(--night-text);text-decoration:underline;text-underline-offset:3px;font-size:13px;padding:0}
+.sb-title{font-size:15px;font-weight:600;color:var(--night-text);margin-bottom:2px}
+.sandbox .legend{margin-top:4px;justify-content:flex-end;gap:8px 14px}
 #sb-hint::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 0 3px rgba(25,170,30,.25)}
 @media (max-width:900px){
   .hud{display:none}
   .hud-m{display:block;position:absolute;top:12px;left:var(--gutter);right:var(--gutter);font:400 11.5px/1.4 var(--mono);color:var(--night-muted);pointer-events:none}
   .sandbox{top:36px;bottom:auto;left:var(--gutter);right:var(--gutter);justify-items:start}
   .seg button{padding:6px 10px;font-size:12.5px}
-  .sb-foot{justify-content:flex-start}
+  .sb-foot{justify-content:flex-start}.sandbox .legend{justify-content:flex-start}
   .hero-in{padding-top:330px}
 }
 
@@ -384,6 +388,8 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .canyon p{color:var(--ink-2);margin-top:10px;max-width:56ch}
 .items.one{grid-template-columns:minmax(0,1fr);max-width:640px}
 .lead2{font-size:17px;max-width:62ch}
+.lead2 + .corr{margin-top:32px}
+#hall-4 .where{margin-top:72px}
 .steps{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 22px}
 .steps li{display:flex;gap:10px;font-size:14px;line-height:1.45;color:var(--ink-2)}
 .steps li b,.corr figcaption b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:inline-grid;place-items:center;font-size:13px;font-weight:600}
@@ -475,7 +481,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .ask canvas{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--rule)}
 .a-note{font-size:13px;color:var(--ink-2);margin-top:8px}
 .a-how{font-size:15.5px;margin-top:14px;max-width:62ch}
-.feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.feat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
 .feat a{display:flex;flex-direction:column;gap:6px;text-decoration:none;border-top:3px solid var(--yellow);padding-top:12px}
 .feat b{font-size:17px;font-weight:600;letter-spacing:-.01em}
 .feat span{font-size:14.5px;color:var(--ink-2);line-height:1.45}
@@ -599,7 +605,7 @@ html{scroll-padding-top:96px}
 @media (max-width:520px){.trip .yrs{display:none}}
 @media (prefers-reduced-motion:reduce){.rstop.cur i{animation:none}.rstop i{transition:none}}
 @media (max-width:1100px){#trip-left{display:none}}
-@media (max-width:900px){.trip{margin-left:auto}.bar .tg{margin-left:10px}}
+
 @media (max-width:520px){.brand span{display:none}}
 /* achievements */
 .ach-pill{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;display:inline-flex;gap:10px;align-items:center;background:var(--night);color:var(--night-text);border:1px solid var(--night-line);border-radius:999px;padding:10px 16px 10px 12px;font-weight:500;font-size:14px;box-shadow:0 12px 30px -12px rgba(0,0,0,.55)}
@@ -637,13 +643,9 @@ html{scroll-padding-top:96px}
 <header class="bar">
   <div class="wrap">
     <a class="brand" href="#top"><img src="assets/img/2gis-logo.png" alt="2ГИС" width="30" height="30">2ГИС <span>Инженерный музей</span></a>
-    <nav aria-label="Залы">
-      <a href="#hall-1">Путь</a><a href="#hall-3">Где я</a><a href="#hall-5">Что вокруг</a><a href="#hall-7">Прогнозы</a><a href="#letter">2056</a>
-    </nav>
-    <div class="trip num" aria-live="off"><span id="trip-where">Старт<span class="yrs"> · 1938 → 2056</span></span><span id="trip-left">до 2056: 8 остановок</span></div>
     <a class="tg" href="https://t.me/rnd2GIS" target="_blank" rel="noopener">Telegram</a>
   </div>
-  <div class="route" role="navigation" aria-label="Маршрут по залам"><div class="route-in" id="route"><div class="route-fill" id="route-fill"></div></div></div>
+  <div class="route" role="navigation" aria-label="Маршрут по залам"><div class="route-in" id="route"><div class="route-fill" id="route-fill"></div></div></div>
 </header>
 
 <main id="top">
@@ -662,35 +664,34 @@ html{scroll-padding-top:96px}
   </div>
   <div class="hud-m num" id="hud-line" aria-hidden="true"></div>
   <div class="sandbox" id="sandbox" role="toolbar" aria-label="Песочница маршрутов">
-    <div class="seg" aria-label="Что делает нажатие"><button type="button" data-mode="route" aria-pressed="true">Точка Б</button><button type="button" data-mode="close" aria-pressed="false">Перекрыть улицу</button><button type="button" data-mode="jam" aria-pressed="false">Пробка</button></div>
+    <p class="sb-title">Поиграйте с картой и сравните три алгоритма</p>
+    <div class="seg" aria-label="Что делает нажатие"><button type="button" data-mode="route" aria-pressed="true">Точка Б</button><button type="button" data-mode="close" aria-pressed="false">Перекрыть улицу</button><button type="button" data-mode="jam" aria-pressed="false">Пробка</button></div>
     <div class="seg" aria-label="Алгоритм"><button type="button" data-alg="astar" aria-pressed="true">A*</button><button type="button" data-alg="dijkstra" aria-pressed="false">Дейкстра</button><button type="button" data-alg="bidir" aria-pressed="false">Двусторонний</button></div>
-    <div class="sb-foot"><span id="sb-hint">Нажмите на карту, чтобы поставить точку Б</span><button type="button" id="sb-reset">Сбросить город</button></div>
-  </div>
-  <div class="wrap hero-in">
-    <div class="hero-copy">
-      <div class="status"><i aria-hidden="true"></i>Строим маршрут: 1938 → 2056</div>
-      <h1 id="h1">Маршрут строится <span class="yrs">88&nbsp;лет</span></h1>
-      <p class="lede">Сначала его рисовали в журналах, потом считали на ЭВМ, теперь строят за миллисекунды. Это музей одной инженерной задачи: как довести человека из точки А в точку Б. Со статьями 1938–1984 годов и рассказами инженеров, которые решают её сейчас.</p>
-      <div class="ctas">
-        <a class="btn btn-go" href="#hall-1">Поехали</a>
-        <a class="btn btn-ghost" href="#letter">Сразу в 2056 год</a>
-      </div>
-      <div class="legend" aria-hidden="true">
+    <div class="sb-foot"><span id="sb-hint">Нажмите на карту, чтобы поставить точку Б</span><button type="button" id="sb-reset">Сбросить</button></div>
+    <div class="legend" aria-hidden="true">
         <span><i style="background:var(--yellow)"></i>просмотренные улицы</span>
         <span><i style="background:#78B4FF"></i>встречный поиск</span>
         <span><i style="background:var(--green)"></i>маршрут</span>
-        <span><i style="background:#F0503C"></i>пробки и перекрытия</span>
+        <span><i style="background:#F0503C"></i>пробки и перекрытия</span>
+      </div>
+  </div>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <h1 id="h1">Навигация <span class="yrs">интереснее, чем&nbsp;кажется</span></h1>
+      <p class="lede">Тысячи лет люди строили маршруты самостоятельно, а в XX веке это начали доверять машине. Мы нашли статьи про задачи навигации в советских журналах и сравнили с рассказами инженеров 2ГИС о том, как всё работает сегодня. Получился интерактивный музей, в котором можно узнать, какая сложная инженерная работа стоит за маршрутами.</p>
+      <div class="ctas">
+        <a class="btn btn-go" href="#hall-1">Начать экскурсию</a>
+        <a class="btn btn-ghost" href="#letter">Сразу в 2056 год</a>
       </div>
     </div>
     <nav class="halls" aria-label="Залы музея">
-      <a href="#hall-1"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 1 · 1972</span><h3>Как посчитать путь?</h3><p>Обгоните ЭВМ на маршруте по Москве</p></a>
-      <a href="#hall-2"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 2 · 1980</span><h3>Как проехать без остановок?</h3><p>Поймайте зелёную волну</p></a>
-      <a href="#hall-3"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 3 · 1980</span><h3>Где я?</h3><p>Найдите себя на карте быстрее робота</p></a>
-      <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · сегодня</span><h3>Как телефон определяет геолокацию</h3><p>Угадайте, какой сигнал выручит</p></a>
-      <a href="#hall-5"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 5 · 1984</span><h3>Что вокруг?</h3><p>Спросите карту обычными словами</p></a>
-      <a href="#hall-6"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 6 · 1984</span><h3>Карта-детектив</h3><p>Найдите центр города по точкам</p></a>
-      <a href="#hall-7"><span class="y"><span class="dot" style="background:var(--lime)"></span>Зал 7 · 1938–1980</span><h3>Каким будет город?</h3><p>Проверьте прогнозы прошлого</p></a>
-      <a href="#letter"><span class="y"><span class="dot" style="background:#fff"></span>Финал · 2056</span><h3>Письмо в будущее</h3><p>Семь вопросов и ваша статья</p></a>
+      <a href="#hall-1"><span class="y"><span class="dot" style="background:var(--lime)"></span>Зал 1 · 1938–1980</span><h3>Каким будет город?</h3><p>Проверьте прогнозы прошлого</p></a>
+      <a href="#hall-2"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 2 · 1972</span><h3>Как посчитать путь?</h3><p>Обгоните ЭВМ на маршруте по Москве</p></a>
+      <a href="#hall-3"><span class="y"><span class="dot" style="background:var(--green)"></span>Зал 3 · 1980</span><h3>Как проехать без остановок?</h3><p>Поймайте зелёную волну</p></a>
+      <a href="#hall-4"><span class="y"><span class="dot" style="background:var(--blue)"></span>Зал 4 · 1980</span><h3>Где я?</h3><p>Найдите себя на карте быстрее робота</p></a>
+      <a href="#hall-5"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 5 · 1984</span><h3>Что вокруг?</h3><p>Спросите карту обычными словами</p></a>
+      <a href="#hall-6"><span class="y"><span class="dot" style="background:var(--yellow)"></span>Зал 6 · 1984</span><h3>Карта-детектив</h3><p>Найдите центр города по точкам</p></a>
+      <a href="#letter"><span class="y"><span class="dot" style="background:#fff"></span>Финал · 2056</span><h3>Письмо в будущее</h3><p>Семь вопросов и ваша статья</p></a>
     </nav>
   </div>
 </section>
@@ -698,48 +699,62 @@ html{scroll-padding-top:96px}
 <div class="wrap tour">
 
 <!-- ================= HALL 1 ================= -->
-<section class="hall" id="hall-1" style="--c:var(--green)" aria-labelledby="h-hall1">
+<section class="hall" id="hall-1" style="--c:var(--lime)" aria-labelledby="h-hall1">
   <div class="rail"><div class="stop">1</div></div>
   <div class="hall-body">
     <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 1</b> 1972 → 2026</div><h2 id="h-hall1">Как посчитать путь?</h2></div>
-      <p>В 1972 году журнал «Наука и жизнь» провёл эксперимент. Нужно было составить самый короткий маршрут по 12 букинистическим магазинам Москвы с возвращением в редакцию. Задачу решали двое: ЭВМ Вычислительного центра Главмосавтотранса и инженер О. Налбандян, автор статьи об этом эксперименте. Машина справилась за секунды и нашла путь в 33&nbsp;км. Инженер считал вручную около часа, и его маршрут вышел длиннее — 35,6&nbsp;км.</p>
+      <div><div class="kicker"><i></i><b>Зал 1</b> 1938 → 1980</div><h2 id="h-hall1">Каким будет город?</h2></div>
+      <p>Инженеры прошлого не только решали задачи, но и делали прогнозы. Теперь их можно проверить. Как думаете, что сбылось?</p>
+    </div>
+    <div class="preds" id="preds"></div>
+    <div class="score" aria-live="polite"><span>Совпало с историей:</span><b id="score" class="num">0 из 4</b><span id="score-note"></span></div>
+    <p class="muted" style="font-size:13px;margin-top:14px">Формулировки прогнозов — наш короткий пересказ статей. Оригиналы есть в списке источников внизу страницы.</p>
+  </div>
+</section>
+
+<!-- ================= HALL 2 ================= -->
+<section class="hall" id="hall-2" style="--c:var(--green)" aria-labelledby="h-hall2">
+  <div class="rail"><div class="stop">2</div></div>
+  <div class="hall-body">
+    <div class="hh">
+      <div><div class="kicker"><i></i><b>Зал 2</b> 1972 → 2026</div><h2 id="h-hall2">Как посчитать путь?</h2></div>
+      <p>В 1972 году в журнале «Наука и жизнь» провели эксперимент: нужно было составить самый короткий маршрут по 12 букинистическим магазинам Москвы с возвращением в редакцию. Проверяли, кто быстрее — ЭВМ Вычислительного центра Главмосавтотранса или инженер О. Налбандян, автор статьи об этом эксперименте. Машина справилась за секунды и нашла путь в 33&nbsp;км. Инженер считал вручную около часа, и его маршрут вышел длиннее — 35,6&nbsp;км.</p>
     </div>
 
     <div class="evm">
       <div class="evm-map">
-        <p class="task" style="padding:2px 4px 10px"><b>Теперь ваша очередь.</b> Нажимайте на магазины на схеме в том порядке, в котором объехали бы их сами, и попробуйте проложить путь короче 33&nbsp;км.</p>
+        <p class="task" style="padding:2px 4px 10px"><b>Теперь ваша очередь.</b> Нажимайте на магазины на схеме в том порядке, в котором объехали бы их сами, и попробуйте проложить путь короче 33&nbsp;км.</p>
         <div class="evm-stats num">
-          <div id="u-km-box"><small id="u-km-l">Ваш путь сейчас</small><b id="u-km">0 км</b></div>
-          <div><small>Магазинов</small><b id="u-cnt">0 из 12</b></div>
+          <div id="u-km-box"><small id="u-km-l">Ваш путь сейчас</small><b id="u-km">0 км</b></div>
+          <div><small>Магазинов</small><b id="u-cnt">0 из 12</b></div>
         </div>
-        <div class="crt"><svg id="evm-svg" viewBox="0 0 600 520" role="group" aria-label="Схема Москвы с 12 магазинами. Нажимайте на магазины по порядку обхода."></svg></div>
-        <div class="evm-legend" aria-hidden="true"><span><i style="background:#FFD36B"></i>ваш путь</span><span><i style="background:#46E06A"></i>ЭВМ 1972</span><span><i style="background:#5CA4FF"></i>лучший на схеме</span></div>
-        <div class="tip" id="evm-tip" aria-live="polite">Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.</div>
+        <div class="crt"><svg id="evm-svg" viewBox="0 0 600 520" role="group" aria-label="Схема Москвы с 12 магазинами. Нажимайте на магазины по порядку обхода."></svg></div>
+        <div class="evm-legend" aria-hidden="true"><span><i style="background:#FFD36B"></i>ваш путь</span><span><i style="background:#46E06A"></i>ЭВМ 1972</span><span><i style="background:#5CA4FF"></i>лучший на схеме</span></div>
+        <div class="tip" id="evm-tip" aria-live="polite">Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.</div>
         <div class="row">
           <button class="chip" id="b-undo" type="button">Шаг назад</button>
           <button class="chip" id="b-reset" type="button">Заново</button>
-          <button class="chip race" id="b-race" type="button" hidden>Гонка с ЭВМ 1972</button>
+          <button class="chip race" id="b-race" type="button" hidden>Гонка с ЭВМ 1972</button>
           <button class="chip go" id="b-evm" type="button">Запустить ЭВМ 1972</button>
-          <button class="chip" id="b-exact" type="button">Лучший маршрут на этой схеме</button>
+          <button class="chip" id="b-exact" type="button">Лучший маршрут на этой схеме</button>
         </div>
         <div class="board num" aria-live="polite">
-          <div><small>ЭВМ 1972</small><b>33,0 км</b></div>
-          <div><small>Инженер вручную</small><b>35,6 км</b></div>
+          <div><small>ЭВМ 1972</small><b>33,0 км</b></div>
+          <div><small>Инженер вручную</small><b>35,6 км</b></div>
           <div class="you" id="b-you-box"><small>Вы</small><b id="b-you">—</b></div>
         </div>
       </div>
       <div class="printout" id="printout" aria-live="polite" tabindex="0" aria-label="Распечатка вычислительного центра"></div>
     </div>
-    <p class="muted" style="font-size:13px;margin-top:12px;max-width:80ch">Расстояния примерные: магазины расставлены по адресам 1972 года, центр схемы увеличен.</p>
+    <p class="muted" style="font-size:13px;margin-top:12px;max-width:80ch">Расстояния примерные: магазины расставлены по адресам 1972 года, центр схемы увеличен.</p>
 
     <div class="pull">
       <div>
-        <blockquote>«Задача, решенная ЭВМ за считанные секунды, потребовала от автора часа работы».<cite>О. Налбандян, «ЭВМ шагает по Москве». «Наука и жизнь», №7, 1972</cite></blockquote>
+        <blockquote>«Задача, решённая ЭВМ за считанные секунды, потребовала от автора часа работы».<cite>О. Налбандян, «ЭВМ шагает по Москве». «Наука и жизнь», №7, 1972</cite></blockquote>
       </div>
       <div>
-        <p>Перебор работает только на маленьких задачах. Уже для 10 такси и 10 заказов вариантов 3&nbsp;628&nbsp;800, пишет автор. Поэтому в ВЦ использовали алгоритм, который заранее отбрасывает заведомо невыгодные варианты. Транспортную карту Москвы для него смоделировали математики И.&nbsp;Г.&nbsp;Медведевская и Т.&nbsp;М.&nbsp;Великанова.</p>
-        <div class="fig"><img src="assets/img/evm-1972.webp" alt="Машинный зал вычислительного центра, 1970-е" width="800" height="597" loading="lazy"><div class="label" style="margin-top:0"><b>Машинный зал вычислительного центра.</b> Фото эпохи, иллюстрация. <a href="https://www.nkj.ru/archive/articles/57011/" target="_blank" rel="noopener">Статья 1972 года в архиве журнала</a></div></div>
+        <p>Перебор применим к любой задаче, но на практике его используют только на маленьких. Уже для 10 такси и 10 заказов — это 3&nbsp;628&nbsp;800 вариантов, пишет автор. Поэтому в ВЦ взяли алгоритм, который заранее отбрасывает заведомо невыгодные варианты. Транспортную карту Москвы для него смоделировали математики И.&nbsp;Г.&nbsp;Медведевская и Т.&nbsp;М.&nbsp;Великанова.</p>
+        <div class="fig"><img src="assets/img/evm-1972.webp" alt="Машинный зал вычислительного центра, 1970-е" width="800" height="597" loading="lazy"><div class="label" style="margin-top:0"><b>Машинный зал вычислительного центра.</b> Фото эпохи, иллюстрация. <a href="https://www.nkj.ru/archive/articles/57011/" target="_blank" rel="noopener">Статья 1972 года в архиве журнала</a></div></div>
       </div>
     </div>
 
@@ -747,89 +762,90 @@ html{scroll-padding-top:96px}
       <table class="cmp">
         <thead><tr><th></th><th>1972, ВЦ Главмосавтотранса</th><th>2026, маршрутизация 2ГИС</th></tr></thead>
         <tbody>
-          <tr><th>Граф</th><td>Транспортная карта Москвы, смоделированная математиками ВЦ</td><td>Направленный дорожный граф, каждое направление движения отдельное ребро</td></tr>
-          <tr><th>Вес ребра</th><td>Расстояние и порожний пробег машин</td><td>Время проезда, которое оценивают по статистике и ML-моделям</td></tr>
-          <tr><th>Поиск</th><td>Алгоритм ВЦ, отсекающий невыгодные варианты</td><td>Дейкстра и A*, иерархия шорткатов, двусторонний поиск</td></tr>
-          <tr><th>Лучший путь</th><td>Самый короткий</td><td>Самый быстрый, а теперь и самый спокойный: штрафы за левые повороты, кольца и нерегулируемые перекрёстки</td></tr>
+          <tr><th>Граф</th><td>Транспортная карта Москвы — граф, который смоделировали математики ВЦ</td><td>Направленный дорожный граф: каждое направление движения — отдельное ребро</td></tr>
+          <tr><th>Вес ребра</th><td>Расстояние и порожний пробег машин</td><td>Время проезда, которое оценивают по статистике и ML-моделям</td></tr>
+          <tr><th>Поиск</th><td>Алгоритм ВЦ, отсекающий заведомо невыгодные варианты</td><td>A*, иерархия шорткатов, двусторонний поиск</td></tr>
+          <tr><th>Лучший путь</th><td>Самый короткий</td><td>Самый быстрый. А с 2026 года — ещё и самый спокойный: меньше сложных манёвров, штрафы за левые повороты, кольца и нерегулируемые перекрёстки</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="today">
-      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
+      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
       <div class="items">
         <article class="item">
-          <img src="assets/img/habr-light-routes.webp" data-full="assets/img/habr-light-routes-full.webp" alt="Иллюстрация из статьи о лёгких маршрутах" loading="lazy" width="1000" height="906">
+          <img src="assets/img/habr-light-routes.webp" data-full="assets/img/habr-light-routes-full.webp" alt="Иллюстрация из статьи о лёгких маршрутах" loading="lazy" width="1000" height="906">
           <div class="meta">Март 2026 · Константин Чирихин</div>
-          <h5>«Лёгкие маршруты» в 2ГИС: рассказываем про алгоритмы и новую систему штрафов</h5>
-          <p>Лёгкий маршрут строится из оптимального: к весам рёбер добавляются штрафы за сложные манёвры. Чтобы поиск оставался быстрым, граф дополнен иерархией шорткатов, где одно ребро верхнего уровня покрывает несколько километров.</p>
+          <h5>«Лёгкие маршруты» в 2ГИС: рассказываем про алгоритмы и новую систему штрафов</h5>
+          <p>«У нас уже есть два типа маршрутов: кратчайший (без искусственных штрафов) и оптимальный (маршрут, по нашему мнению, лучший для большинства водителей). В качестве основы для лёгких маршрутов мы взяли оптимальный маршрут. Сохранив всё, что в нём есть (в том числе ML‑модели), мы добавили дополнительную логику, которая избегает сложных участков».</p>
           <div class="stack">A* · двусторонний поиск · шорткаты · аддитивные штрафы</div>
-          <a class="read" href="https://habr.com/ru/companies/2gis/articles/1015140/" target="_blank" rel="noopener">Читать на Хабре</a>
+          <a class="read" href="https://habr.com/ru/companies/2gis/articles/1015140/" target="_blank" rel="noopener">Читать на Хабре</a>
         </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= HALL 2: WAVE ================= -->
-<section class="hall" id="hall-2" style="--c:var(--green)" aria-labelledby="h-hall2">
-  <div class="rail"><div class="stop">2</div></div>
-  <div class="hall-body">
-    <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 2</b> 1980 → 2026</div><h2 id="h-hall2">Как проехать без остановок?</h2></div>
-      <p>В 1980 году академик Виктор Глушков писал в «Технике — молодёжи» о городе завтрашнего дня, где помогают вычислительные сети. Сегодня светофоры передают данные прямо в навигатор, и он подсказывает скорость, при которой всю улицу можно проехать на зелёный.</p>
-    </div>
-    <div class="game">
-      <p class="task"><b>Задача:</b> проехать пять светофоров и ни разу не остановиться. Выберите скорость и нажмите «Поехали».</p>
-      <div class="game-top">
-        <div class="big-num"><small>Ваша скорость</small><b><span id="w-speed">60</span> км/ч</b></div>
-        <div class="stats"><div class="big-num"><small>Остановок</small><b id="w-stops">0</b></div><div class="big-num"><small>Время в пути</small><b id="w-time">0:00</b></div></div>
-      </div>
-      <div class="road-wrap"><svg id="w-svg" viewBox="0 0 1000 175" role="img" aria-label="Улица длиной 1,7 км с пятью светофорами и машиной"></svg></div>
-      <div class="range-wrap"><div class="band" id="w-band" hidden></div><input type="range" id="w-range" min="20" max="80" value="60" step="1" aria-label="Скорость, км/ч"></div>
-      <div class="scale" aria-hidden="true"><span>20 км/ч</span><span>50</span><span>80 км/ч</span></div>
-      <div class="row" style="margin-top:14px"><button class="chip go big" id="w-go" type="button">Поехали</button><button class="chip" id="w-hint" type="button">Подсказка навигатора</button></div>
-      <p class="game-out" id="w-out" aria-live="polite">Светофоры уже переключаются: зелёный горит 30 секунд, красный 30 секунд. Время в игре ускорено.</p>
-    </div>
-    <div class="today">
-      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
-      <div class="items one">
-        <article class="item">
-          <div class="meta">2026 · Даня Сопов, команда Транспорт</div>
-          <h5>Красный подождёт. Как мы запускали «зелёную волну» в навигаторе 2ГИС</h5>
-          <p>Навигатор учитывает всю цепочку светофоров на маршруте и подсказывает скорость, при которой их можно проехать без остановок. Главная задача дизайна: показать диапазон скорости так, чтобы не отвлечь водителя.</p>
-          <a class="read" href="https://habr.com/ru/companies/2gis/articles/1045896/" target="_blank" rel="noopener">Читать на Хабре</a>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= HALL 3 ================= -->
-<section class="hall" id="hall-3" style="--c:var(--blue)" aria-labelledby="h-hall3">
+<!-- ================= HALL 3: WAVE ================= -->
+<section class="hall" id="hall-3" style="--c:var(--green)" aria-labelledby="h-hall3">
   <div class="rail"><div class="stop">3</div></div>
   <div class="hall-body">
     <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 3</b> 1954 → 2026</div><h2 id="h-hall3">Где я?</h2></div>
-      <p>Чтобы проложить путь, нужна точка А. Как машине понять, где она, если спутников нет? В 1980 году инженеры предложили способ, которым пользуется любой человек с картой.</p>
+      <div><div class="kicker"><i></i><b>Зал 3</b> 1980 → 2026</div><h2 id="h-hall3">Как проехать без остановок?</h2></div>
+      <div><p>В 1980 году академик Виктор Глушков писал в «Технике — молодёжи» о городе завтрашнего дня, где всё связано вычислительными сетями. Часть этой сети работает уже сегодня: светофоры передают данные прямо в навигатор, и он подсказывает диапазон скорости, при котором всю улицу можно проехать на зелёный.</p><p class="src">В. Глушков. «Город завтрашнего дня». <a href="https://ru.djvu.online/file/bearrIgsdBmrE" target="_blank" rel="noopener">«Техника — молодёжи», №5, 1980</a></p></div>
+    </div>
+    <div class="game">
+      <p class="task"><b>Задача:</b> проехать пять светофоров и ни разу не остановиться. Двигайте зелёный ползунок, чтобы подобрать скорость, и нажмите «Поехали».</p>
+      <div class="game-top">
+        <div class="big-num"><small>Ваша скорость</small><b><span id="w-speed">60</span> км/ч</b></div>
+        <div class="stats"><div class="big-num"><small>Остановок</small><b id="w-stops">0</b></div><div class="big-num"><small>Время в пути</small><b id="w-time">0:00</b></div></div>
+      </div>
+      <div class="road-wrap"><svg id="w-svg" viewBox="0 0 1000 175" role="img" aria-label="Улица длиной 1,7 км с пятью светофорами и машиной"></svg></div>
+      <div class="range-wrap"><div class="band" id="w-band" hidden></div><input type="range" id="w-range" min="20" max="80" value="60" step="1" aria-label="Скорость, км/ч"></div>
+      <div class="scale" aria-hidden="true"><span>20 км/ч</span><span>50</span><span>80 км/ч</span></div>
+      <div class="row" style="margin-top:14px"><button class="chip go big" id="w-go" type="button">Поехали</button><button class="chip" id="w-hint" type="button">Подсказка навигатора</button></div>
+      <p class="game-out" id="w-out" aria-live="polite">Светофоры уже переключаются: зелёный горит 30 секунд, красный 30 секунд. Время в игре ускорено.</p>
+    </div>
+    <div class="today">
+      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
+      <div class="items one">
+        <article class="item">
+          <img src="assets/img/habr-green-wave.webp" data-full="assets/img/habr-green-wave-full.webp" alt="Макеты подсказки «зелёной волны» в навигаторе 2ГИС: плашка с диапазоном скорости и аналоговый спидометр" loading="lazy" width="1000" height="562">
+          <div class="meta">2026 · Даниил Сопов, команда Транспорт</div>
+          <h5>Красный подождёт. Как мы запускали «зелёную волну» в навигаторе 2ГИС</h5>
+          <p>Навигатор учитывает всю цепочку светофоров на маршруте и подсказывает скорость, при которой их можно проехать без остановок. Главная задача дизайна: показать диапазон скорости так, чтобы не отвлечь водителя.</p>
+          <a class="read" href="https://habr.com/ru/companies/2gis/articles/1045896/" target="_blank" rel="noopener">Читать на Хабре</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HALL 4 ================= -->
+<section class="hall" id="hall-4" style="--c:var(--blue)" aria-labelledby="h-hall4">
+  <div class="rail"><div class="stop">4</div></div>
+  <div class="hall-body">
+    <div class="hh">
+      <div><div class="kicker"><i></i><b>Зал 4</b> 1980 → 2026</div><h2 id="h-hall4">Где я?</h2></div>
+      <p>Чтобы проложить путь, нужна точка А. Но откуда машине знать, где она, если спутников нет?</p>
     </div>
     <div class="where">
       <div>
-        <div class="scan"><img src="assets/img/nij-1980-p87.webp" data-full="assets/img/nij-1980-p87-full.webp" alt="Страница статьи «Робот-штурман» со схемой корреляционно-экстремальной навигации" width="704" height="1100" loading="lazy"></div>
-        <div class="label"><b>В. Тарасенко, А. Кориков. «Робот-штурман».</b> «Наука и жизнь», №7, 1980, с. 84–90. Схема корреляционно-экстремальной системы ориентирования. <a href="https://djvu.online/file/zKwC09TdR1376" target="_blank" rel="noopener">Номер в архиве</a></div>
+        <div class="scan"><img src="assets/img/nij-1980-p87.webp" data-full="assets/img/nij-1980-p87-full.webp" alt="Страница статьи «Робот-штурман» со схемой корреляционно-экстремальной навигации" width="704" height="1100" loading="lazy"></div>
+        <div class="label"><b>В. Тарасенко, А. Кориков. «Робот-штурман».</b> «Наука и жизнь», №7, 1980, с. 84–90. Схема корреляционно-экстремальной системы ориентирования. <a href="https://djvu.online/file/zKwC09TdR1376" target="_blank" rel="noopener">Номер в архиве</a></div>
       </div>
       <div>
-        <p class="lead2">Представьте: вас высадили в незнакомом месте с бумажной картой. GPS нет. Вы смотрите вокруг: слева пруд, справа широкая улица. И ищете на карте место, где всё выглядит так же. Именно так в 1980 году предлагали ориентироваться роботу: хранить карту в памяти и сравнивать с ней то, что он видит.</p>
+        <p class="lead2">В 1980 году инженеры предложили способ, которым пользуется любой человек с картой. Представьте: вас высадили в незнакомом месте, GPS нет. Слева пруд, справа широкая улица — и вы листаете карту, пока не найдёте участок с таким же прудом и такой же улицей. Именно так предлагали ориентироваться и роботу: хранить карту в памяти и сравнивать с ней то, что видит камера.</p>
         <div class="corr dev">
           <ol class="steps">
-            <li><b>1</b><span>Перетащите <strong>плёнку с кадром робота</strong> по карте.</span></li>
-            <li><b>2</b><span>Следите за <strong>пятном света</strong> справа: оно смещено туда, куда нужно двигать плёнку, и становится ярче по мере приближения.</span></li>
+            <li><b>1</b><span>Перетащите <strong>плёнку с кадром робота</strong> по карте.</span></li>
+            <li><b>2</b><span>Следите за <strong>пятном света</strong> справа: оно смещено туда, куда нужно двигать плёнку, и становится ярче по мере приближения.</span></li>
             <li><b>3</b><span>Найдите место, где пятно <strong>вспыхнет звездой</strong>.</span></li>
           </ol>
           <div class="cor-grid">
-            <figure><figcaption>Карта в памяти робота</figcaption>
+            <figure><figcaption>Карта в памяти робота</figcaption>
               <div class="cor-map" id="cor-map"><canvas id="corr-map" width="576" height="384" aria-label="Карта района"></canvas>
-                <div class="film" id="film" tabindex="0" role="slider" aria-label="Плёнка с кадром робота. Перетащите её или двигайте стрелками"><canvas id="corr-cam" width="120" height="120"></canvas></div></div>
+                <div class="film" id="film" tabindex="0" role="slider" aria-label="Плёнка с кадром робота. Перетащите её или двигайте стрелками"><canvas id="corr-cam" width="120" height="120"></canvas></div></div>
             </figure>
             <figure class="plane"><figcaption>Корреляционная плоскость</figcaption><canvas id="cor-plane" width="240" height="240" aria-label="Пятно света показывает, насколько совпадает кадр"></canvas>
               <div class="cor-meter"><span>Сила сигнала</span><b id="cor-pct" class="num">0%</b></div></figure>
@@ -839,67 +855,26 @@ html{scroll-padding-top:96px}
             <button class="chip blue" id="c-run" type="button">Пусть ищет робот</button>
             <button class="chip" id="c-new" type="button">Новое место</button>
           </div>
-          <label for="noise"><span>Грязь на объективе: чем больше, тем хуже видит робот</span><span id="noise-v" class="num">15%</span></label>
+          <label for="noise"><span>Грязь на объективе: чем больше, тем хуже видит робот</span><span id="noise-v" class="num">15%</span></label>
           <input type="range" id="noise" min="0" max="45" value="15" step="1">
         </div>
-        <blockquote>«…робот ничем не отличается от человека — штурмана, который для определения своих координат сравнивает с картой изображение местности».<cite>«Робот-штурман», 1980</cite></blockquote>
+        <blockquote>«…робот ничем не отличается от человека — штурмана, который для определения своих координат сравнивает с картой изображение местности».<cite>«Робот-штурман», 1980</cite></blockquote>
         <div class="pre">
-          <div><img src="assets/img/tm-1954-cover.webp" alt="" width="200" height="275" loading="lazy"><span><b>1954. Ф. Честнов, «Радиоволны-путеводители»</b>Радиолокационная картина местности совмещается с навигационной картой. «Техника — молодёжи», №12, с. 14–16.</span></div>
+          <div><img src="assets/img/tm-1954-cover.webp" alt="" width="200" height="275" loading="lazy"><span><b>1954. Ф. Честнов, «Радиоволны-путеводители»</b>Радиолокационная картина местности совмещается с навигационной картой. «Техника — молодёжи», №12, с. 14–16.</span></div>
         </div>
       </div>
     </div>
 
     <div class="today">
-      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
+      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
       <div class="items">
         <article class="item">
-          <img src="assets/img/habr-ar-indoor.webp" data-full="assets/img/habr-ar-indoor-full.webp" alt="Иллюстрация из статьи об AR-навигации внутри зданий" loading="lazy" width="1000" height="582">
+          <img src="assets/img/habr-ar-indoor.webp" data-full="assets/img/habr-ar-indoor-full.webp" alt="Иллюстрация из статьи об AR-навигации внутри зданий" loading="lazy" width="1000" height="582">
           <div class="meta">Октябрь 2025 · Дмитрий Чудаков, Андрей Кузнецов</div>
           <h5>Компьютерное зрение + ARKit = AR-навигация внутри зданий</h5>
-          <p>Внутри торгового центра GPS ненадёжен. По одной фотографии телефон определяет координаты, направление взгляда и этаж. Для каждого ТЦ снимают около 10&nbsp;000 кадров, в каждом около 3&nbsp;000 ключевых точек. Локализация занимает около 100&nbsp;мс.</p>
-          <div class="stack">SIFT · DINOv2 + AnyLoc · SuperPoint + SuperGlue · PnP в RANSAC · ARKit</div>
-          <a class="read" href="https://habr.com/ru/companies/2gis/articles/951526/" target="_blank" rel="noopener">Читать на Хабре</a>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= HALL 4: WHICH SIGNAL ================= -->
-<section class="hall" id="hall-4" style="--c:var(--blue)" aria-labelledby="h-hall4">
-  <div class="rail"><div class="stop">4</div></div>
-  <div class="hall-body">
-    <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 4</b> сегодня</div><h2 id="h-hall4">Как телефон определяет геолокацию</h2></div>
-      <p>Обычно телефон узнаёт, где вы, по спутникам. Но в тоннеле их сигнал пропадает, а между высоток отражается от стен. Тогда выручают другие источники: Wi‑Fi и сотовые вышки. Угадайте, что поможет в каждом месте.</p>
-    </div>
-    <div class="game sig-game dark">
-      <div class="sig-steps" id="s-steps" aria-hidden="true"></div>
-      <div class="sig-grid">
-        <div class="sig-stage"><svg id="s-svg" viewBox="0 0 640 400" role="img" aria-label="Ночная сцена: телефон с картой и источники сигнала вокруг"></svg></div>
-        <div class="sig-side">
-          <h3 id="s-q" aria-live="polite"></h3>
-          <p class="sig-hint">Выберите источник и посмотрите, что покажет телефон.</p>
-          <div class="sig-opts" id="s-opts" role="group" aria-label="Варианты ответа">
-            <button type="button" class="sig-opt" data-k="sat"><svg viewBox="-34 -20 68 40" aria-hidden="true"><rect x="-9" y="-7" width="18" height="14" rx="3" fill="currentColor"/><rect x="-30" y="-6" width="18" height="12" fill="var(--blue)"/><rect x="12" y="-6" width="18" height="12" fill="var(--blue)"/></svg>Спутник</button>
-            <button type="button" class="sig-opt" data-k="wifi"><svg viewBox="-20 -16 40 32" aria-hidden="true"><rect x="-16" y="4" width="32" height="10" rx="3" fill="currentColor"/><path d="M-10 -2 a14 14 0 0 1 20 0 M-5 3 a7 7 0 0 1 10 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Wi‑Fi</button>
-            <button type="button" class="sig-opt" data-k="cell"><svg viewBox="-20 -40 40 62" aria-hidden="true"><path d="M0 -26 L-12 18 M0 -26 L12 18 M-8 4 L8 4 M-5 -8 L5 -8" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M-10 -32 a12 12 0 0 1 20 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>Сотовая вышка</button>
-          </div>
-          <div class="sig-res" id="s-res" aria-live="polite" hidden></div>
-          <button type="button" class="chip go" id="s-next" hidden>Следующее место</button>
-        </div>
-      </div>
-    </div>
-    <p class="punch">Вот почему навигация в тоннелях и между высоток до сих пор трудная задача.</p>
-    <div class="today">
-      <h4>Как это решают сейчас<span>Инженеры 2ГИС на Хабре</span></h4>
-      <div class="items one">
-        <article class="item">
-          <div class="meta">2026 · Блог 2ГИС</div>
-          <h5>Как 2ГИС адаптируется к проблемам с позиционированием</h5>
-          <p>На одном тестовом маршруте по Москве системная геолокация сначала вела пользователя правильно, а потом «увезла» его в Шереметьево. Теперь каждый источник координат оценивается по поведению во времени, и приложение выбирает тот, которому можно верить. Когда сигнала нет, помогает режим «Шаг за шагом».</p>
-          <div class="stack">GPS · ГЛОНАСС · Galileo · BeiDou · Wi‑Fi · сотовые сети · собственные источники</div>
-          <a class="read" href="https://habr.com/ru/companies/2gis/articles/1028348/" target="_blank" rel="noopener">Читать на Хабре</a>
+          <p>Внутри торгового центра GPS ненадёжен. По одной фотографии телефон определяет координаты, направление взгляда и этаж. Для каждого ТЦ снимают около 10&nbsp;000 кадров, в каждом около 3&nbsp;000 ключевых точек. Локализация занимает около 100&nbsp;мс.</p>
+          <div class="stack">SIFT · DINOv2 + AnyLoc · SuperPoint + SuperGlue · PnP в RANSAC · ARKit</div>
+          <a class="read" href="https://habr.com/ru/companies/2gis/articles/951526/" target="_blank" rel="noopener">Читать на Хабре</a>
         </article>
       </div>
     </div>
@@ -911,32 +886,31 @@ html{scroll-padding-top:96px}
   <div class="rail"><div class="stop">5</div></div>
   <div class="hall-body">
     <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 5</b> 1984 → 2026</div><h2 id="h-hall5">Что вокруг?</h2></div>
-      <p>В 1984 году картограф Александр Берлянт писал, что карта — это модель местности, у которой можно узнать то, чего не видно сразу. Сегодня карте можно просто задать вопрос обычными словами.</p>
+      <div><div class="kicker"><i></i><b>Зал 5</b> 1984 → 2026</div><h2 id="h-hall5">Что вокруг?</h2></div>
+      <p>В 1984 году картограф Александр Берлянт писал, что карта — это модель местности: по ней можно находить закономерности, которых не видно напрямую. Сегодня у этой модели можно спросить то, что раньше пришлось бы искать самому, — и вопрос можно задать обычными словами.</p>
     </div>
     <div class="data">
       <div>
         <div class="scan"><img src="assets/img/nij-1984-p78.webp" data-full="assets/img/nij-1984-p78-full.webp" alt="Первая страница статьи «Информация, которую даёт карта»" width="704" height="1100" loading="lazy"></div>
-        <div class="label"><b>А. Берлянт. «Информация, которую даёт карта».</b> «Наука и жизнь», №6, 1984, с. 78–82. Картограф рассказывает, как карта становится инструментом исследования. <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">Номер в архиве</a></div>
+        <div class="label"><b>А. Берлянт. «Информация, которую даёт карта».</b> «Наука и жизнь», №6, 1984, с. 78–82. Картограф рассказывает, как карта становится инструментом исследования. <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">Номер в архиве</a></div>
       </div>
       <div>
         <div class="game ask">
-          <p class="task"><b>Спросите карту.</b> Выберите вопрос и посмотрите, как карта его понимает.</p>
-          <div class="a-qs" id="a-qs" role="group" aria-label="Вопросы к карте">
-            <button type="button" aria-pressed="true">Кафе на Арбате с рейтингом выше 3</button>
+          <p class="task"><b>Спросите карту.</b> Выберите вопрос и посмотрите, как карта его понимает.</p>
+          <div class="a-qs" id="a-qs" role="group" aria-label="Вопросы к карте">
+            <button type="button" aria-pressed="true">Кафе на Арбате с рейтингом выше 3</button>
             <button type="button" aria-pressed="false">Где тихо поработать?</button>
-            <button type="button" aria-pressed="false">Место, похожее на фото</button>
+            <button type="button" aria-pressed="false">Место, похожее на фото</button>
           </div>
           <p class="a-phrase" id="a-phrase" aria-live="polite"></p>
           <div class="a-chips" id="a-chips"></div>
           <canvas id="a-map" width="560" height="300" aria-label="Схема района: найденные места подсвечиваются зелёным"></canvas>
           <p class="a-note" id="a-note"></p>
-          <p class="a-how">Так работает ИИ-помощник в 2ГИС: он не придумывает ответ, а переводит ваши слова в понятный карте запрос и ищет по настоящим данным.</p>
+          <p class="a-how">Так работает ИИ-помощник в 2ГИС: он не придумывает ответ, а переводит ваши слова в понятный карте запрос и ищет по настоящим данным.</p>
         </div>
         <div class="feat">
-          <a href="https://habr.com/ru/companies/2gis/articles/951008/" target="_blank" rel="noopener"><b>Поиск по настроению</b><span>Можно искать не только «кафе», но и «уютно», «с видом», «тихо».</span><em>Читать на Хабре</em></a>
-          <a href="https://habr.com/ru/companies/2gis/articles/951008/" target="_blank" rel="noopener"><b>Поиск по фото</b><span>Показали картинку, а карта нашла похожие места.</span><em>Читать на Хабре</em></a>
-          <a href="https://habr.com/ru/companies/2gis/articles/1037974/" target="_blank" rel="noopener"><b>Вопрос словами — готовый отчёт</b><span>Бизнес спрашивает карту обычными словами и сразу получает слои на карте, таблицы и графики.</span><em>Читать на Хабре</em></a>
+          <a href="https://habr.com/ru/companies/2gis/articles/951008/" target="_blank" rel="noopener"><b>Поиск по фото и настроению</b><span>Можно искать не просто «кафе», а с конкретным вайбом — например, «потусить» или «расслабиться», а также находить места по фото.</span><em>Читать на Хабре</em></a>
+          <a href="https://habr.com/ru/companies/2gis/articles/1037974/" target="_blank" rel="noopener"><b>Вопрос словами — готовый отчёт</b><span>Бизнес спрашивает карту обычными словами и сразу получает слои на карте, таблицы и графики.</span><em>Читать на Хабре</em></a>
         </div>
       </div>
     </div>
@@ -949,41 +923,27 @@ html{scroll-padding-top:96px}
   <div class="hall-body">
     <div class="hh">
       <div><div class="kicker"><i></i><b>Зал 6</b> 1984 → 2026</div><h2 id="h-hall6">Карта-детектив</h2></div>
-      <p>Картограф Александр Берлянт в 1984 году писал, что карта даёт больше информации, чем на ней нарисовано. Проверим. Перед вами условный город без улиц и названий: только точки. Ответьте на три вопроса.</p>
+      <p>Картограф Александр Берлянт в 1984 году писал, что карта даёт больше информации, чем на ней нарисовано. Перед вами условный город без улиц и названий: только точки. Ответьте на три вопроса.</p>
     </div>
     <div class="det">
       <div>
-        <canvas id="d-map" width="720" height="480" aria-label="Условный город из 24 кварталов с точками офисов, кафе, остановок и жилых домов"></canvas>
-        <div class="layers" id="d-layers" role="group" aria-label="Слои карты"><span class="layers-t">Показать на карте:</span>
+        <canvas id="d-map" width="720" height="480" aria-label="Условный город из 24 кварталов с точками офисов, кафе, остановок и жилых домов"></canvas>
+        <div class="layers" id="d-layers" role="group" aria-label="Слои карты"><span class="layers-t">Показать на карте:</span>
           <button type="button" data-l="o" aria-pressed="true"><i style="background:var(--blue)"></i>Офисы</button>
           <button type="button" data-l="c" aria-pressed="true"><i style="background:var(--yellow)"></i>Кафе</button>
           <button type="button" data-l="s" aria-pressed="true"><i style="background:var(--green);border-radius:2px"></i>Остановки</button>
           <button type="button" data-l="h" aria-pressed="true"><i style="background:var(--ink-2)"></i>Жилые дома</button>
         </div>
-        <p class="muted" style="font-size:13px;margin-top:8px">Нажмите на слой, чтобы скрыть его точки с карты. Нажмите ещё раз, чтобы вернуть.</p>
+        <p class="muted" style="font-size:13px;margin-top:8px">Нажмите на слой, чтобы скрыть его точки с карты. Нажмите ещё раз, чтобы вернуть.</p>
       </div>
       <div class="det-q game">
-        <div class="qprog" id="d-prog">Вопрос 1 из 3</div>
+        <div class="qprog" id="d-prog">Вопрос 1 из 3</div>
         <h3 id="d-q">Где деловой центр города?</h3>
         <p class="d-count num" id="d-count" aria-live="polite"></p>
-        <p id="d-why" aria-live="polite">Нажмите на квартал на карте.</p>
+        <p id="d-why" aria-live="polite">Нажмите на квартал на карте.</p>
         <div class="row"><button class="chip go" id="d-next" type="button" hidden>Следующий вопрос</button><button class="chip" id="d-reveal" type="button">Показать ответ</button></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ================= HALL 7 ================= -->
-<section class="hall" id="hall-7" style="--c:var(--lime)" aria-labelledby="h-hall7">
-  <div class="rail"><div class="stop">7</div></div>
-  <div class="hall-body">
-    <div class="hh">
-      <div><div class="kicker"><i></i><b>Зал 7</b> 1938 → 1980</div><h2 id="h-hall7">Каким будет город?</h2></div>
-      <p>Инженеры прошлого не только решали задачи, но и делали прогнозы. Теперь их можно проверить. Как думаете, что сбылось?</p>
-    </div>
-    <div class="preds" id="preds"></div>
-    <div class="score" aria-live="polite"><span>Совпало с историей:</span><b id="score" class="num">0 из 4</b><span id="score-note"></span></div>
-    <p class="muted" style="font-size:13px;margin-top:14px">Формулировки прогнозов — наш короткий пересказ статей. Оригиналы есть в списке источников внизу страницы.</p>
   </div>
 </section>
 
@@ -995,8 +955,8 @@ html{scroll-padding-top:96px}
       <div class="l-grid">
         <div>
           <h2 id="h-letter">Письмо в&nbsp;<span>2056</span></h2>
-          <p class="lede">В 1956 году доктор технических наук Георгий Бабат опубликовал в «Технике — молодёжи» «Мечты инженера»: отрывки из статей, будто бы опубликованных в 2056 году. До 2056-го осталось 30 лет. Ответьте на семь вопросов, и мы соберём вашу статью из будущего.</p>
-          <div class="babat"><img src="assets/img/babat.webp" alt="Георгий Бабат" width="160" height="222" loading="lazy"><span>Г. И. Бабат. «Мечты инженера (отрывки из статей, опубликованных в 2056 году)». «Техника — молодёжи», №6, 1956, с. 30–32</span></div>
+          <p class="lede">В 1956 году доктор технических наук Георгий Бабат опубликовал в «Технике — молодёжи» «Мечты инженера»: отрывки из статей, будто бы опубликованных в 2056 году. До 2056-го осталось 30 лет. Ответьте на семь вопросов, и мы соберём вашу статью из будущего.</p>
+          <div class="babat"><img src="assets/img/babat.webp" alt="Георгий Бабат" width="160" height="222" loading="lazy"><span>Г. И. Бабат. «Мечты инженера (отрывки из статей, опубликованных в 2056 году)». «Техника — молодёжи», №6, 1956, с. 30–32</span></div>
           <div class="quiz" id="quiz" aria-live="polite"></div>
         </div>
         <div>
@@ -1010,10 +970,10 @@ html{scroll-padding-top:96px}
         </div>
       </div>
       <div class="exit">
-        <div><h4>Эти вопросы пока открыты</h4><p>Над ними работают инженеры многих команд, в том числе в 2ГИС: в маршрутизации, позиционировании, поиске и геоаналитике.</p></div>
-        <a href="https://job.2gis.ru/vacancies?direction=development&amp;direction=testing&amp;direction=product_management&amp;direction=analytics&amp;direction=design&amp;direction=information_security&amp;direction=infrastructure_administration&amp;direction=team_management&amp;direction=data_science_ai&amp;direction=project_management" target="_blank" rel="noopener" style="--c:var(--green)"><b>Вакансии 2ГИС</b><span>Разработка, данные и ИИ, инфраструктура, продукт</span></a>
+        <div><h4>Эти вопросы пока открыты</h4><p>Над ними работают инженеры многих команд, в том числе в 2ГИС: в маршрутизации, позиционировании, поиске и геоаналитике.</p></div>
+        <a href="https://job.2gis.ru/vacancies?direction=development&amp;direction=testing&amp;direction=product_management&amp;direction=analytics&amp;direction=design&amp;direction=information_security&amp;direction=infrastructure_administration&amp;direction=team_management&amp;direction=data_science_ai&amp;direction=project_management" target="_blank" rel="noopener" style="--c:var(--green)"><b>Вакансии 2ГИС</b><span>Разработка, данные и ИИ, инфраструктура, продукт</span></a>
         <a href="https://t.me/rnd2GIS" target="_blank" rel="noopener" style="--c:var(--blue)"><b>Telegram @rnd2GIS</b><span>Инженерный канал 2ГИС</span></a>
-        <a href="https://habr.com/ru/companies/2gis/articles/" target="_blank" rel="noopener" style="--c:var(--yellow)"><b>Блог 2ГИС на Хабре</b><span>Как это устроено изнутри</span></a>
+        <a href="https://habr.com/ru/companies/2gis/articles/" target="_blank" rel="noopener" style="--c:var(--yellow)"><b>Блог 2ГИС на Хабре</b><span>Как это устроено изнутри</span></a>
       </div>
     </div>
   </div>
@@ -1023,18 +983,18 @@ html{scroll-padding-top:96px}
 
 <footer>
   <div class="wrap">
-    <div><b>2ГИС</b> · Инженерный музей<br>Сайт не собирает данные. Ответы в тестах остаются в вашем браузере и исчезают, когда вы закрываете страницу.</div>
+    <div><b>2ГИС</b> · Инженерный музей<br>Сайт не собирает данные. Ответы в тестах остаются в вашем браузере и исчезают, когда вы закрываете страницу.</div>
     <div><b>Источники</b>
       <ul>
-        <li>Ю. Долматовский. «Автосфера ЗИС-1001». <a href="https://ru.djvu.online/file/jCxy9WnwPsCP5" target="_blank" rel="noopener">«Техника — молодёжи», №10, 1938</a></li>
-        <li>Ф. Честнов. «Радиоволны-путеводители». <a href="https://ru.djvu.online/file/6hj8a2fTYObGC" target="_blank" rel="noopener">«Техника — молодёжи», №12, 1954</a></li>
-        <li>С. Вольберг. «Движущаяся улица»; Г. Бабат. «Мечты инженера». <a href="https://djvu.online/file/vczZJckoOQdkp" target="_blank" rel="noopener">«Техника — молодёжи», №6, 1956</a></li>
-        <li>О. Налбандян. «ЭВМ шагает по Москве». <a href="https://www.nkj.ru/archive/articles/57011/" target="_blank" rel="noopener">«Наука и жизнь», №7, 1972</a></li>
-        <li>Г. Николаев. «Загадки пернатого штурмана». <a href="https://djvu.online/file/lz0mfLRWpWh5L" target="_blank" rel="noopener">«Наука и жизнь», №9, 1975</a></li>
-        <li>В. Тарасенко, А. Кориков. «Робот-штурман». <a href="https://djvu.online/file/zKwC09TdR1376" target="_blank" rel="noopener">«Наука и жизнь», №7, 1980</a></li>
-        <li>В. Глушков. «Город завтрашнего дня». <a href="https://ru.djvu.online/file/bearrIgsdBmrE" target="_blank" rel="noopener">«Техника — молодёжи», №5, 1980</a></li>
-        <li>А. Берлянт. «Информация, которую даёт карта». <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">«Наука и жизнь», №6, 1984</a></li>
-        <li><a href="https://habr.com/ru/companies/2gis/articles/" target="_blank" rel="noopener">Блог 2ГИС на Хабре</a>, статьи 2025–2026 годов</li>
+        <li>Ю. Долматовский. «Автосфера ЗИС-1001». <a href="https://ru.djvu.online/file/jCxy9WnwPsCP5" target="_blank" rel="noopener">«Техника — молодёжи», №10, 1938</a></li>
+        <li>Ф. Честнов. «Радиоволны-путеводители». <a href="https://ru.djvu.online/file/6hj8a2fTYObGC" target="_blank" rel="noopener">«Техника — молодёжи», №12, 1954</a></li>
+        <li>С. Вольберг. «Движущаяся улица»; Г. Бабат. «Мечты инженера». <a href="https://djvu.online/file/vczZJckoOQdkp" target="_blank" rel="noopener">«Техника — молодёжи», №6, 1956</a></li>
+        <li>О. Налбандян. «ЭВМ шагает по Москве». <a href="https://www.nkj.ru/archive/articles/57011/" target="_blank" rel="noopener">«Наука и жизнь», №7, 1972</a></li>
+        <li>Г. Николаев. «Загадки пернатого штурмана». <a href="https://djvu.online/file/lz0mfLRWpWh5L" target="_blank" rel="noopener">«Наука и жизнь», №9, 1975</a></li>
+        <li>В. Тарасенко, А. Кориков. «Робот-штурман». <a href="https://djvu.online/file/zKwC09TdR1376" target="_blank" rel="noopener">«Наука и жизнь», №7, 1980</a></li>
+        <li>В. Глушков. «Город завтрашнего дня». <a href="https://ru.djvu.online/file/bearrIgsdBmrE" target="_blank" rel="noopener">«Техника — молодёжи», №5, 1980</a></li>
+        <li>А. Берлянт. «Информация, которую даёт карта». <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">«Наука и жизнь», №6, 1984</a></li>
+        <li><a href="https://habr.com/ru/companies/2gis/articles/" target="_blank" rel="noopener">Блог 2ГИС на Хабре</a>, статьи 2025–2026 годов</li>
       </ul>
     </div>
   </div>
@@ -1043,7 +1003,7 @@ html{scroll-padding-top:96px}
 <button class="ach-pill" id="ach-pill" type="button" aria-expanded="false" aria-controls="ach-panel"><span class="ach-ico" aria-hidden="true"></span><span class="ach-word">Достижения</span> <b id="ach-count" class="num">0/11</b></button>
 <div class="ach-panel" id="ach-panel" hidden>
   <h4>Достижения</h4>
-  <p>Открываются, пока вы гуляете по залам. Хранятся только в этом браузере.</p>
+  <p>Открываются, пока вы гуляете по залам. Хранятся только в этом браузере.</p>
   <ul id="ach-list"></ul>
   <button type="button" id="ach-reset">Сбросить прогресс</button>
 </div>
@@ -1072,21 +1032,20 @@ function rng(seed){let s=seed>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5
    ========================================================= */
 const ACH=(function(){
   const LIST=[
-    {id:'route', t:'Точка Б', d:'Постройте свой маршрут на ночной карте'},
-    {id:'close', t:'Дорожные работы', d:'Перекройте улицу и посмотрите, как алгоритм ищет объезд'},
-    {id:'jam',   t:'Час пик', d:'Нарисуйте пробку на карте'},
-    {id:'algos', t:'Три алгоритма', d:'Сравните A*, Дейкстру и двусторонний поиск'},
-    {id:'beat',  t:'Обогнал ЭВМ', d:'Проложите маршрут по 12 магазинам короче, чем ЭВМ в 1972 году'},
-    {id:'robot', t:'Глазами робота', d:'Найдите себя на карте без ошибки при помехах от 35%'},
-    {id:'wave',  t:'Зелёная волна', d:'Проедьте пять светофоров без единой остановки'},
-    {id:'tunnel',t:'Знаток сигналов', d:'Угадайте верный источник во всех четырёх местах'},
-    {id:'detective',t:'Картограф-детектив', d:'Найдите все верные кварталы без единого промаха'},
-    {id:'seer',  t:'Провидец', d:'Угадайте все четыре прогноза о городе будущего'},
-    {id:'letter',t:'Письмо в 2056', d:'Соберите свою статью из будущего'},
+    {id:'route', t:'Точка Б', d:'Постройте свой маршрут на ночной карте'},
+    {id:'close', t:'Дорожные работы', d:'Перекройте улицу и посмотрите, как алгоритм ищет объезд'},
+    {id:'jam',   t:'Час пик', d:'Нарисуйте пробку на карте'},
+    {id:'algos', t:'Три алгоритма', d:'Сравните A*, Дейкстру и двусторонний поиск'},
+    {id:'seer',  t:'Провидец', d:'Угадайте все четыре прогноза о городе будущего'},
+    {id:'beat',  t:'Обогнал ЭВМ', d:'Проложите маршрут по 12 магазинам короче, чем ЭВМ в 1972 году'},
+    {id:'robot', t:'Глазами робота', d:'Найдите себя на карте без ошибки при помехах от 35%'},
+    {id:'wave',  t:'Зелёная волна', d:'Проедьте пять светофоров без единой остановки'},
+    {id:'detective',t:'Картограф-детектив', d:'Найдите все верные кварталы без единого промаха'},
+    {id:'letter',t:'Письмо в 2056', d:'Соберите свою статью из будущего'},
   ];
   const KEY='museum88-ach';
   let got=new Set();
-  try{ got=new Set(JSON.parse(localStorage.getItem(KEY)||'[]')) }catch(e){}
+  try{ got=new Set(JSON.parse(localStorage.getItem(KEY)||'[]').filter(id=>LIST.some(a=>a.id===id))) }catch(e){}
   const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify([...got])) }catch(e){} };
   const pill=$('#ach-pill'), panel=$('#ach-panel'), list=$('#ach-list'), count=$('#ach-count'), toast=$('#toast');
   function render(){
@@ -1098,10 +1057,10 @@ const ACH=(function(){
   function unlock(id){
     if(got.has(id)) return; const a=LIST.find(x=>x.id===id); if(!a) return;
     got.add(id); save(); render();
-    toast.innerHTML=`<i aria-hidden="true"></i><span><small>Достижение ${got.size} из ${LIST.length}</small>${a.t}</span>`;
+    toast.innerHTML=`<i aria-hidden="true"></i><span><small>Достижение ${got.size} из ${LIST.length}</small>${a.t}</span>`;
     toast.classList.add('show'); pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump');
     clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),3600);
-    if(got.size===LIST.length) setTimeout(()=>{ toast.innerHTML=`<i aria-hidden="true"></i><span><small>Все ${LIST.length} из ${LIST.length}</small>Маршрут пройден целиком</span>`; toast.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),4200) },3800);
+    if(got.size===LIST.length) setTimeout(()=>{ toast.innerHTML=`<i aria-hidden="true"></i><span><small>Все ${LIST.length} из ${LIST.length}</small>Маршрут пройден целиком</span>`; toast.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),4200) },3800);
   }
   pill.addEventListener('click',()=>{ const open=panel.hidden; panel.hidden=!open; pill.setAttribute('aria-expanded',open) });
   document.addEventListener('click',e=>{ if(!panel.hidden && !panel.contains(e.target) && !pill.contains(e.target)){ panel.hidden=true; pill.setAttribute('aria-expanded','false') } });
@@ -1115,15 +1074,13 @@ const ACH=(function(){
    TRIP PROGRESS (scroll odometer)
    ========================================================= */
 try{(function trip(){
-  const fill=$('#route-fill'), box=$('#route'), where=$('#trip-where'), left=$('#trip-left');
-  const H=[['hall-1','1972','Путь'],['hall-2','1980','Зелёная волна'],['hall-3','1954','Где я'],['hall-4','2026','Геолокация'],['hall-5','1984','Что вокруг'],['hall-6','1984','Детектив'],['hall-7','1938','Прогнозы'],['letter','2056','Письмо в 2056']]
+  const fill=$('#route-fill'), box=$('#route');
+  const H=[['hall-1','1938','Прогнозы'],['hall-2','1972','Путь'],['hall-3','1980','Зелёная волна'],['hall-4','1980','Где я'],['hall-5','1984','Что вокруг'],['hall-6','1984','Детектив'],['letter','2056','Письмо в 2056']]
     .map(([id,y,n],i)=>({el:document.getElementById(id),id,y,n,i})).filter(h=>h.el);
   const N=H.length, pos=i=>(i+.5)/N*100;
-  const plural=(n,a,b,c)=>{const m=n%10,h=n%100; return m===1&&h!==11?a:m>=2&&m<=4&&(h<12||h>14)?b:c};
   H.forEach(h=>{ const a=document.createElement('a'); a.className='rstop'+(h.i===N-1?' fin':''); a.href='#'+h.id; a.style.left=pos(h.i)+'%';
     a.title=(h.i<N-1?`Зал ${h.i+1} · `:'Финал · ')+h.n+' · '+h.y; a.setAttribute('aria-label',a.title);
     a.innerHTML=`<i></i><span>${h.i===N-1?'<b>2056</b>':h.y}</span>`; box.appendChild(a); h.a=a });
-  const links=[...document.querySelectorAll('.bar .wrap nav a')];
   let raf=0;
   function upd(){
     raf=0; const vh=innerHeight, max=document.documentElement.scrollHeight-vh, y=scrollY;
@@ -1132,10 +1089,6 @@ try{(function trip(){
     let w; if(cur<0){ w=at[0]>0?Math.max(0,y/at[0])*pos(0):0 } else if(cur<N-1){ const s0=at[cur], s1=at[cur+1]; w=pos(cur)+(s1>s0?Math.min(1,(y-s0)/(s1-s0)):1)*(pos(cur+1)-pos(cur)) } else w=pos(N-1)+(max>at[N-1]?Math.min(1,(y-at[N-1])/(max-at[N-1])):1)*(100-pos(N-1));
     fill.style.width=w.toFixed(2)+'%';
     H.forEach(h=>{ h.a.classList.toggle('done',h.i<cur); h.a.classList.toggle('cur',h.i===cur) });
-    if(cur<0){ where.innerHTML='Старт<span class="yrs"> · 1938 → 2056</span>'; left.textContent=`до 2056: ${N} ${plural(N,'остановка','остановки','остановок')}` }
-    else if(cur<N-1){ const r=N-1-cur; where.textContent=`Зал ${cur+1} из ${N-1} · ${H[cur].y}`; left.textContent=`до 2056 ещё ${r} ${plural(r,'остановка','остановки','остановок')}` }
-    else { where.innerHTML='Маршрут построен<span class="yrs"> · 1938 → 2056</span>'; left.textContent='' }
-    const id=cur<0?'top':H[cur].id; links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
   }
   addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(upd) },{passive:true});
   addEventListener('resize',upd); addEventListener('load',upd); upd();
@@ -1147,7 +1100,7 @@ try{(function hero(){
   const rows={astar:$('#r-astar'),dijkstra:$('#r-dijkstra'),bidir:$('#r-bidir')};
   const hintEl=$('#sb-hint');
   const NAMES={astar:'A*',dijkstra:'Дейкстра',bidir:'Двусторонний'};
-  const HINTS={route:'Нажмите на карту, чтобы поставить точку Б',close:'Нажмите на улицу, чтобы перекрыть её',jam:'Проведите по улицам, чтобы создать пробку'};
+  const HINTS={route:'Нажмите на карту, чтобы поставить точку Б',close:'Нажмите на улицу, чтобы перекрыть её',jam:'Нажмите на улицу или проведите по ней, чтобы создать пробку'};
   let W=0,H=0,DPR=1,nodes=[],adj=[],edges=[],cx=0,cy=0,R=0,river=[];
   const KM=36;
   let alg='astar', mode='route', auto=true, idle=null;
@@ -1322,11 +1275,11 @@ try{(function hero(){
 
 
 /* =========================================================
-   HALL 1: EVM 1972 — the bookshop route
+   HALL 1: EVM 1972 — the bookshop route
    ========================================================= */
 try{(function evm(){
   const S=[
-    {n:'Редакция «Науки и жизни»',a:'ул. Кирова, 24',lat:55.7652,lon:37.6366,s:'Редакция'},
+    {n:'Редакция «Науки и жизни»',a:'ул. Кирова, 24',lat:55.7652,lon:37.6366,s:'Редакция'},
     {n:'«Книги»',a:'ул. Кирова, 13',lat:55.7617,lon:37.6328,s:'Книги'},
     {n:'«Старая книга»',a:'Сретенка, 9',lat:55.7684,lon:37.6307,s:'Старая книга'},
     {n:'Магазин № 34',a:'Пушечная, 4',lat:55.7616,lon:37.6232,s:'Магазин №34'},
@@ -1336,7 +1289,7 @@ try{(function evm(){
     {n:'Магазин № 35',a:'Арбат, 36',lat:55.7488,lon:37.5893,s:'Магазин №35'},
     {n:'Магазин № 121',a:'Ленинский пр-т, 69',lat:55.6840,lon:37.5480,s:'Магазин №121'},
     {n:'Магазин № 61',a:'ул. Димитрова, 18',lat:55.7375,lon:37.6132,s:'Магазин №61'},
-    {n:'«Книжная находка»',a:'пр-т Маркса, у памятника Ивану Фёдорову',lat:55.7588,lon:37.6236,s:'Книжн. находка'},
+    {n:'«Книжная находка»',a:'пр-т Маркса, у памятника Ивану Фёдорову',lat:55.7588,lon:37.6236,s:'Книжн. находка'},
     {n:'«Антиквар»',a:'пр-т Маркса, 1',lat:55.7598,lon:37.6262,s:'Антиквар'},
     {n:'Магазин № 54',a:'ул. Чернышевского, 50',lat:55.7595,lon:37.6500,s:'Магазин №54'},
   ];
@@ -1408,14 +1361,14 @@ try{(function evm(){
   });
   const len=r=>{let s=0;for(let i=1;i<r.length;i++)s+=D[r[i-1]][r[i]];return s};
   const ukm=$('#u-km'), ucnt=$('#u-cnt'), you=$('#b-you'), youBox=$('#b-you-box'), raceB=$('#b-race');
-  const shortName=i=>`№${i} — ${S[i].a}`;
+  const shortName=i=>`№${i} — ${S[i].a}`;
   function draw(){
     userPath.setAttribute('points',route.map(i=>XY[i].join(',')).join(' '));
     const picked=new Set(route);
     nodeEls.forEach((g,i)=>{ g.classList.toggle('done',i>0&&picked.has(i)); g.classList.toggle('pulse',!done&&i>0&&!picked.has(i)&&route.length>=10) });
     nodeEls.forEach((g,i)=>{ if(i===0) return; const c=g.querySelector('.c'), t=g.querySelector('text'); const on=picked.has(i); c.setAttribute('fill',on?AMB:'#0B1A10'); c.setAttribute('stroke',on?AMB:PH); t.setAttribute('fill',on?'#1b1300':PH) });
     const L=len(route);
-    ukm.textContent=fmt(L)+' км'; ucnt.textContent=`${Math.min(12,picked.size-1)} из 12`;
+    ukm.textContent=fmt(L)+' км'; ucnt.textContent=`${Math.min(12,picked.size-1)} из 12`;
     you.textContent=done?fmt(L)+' км':'—';
     $('#u-km-l').textContent=done?'Итог':'Ваш путь сейчас';
     const kb=$('#u-km-box'); kb.classList.toggle('win',done&&L<32.95); kb.classList.toggle('lose',done&&L>33.05);
@@ -1432,7 +1385,7 @@ try{(function evm(){
   }
   function clearRace(){ cancelAnimationFrame(raceRaf); gRace.replaceChildren() }
   $('#b-undo').onclick=()=>{ clearRace(); if(done){ route.pop(); done=false } if(route.length>1) route.pop(); draw(); };
-  $('#b-reset').onclick=()=>{ clearRace(); route=[0]; done=false; gEvm.replaceChildren(); gOpt.replaceChildren(); draw(); tip.textContent='Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.'; };
+  $('#b-reset').onclick=()=>{ clearRace(); route=[0]; done=false; gEvm.replaceChildren(); gOpt.replaceChildren(); draw(); tip.textContent='Начните от редакции (синяя точка А): нажмите на первый магазин, в который поехали бы.'; };
 
   // ---------- printout ----------
   const pr=$('#printout'); let q=Promise.resolve();
@@ -1452,9 +1405,9 @@ try{(function evm(){
 
   function finishUser(){
     const L=len(route), tie=Math.abs(L-33)<.05, beat=!tie&&L<33;
-    tip.textContent=tie?'Ваш маршрут 33,0 км — ровно как у ЭВМ 1972 года! Устройте гонку с машиной.':beat?`Ваш маршрут ${fmt(L)} км — короче, чем у ЭВМ 1972 года! Устройте гонку и убедитесь сами.`:`Ваш маршрут ${fmt(L)} км. Нажмите «Гонка с ЭВМ 1972» и посмотрите, кто приедет первым.`;
+    tip.textContent=tie?'Ваш маршрут 33,0 км — ровно как у ЭВМ 1972 года! Устройте гонку с машиной.':beat?`Ваш маршрут ${fmt(L)} км — короче, чем у ЭВМ 1972 года! Устройте гонку и убедитесь сами.`:`Ваш маршрут ${fmt(L)} км. Нажмите «Гонка с ЭВМ 1972» и посмотрите, кто приедет первым.`;
     if(beat) ACH.unlock('beat');
-    print(['—',['Ваш маршрут','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[route[k]][i])}`),['Итого: '+fmt(L)+' км','y'],tie?'Ровно как у ЭВМ 1972!':beat?'Короче, чем у ЭВМ 1972!':'ЭВМ 1972: 33,0 км']);
+    print(['—',['Ваш маршрут','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[route[k]][i])}`),['Итого: '+fmt(L)+' км','y'],tie?'Ровно как у ЭВМ 1972!':beat?'Короче, чем у ЭВМ 1972!':'ЭВМ 1972: 33,0 км']);
   }
   const evmRoute=EVM_ORDER;
   // plotter-style drawing with a moving pen
@@ -1470,8 +1423,8 @@ try{(function evm(){
   }
   $('#b-evm').onclick=()=>{
     plot(gEvm,evmRoute,PH,5,2200);
-    print(['—',['Маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[evmRoute[k]][i])}`),
-      ['Итого: 33,0 км','y'],'Инженер вручную: 35,6 км, ~1 час'],150);
+    print(['—',['Маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[evmRoute[k]][i])}`),
+      ['Итого: 33,0 км','y'],'Инженер вручную: 35,6 км, ~1 час'],150);
   };
   $('#b-exact').onclick=()=>{
     const n=N-1, FULL=(1<<n)-1, dp=new Float64Array((1<<n)*n).fill(Infinity), par=new Int8Array((1<<n)*n).fill(-1);
@@ -1484,10 +1437,10 @@ try{(function evm(){
     order.reverse(); const r=[0,...order,0];
     const dt=performance.now()-t0;
     plot(gOpt,r,BLU,3,2400);
-    print(['—',['Лучший маршрут на этой схеме','hl'],'Компьютер перебрал варианты',`за ${fmt(dt,1)} мс в вашем браузере`,
+    print(['—',['Лучший маршрут на этой схеме','hl'],'Компьютер перебрал варианты',`за ${fmt(dt,1)} мс в вашем браузере`,
       ...r.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${S[i].s}`),
       ['Итого: '+fmt(best)+' км','y'],
-      'На реальных улицах лучший','маршрут может быть другим'],150);
+      'На реальных улицах лучший','маршрут может быть другим'],150);
   };
 
   // ---------- race ----------
@@ -1504,19 +1457,19 @@ try{(function evm(){
     const tagE=lbl(0,0,'ЭВМ',{fill:PH,'font-size':12,'font-weight':600,p:gRace}), tagU=lbl(0,0,'ВЫ',{fill:AMB,'font-size':12,'font-weight':600,p:gRace});
     const clock=el('text',{x:16,y:30,'font-size':18,fill:'#E8F0E8','font-family':'var(--mono)'},gRace);
     const DUR=RM?0:8000, t0=performance.now(); let saidE=false, saidU=false;
-    print(['—',['Гонка: вы против ЭВМ 1972','hl'],'Скорость у обоих 30 км/ч','Старт: редакция, ул. Кирова'],40);
-    const fin=(who,km)=>print([`${who} в редакции: ${Math.round(km*MIN_PER_KM)} мин`],0);
+    print(['—',['Гонка: вы против ЭВМ 1972','hl'],'Скорость у обоих 30 км/ч','Старт: редакция, ул. Кирова'],40);
+    const fin=(who,km)=>print([`${who} в редакции: ${Math.round(km*MIN_PER_KM)} мин`],0);
     const step=now=>{
       const k=DUR?Math.min(1,(now-t0)/DUR):1, km=Lmax*k;
       const pe=posAt(evmRoute,ce,Math.min(km,Le)), pu=posAt(route,cu,Math.min(km,Lu));
       dotE.setAttribute('cx',pe[0]); dotE.setAttribute('cy',pe[1]); dotU.setAttribute('cx',pu[0]); dotU.setAttribute('cy',pu[1]);
       tagE.setAttribute('x',pe[0]+11); tagE.setAttribute('y',pe[1]-9); tagU.setAttribute('x',pu[0]+11); tagU.setAttribute('y',pu[1]+18);
-      clock.textContent=`В ПУТИ: ${Math.round(km*MIN_PER_KM)} МИН`;
+      clock.textContent=`В ПУТИ: ${Math.round(km*MIN_PER_KM)} МИН`;
       if(!saidE&&km>=Le){ saidE=true; fin('ЭВМ',Le) }
       if(!saidU&&km>=Lu){ saidU=true; fin('Вы',Lu) }
       if(k<1){ raceRaf=requestAnimationFrame(step); return }
       const dm=Math.round((Lu-Le)*MIN_PER_KM);
-      const res=Math.abs(dm)<1?'Ничья! Вы приехали одновременно с ЭВМ.':dm>0?`ЭВМ приехала раньше на ${dm} мин.`:`Вы приехали раньше ЭВМ на ${-dm} мин!`;
+      const res=Math.abs(dm)<1?'Ничья! Вы приехали одновременно с ЭВМ.':dm>0?`ЭВМ приехала раньше на ${dm} мин.`:`Вы приехали раньше ЭВМ на ${-dm} мин!`;
       print([[res,'y']],0); tip.textContent=res+(dm>0?' Попробуйте другой порядок: «Заново».':'');
       crt.classList.remove('flash'); void crt.offsetWidth; crt.classList.add('flash');
     };
@@ -1527,7 +1480,7 @@ try{(function evm(){
   let booted=false;
   function boot(){
     if(booted) return; booted=true;
-    print(['ВЦ Главмосавтотранса    1972','Загрузка карты Москвы...','Кольца: ОК   Река: ОК   Улицы: ОК','Магазинов: 12','Задача: кратчайший маршрут','Старт и финиш: редакция, ул. Кирова','Вариантов обхода: 479 001 600','—','Жду ваш маршрут'],RM?0:110);
+    print(['ВЦ Главмосавтотранса    1972','Загрузка карты Москвы...','Кольца: ОК   Река: ОК   Улицы: ОК','Магазинов: 12','Задача: кратчайший маршрут','Старт и финиш: редакция, ул. Кирова','Вариантов обхода: 479 001 600','—','Жду ваш маршрут'],RM?0:110);
     if(RM) return;
     crt.classList.add('booting');
     base.querySelectorAll('.draw').forEach((p,i)=>{ const L=p.getTotalLength?p.getTotalLength():0; if(!L) return; p.style.strokeDasharray=L; p.style.strokeDashoffset=L; p.getBoundingClientRect(); p.style.transition=`stroke-dashoffset 1.1s ease ${.15+i*.12}s`; p.style.strokeDashoffset=0;
@@ -1601,12 +1554,12 @@ try{(function corr(){
     computeAll(); found=false; robot=null; heatN=0;
     do{ fx=Math.floor(Math.random()*(W-P)); fy=Math.floor(Math.random()*(H-P)) } while(Math.abs(fx-tx)+Math.abs(fy-ty)<30);
     film.classList.remove('hit'); placeFilm(); drawMap(); drawPlane(fx,fy);
-    out.innerHTML='Перетащите плёнку по карте. Пятно света справа подскажет направление: двигайте плёнку туда, куда оно смещено.';
+    out.innerHTML='Перетащите плёнку по карте. Пятно света справа подскажет направление: двигайте плёнку туда, куда оно смещено.';
   }
   function check(){
     drawPlane(fx,fy);
     if(!found && Math.abs(fx-tx)<=1 && Math.abs(fy-ty)<=1){ fx=tx; fy=ty; placeFilm(); found=true; film.classList.add('hit'); star();
-      out.innerHTML='<b>Вы нашли место!</b> Пятно света вспыхнуло в центре плоскости: так в 1980 году робот понимал, что совпадение полное. Теперь посмотрите, как ищет сам робот.' }
+      out.innerHTML='<b>Вы нашли место!</b> Пятно света вспыхнуло в центре плоскости: так в 1980 году робот понимал, что совпадение полное. Теперь посмотрите, как ищет сам робот.' }
   }
   // drag
   let drag=null;
@@ -1623,7 +1576,7 @@ try{(function corr(){
     const bx=bi%cw, by=(bi/cw)|0, userWas=found;
     const fin=()=>{ heatN=total; fx=bx; fy=by; placeFilm(); robot=[bx,by]; drawMap(); star(); busy=false; runB.disabled=false;
       const re=Math.max(Math.abs(bx-tx),Math.abs(by-ty))*CELL_M;
-      out.innerHTML=`Робот приложил плёнку к <b>${intf(total)}</b> местам карты за <b>${fmt(dt,1)} мс</b>. `+(re===0?'<b>Робот нашёл себя точно.</b>':`<b>Робот ошибся на ${re} м:</b> грязь на объективе сбила его с толку.`)+(userWas?' Вы тоже справились!':'')+' Зелёный пунктир — где робот на самом деле.';
+      out.innerHTML=`Робот приложил плёнку к <b>${intf(total)}</b> местам карты за <b>${fmt(dt,1)} мс</b>. `+(re===0?'<b>Робот нашёл себя точно.</b>':`<b>Робот ошибся на ${re} м:</b> грязь на объективе сбила его с толку.`)+(userWas?' Вы тоже справились!':'')+' Зелёный пунктир — где робот на самом деле.';
       if(re===0 && +noise.value>=35) ACH.unlock('robot'); };
     if(RM){ fin(); return }
     film.classList.add('scan'); let k=0; const per=Math.ceil(total/90);
@@ -1689,155 +1642,17 @@ try{(function wave(){
   function finish(){
     go.disabled=false; go.textContent='Ещё раз';
     const v=+range.value;
-    if(res.stops===0){ out.innerHTML=`<b>Ни одной остановки!</b> Вы поймали зелёную волну на ${v} км/ч и доехали за ${mmss(res.t)}.`; ACH.unlock('wave') }
+    if(res.stops===0){ out.innerHTML=`<b>Ни одной остановки!</b> Вы поймали зелёную волну на ${v} км/ч и доехали за ${mmss(res.t)}.`; ACH.unlock('wave') }
     else { const mid=Math.round((bandLo+bandHi)/2), best=simulate(mid);
-      out.innerHTML=`<b>Остановок: ${res.stops}.</b> Время в пути ${mmss(res.t)}, с учётом торможения и разгона. `+(best.t<res.t?`Быстрее не значит раньше: на ${mid} км/ч вы бы доехали за ${mmss(best.t)} и ни разу не остановились.`:`Попробуйте поймать зелёную волну: на ${mid} км/ч вы доедете за ${mmss(best.t)} без единой остановки. Или откройте подсказку навигатора.`) }
+      out.innerHTML=`<b>Остановок: ${res.stops}.</b> Время в пути ${mmss(res.t)}, с учётом торможения и разгона. `+(best.t<res.t?`Быстрее не значит раньше: на ${mid} км/ч вы бы доехали за ${mmss(best.t)} и ни разу не остановились.`:`Попробуйте поймать зелёную волну: на ${mid} км/ч вы доедете за ${mmss(best.t)} без единой остановки. Или откройте подсказку навигатора.`) }
   }
   go.onclick=()=>{ res=simulate(+range.value); simT=0; stopsEl.textContent='0'; timeEl.textContent='0:00'; out.textContent='Едем…';
     if(RM){ setCar(END); paintLights(res.t); stopsEl.textContent=res.stops; timeEl.textContent=mmss(res.t); finish(); return }
     running=true; go.disabled=true; };
   $('#w-hint').onclick=()=>{ band.hidden=false; const lo=(bandLo-20)/60*100, hi=(bandHi-20)/60*100; band.style.left=lo+'%'; band.style.width=(hi-lo)+'%';
-    out.innerHTML=`Навигатор знает расписание всех пяти светофоров и советует держать <b>${bandLo}–${bandHi} км/ч</b>. Зелёная полоса на шкале показывает этот диапазон.`; };
+    out.innerHTML=`Навигатор знает расписание всех пяти светофоров и советует держать <b>${bandLo}–${bandHi} км/ч</b>. Зелёная полоса на шкале показывает этот диапазон.`; };
   setCar(0); paintLights(0); if(!RM) requestAnimationFrame(frame);
 })();}catch(err){console.error('section failed',err)}
-
-try{(function signals(){
-  const svg=$('#s-svg'), qEl=$('#s-q'), opts=$('#s-opts'), res=$('#s-res'), steps=$('#s-steps'), nextB=$('#s-next');
-  const NS='http://www.w3.org/2000/svg';
-  const W=640, H=400;
-  // phone geometry
-  const PX=235, PY=34, PW=170, PH=332, SX=PX+9, SY=PY+30, SW=PW-18, SH=PH-48;
-  const TRUE=[PX+PW/2, SY+SH*.62];
-  const NAME={sat:'Спутник',wifi:'Wi‑Fi',cell:'Сотовая вышка'};
-  const ST={ok:['точно','ok'],best:['примерно, но лучше нет','ok'],coarse:['примерно','weak'],bounce:['отражается от стен','bad'],none:['нет сигнала','bad']};
-  const SAT='<g><rect x="-9" y="-7" width="18" height="14" rx="3" fill="#E8F0E8"/><rect x="-30" y="-6" width="18" height="12" fill="#5CA4FF"/><rect x="12" y="-6" width="18" height="12" fill="#5CA4FF"/></g>';
-  const ROUTER='<g><rect x="-14" y="2" width="28" height="9" rx="3" fill="#E8F0E8"/><circle cx="8" cy="6.5" r="1.8" fill="#2BD13A"/></g>';
-  const TOWER='<g><path d="M0 -26 L-12 18 M0 -26 L12 18 M-8 4 L8 4 M-5 -8 L5 -8" stroke="#E8F0E8" stroke-width="3" fill="none" stroke-linecap="round"/></g>';
-  const rings=(x,y,col,n=3,cls='ring')=>Array.from({length:n},(_,i)=>`<circle class="${cls}" cx="${x}" cy="${y}" r="10" fill="none" stroke="${col}" stroke-width="2" style="animation-delay:${i*.6}s"/>`).join('');
-  const arcs=(x,y)=>Array.from({length:3},(_,i)=>`<path class="wave" d="M${x-14} ${y-30} a20 20 0 0 1 28 0" fill="none" stroke="#FFB81C" stroke-width="2.4" stroke-linecap="round" style="animation-delay:${i*.5}s;transform-origin:${x}px ${y-24}px"/>`).join('');
-  const toPhone=[PX+PW/2, PY+12];
-  const SC=[
-    {title:'В поле', q:'Вы гуляете в поле. Как телефону понять, где вы?', ans:'sat',
-     why:'Над головой открытое небо: сигнал спутников доходит без помех. Это самый точный источник, когда ему ничего не мешает.',
-     sig:{sat:{t:'ok',acc:5},wifi:{t:'none'},cell:{t:'coarse',acc:300,off:[26,-18]}},
-     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}<rect y="330" width="${W}" height="70" fill="#14301C"/>
-       <circle cx="110" cy="318" r="22" fill="#1F4A2A"/><circle cx="530" cy="322" r="18" fill="#1F4A2A"/>
-       <g transform="translate(90,60)">${SAT}</g>
-       <path class="ray" d="M90 60 L${toPhone}" stroke="#5CA4FF"/>
-       <g transform="translate(580,300) scale(.8)">${TOWER}</g>${arcs(580,300)}`},
-    {title:'Между высоток', q:'Вы идёте между небоскрёбами. Как телефону понять, где вы?', ans:'wifi',
-     why:'Сигнал спутников отражается от стен и приходит с опозданием, поэтому точка «прыгает» в соседний дом. А роутеров Wi‑Fi вокруг много, и по ним место определяется точнее.',
-     sig:{sat:{t:'bounce',acc:80,jump:[44,-92]},wifi:{t:'ok',acc:10},cell:{t:'coarse',acc:250,off:[-30,20]}},
-     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}<rect y="340" width="${W}" height="60" fill="#1B2620"/>
-       ${tower(40,30,150,310)}${tower(460,60,150,280)}
-       <g transform="translate(60,40)">${SAT}</g>
-       <path class="ray bad" d="M60 40 L188 120 L232 150" stroke="#F0503C"/>
-       <g transform="translate(150,170)">${ROUTER}</g>${rings(150,175,'#46E06A')}
-       <g transform="translate(520,140)">${ROUTER}</g>${rings(520,145,'#46E06A')}`},
-    {title:'В тоннеле', q:'Вы едете по тоннелю. Как телефону понять, где вы?', ans:'cell',
-     why:'Спутник сквозь землю и бетон не пробьётся, Wi‑Fi в тоннеле обычно нет. Зато в тоннелях ставят антенны сотовой связи: по ним место видно примерно, а остальное навигатор досчитывает по скорости и времени.',
-     sig:{sat:{t:'none'},wifi:{t:'none'},cell:{t:'best',acc:150}},
-     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}
-       <rect y="96" width="${W}" height="28" fill="#1F4A2A"/>
-       <path d="M0 400 L0 150 Q0 124 26 124 L614 124 Q640 124 640 150 L640 400 Z" fill="#2A3530"/>
-       <path d="M24 400 L24 168 Q24 150 42 150 L598 150 Q616 150 616 168 L616 400 Z" fill="#05090A"/>
-       ${Array.from({length:7},(_,i)=>`<circle cx="${60+i*86}" cy="162" r="3" fill="#FFD36B" opacity=".55"/>`).join('')}
-       <g transform="translate(80,48)">${SAT}</g>
-       <path class="ray bad" d="M80 48 L150 112" stroke="#F0503C"/><g transform="translate(150,112)"><circle r="10" fill="#F0503C"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.5"/></g>
-       <g transform="translate(110,250) scale(.7)">${TOWER}</g>${arcs(110,250)}`},
-    {title:'В торговом центре', q:'Вы в торговом центре. Как телефону понять, где вы?', ans:'wifi',
-     why:'Крыша и стены не пропускают спутниковый сигнал, а вышка снаружи даёт лишь примерное место. Зато в ТЦ десятки роутеров Wi‑Fi. А в некоторых ТЦ 2ГИС находит вас даже по фото с камеры, как в зале 3.',
-     sig:{sat:{t:'none'},wifi:{t:'ok',acc:8},cell:{t:'coarse',acc:200,off:[-22,-26]}},
-     scene:()=>`<rect width="${W}" height="${H}" fill="url(#sky)"/>${stars()}
-       <path d="M10 400 L10 110 L320 60 L630 110 L630 400 Z" fill="#17211C" stroke="#46E06A" stroke-opacity=".35" stroke-width="3"/>
-       ${[[60,150],[130,150],[510,150],[580,150],[60,250],[130,250],[510,250],[580,250]].map(([x,y])=>`<rect x="${x-26}" y="${y}" width="52" height="60" rx="4" fill="#24332A"/><rect x="${x-26}" y="${y}" width="52" height="8" fill="#FFD36B" opacity=".35"/>`).join('')}
-       <g transform="translate(70,36)">${SAT}</g>
-       <path class="ray bad" d="M70 36 L150 92" stroke="#F0503C"/><g transform="translate(150,92)"><circle r="10" fill="#F0503C"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.5"/></g>
-       <g transform="translate(100,210)">${ROUTER}</g>${rings(100,215,'#46E06A')}
-       <g transform="translate(545,210)">${ROUTER}</g>${rings(545,215,'#46E06A')}
-       <g transform="translate(320,120)">${ROUTER}</g>${rings(320,125,'#46E06A')}`},
-  ];
-  function stars(){ let s=''; const r=rng(7); for(let i=0;i<40;i++) s+=`<circle cx="${(r()*W).toFixed(0)}" cy="${(r()*110).toFixed(0)}" r="${(r()*1.3+.3).toFixed(1)}" fill="#fff" opacity="${(.2+r()*.6).toFixed(2)}"/>`; return s }
-  function tower(x,y,w,h){ let s=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#1E2B24"/>`; const r=rng(x); for(let yy=y+14;yy<y+h-10;yy+=22) for(let xx=x+12;xx<x+w-14;xx+=24) s+=`<rect x="${xx}" y="${yy}" width="12" height="9" fill="#FFD36B" opacity="${r()<.45?.75:.08}"/>`; return s }
-  // phone screen (mini map)
-  function phone(){
-    const r=rng(42); let m='';
-    for(let y=SY+12;y<SY+SH;y+=46) m+=`<rect x="${SX}" y="${y}" width="${SW}" height="7" fill="#FFFFFF"/>`;
-    for(let x=SX+18;x<SX+SW;x+=48) m+=`<rect x="${x}" y="${SY}" width="7" height="${SH}" fill="#FFFFFF"/>`;
-    for(let y=SY+22;y<SY+SH-10;y+=46) for(let x=SX+28;x<SX+SW-10;x+=48) if(r()<.85) m+=`<rect x="${x}" y="${y}" width="${30+r()*6}" height="${30}" rx="2" fill="#D9DED6"/>`;
-    return `<g class="phone" id="ph">
-      <rect x="${PX-3}" y="${PY-3}" width="${PW+6}" height="${PH+6}" rx="30" fill="#000" opacity=".5" filter="url(#soft)"/>
-      <rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="28" fill="#0D0F10" stroke="#3A4440" stroke-width="2"/>
-      <rect x="${PX+PW/2-24}" y="${PY+10}" width="48" height="8" rx="4" fill="#1E2422"/>
-      <clipPath id="scr"><rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" rx="6"/></clipPath>
-      <g clip-path="url(#scr)">
-        <rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" fill="#EEF1EB"/>${m}
-        <path id="ph-route" d="M${TRUE[0]} ${TRUE[1]} L${TRUE[0]} ${SY+108} L${SX+SW-24} ${SY+108} L${SX+SW-24} ${SY+30}" fill="none" stroke="#19AA1E" stroke-width="5" stroke-linejoin="round" opacity=".9"/>
-        <circle id="ph-acc" cx="${TRUE[0]}" cy="${TRUE[1]}" r="40" fill="rgba(0,115,250,.16)" stroke="rgba(0,115,250,.5)" stroke-width="1.5"/>
-        <circle id="ph-dot" cx="${TRUE[0]}" cy="${TRUE[1]}" r="7" fill="#0073FA" stroke="#fff" stroke-width="3"/>
-        <g id="ph-spin" opacity="0"><circle cx="${TRUE[0]}" cy="${TRUE[1]}" r="16" fill="none" stroke="#9AA7A0" stroke-width="3" stroke-dasharray="20 80" class="spin"/></g>
-        <rect x="${SX}" y="${SY}" width="${SW}" height="26" fill="rgba(255,255,255,.92)"/>
-        <text id="ph-bar" x="${SX+10}" y="${SY+17}" font-size="11" font-weight="600" fill="#131C16" font-family="var(--sans)">Определяю место…</text>
-        <g id="ph-banner" opacity="0"><rect x="${SX+8}" y="${SY+SH-40}" width="${SW-16}" height="30" rx="8" fill="#131C16"/><text id="ph-btxt" x="${SX+SW/2}" y="${SY+SH-20}" font-size="11.5" font-weight="600" fill="#fff" text-anchor="middle" font-family="var(--sans)"></text></g>
-      </g>
-    </g>`;
-  }
-  let i=0, score=0, answered=false, anim=0;
-  function render(){
-    answered=false; const s=SC[i];
-    steps.innerHTML=SC.map((x,k)=>`<span class="${k<i?'done':k===i?'cur':''}">${k+1}. ${x.title}</span>`).join('');
-    qEl.textContent=s.q; res.hidden=true; nextB.hidden=true;
-    opts.querySelectorAll('button').forEach(b=>{ b.disabled=false; b.className='sig-opt' });
-    svg.innerHTML=`<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050B12"/><stop offset="1" stop-color="#0B1A14"/></linearGradient>
-      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>`+s.scene()+phone();
-    setPhone({x:TRUE[0],y:TRUE[1],r:46,bar:'Определяю место…',banner:null,spin:false,instant:true});
-  }
-  function setPhone(o){
-    const dot=$('#ph-dot'), acc=$('#ph-acc'), bar=$('#ph-bar'), ban=$('#ph-banner'), btx=$('#ph-btxt'), spin=$('#ph-spin'), route=$('#ph-route');
-    bar.textContent=o.bar; spin.setAttribute('opacity',o.spin?1:0);
-    dot.setAttribute('opacity',o.spin?0:1); acc.setAttribute('opacity',o.spin?0:1);
-    if(o.banner){ ban.setAttribute('opacity',1); btx.textContent=o.banner } else ban.setAttribute('opacity',0);
-    route.classList.toggle('reroute',!!o.reroute);
-    cancelAnimationFrame(anim);
-    const fx=+dot.getAttribute('cx'), fy=+dot.getAttribute('cy'), fr=+acc.getAttribute('r');
-    if(o.instant||RM){ dot.setAttribute('cx',o.x); dot.setAttribute('cy',o.y); acc.setAttribute('cx',o.x); acc.setAttribute('cy',o.y); acc.setAttribute('r',o.r); return }
-    const t0=performance.now(), D=700;
-    const step=now=>{ const k=Math.min(1,(now-t0)/D), e=1-Math.pow(1-k,3), j=o.jitter&&k<1?(Math.random()-.5)*10:0;
-      const x=fx+(o.x-fx)*e+j, y=fy+(o.y-fy)*e+j; dot.setAttribute('cx',x); dot.setAttribute('cy',y); acc.setAttribute('cx',x); acc.setAttribute('cy',y); acc.setAttribute('r',fr+(o.r-fr)*e);
-      if(k<1) anim=requestAnimationFrame(step) };
-    anim=requestAnimationFrame(step);
-  }
-  const accR=m=>Math.max(7,Math.min(92,m*.3));
-  opts.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
-    if(answered) return; answered=true; const s=SC[i], k=b.dataset.k, ok=k===s.ans, g=s.sig[k]; if(ok) score++;
-    opts.querySelectorAll('button').forEach(x=>{ x.disabled=true; if(x.dataset.k===s.ans) x.classList.add('right') });
-    if(!ok) b.classList.add('wrong');
-    const ph=$('#ph');
-    if(g.t==='none') setPhone({x:TRUE[0],y:TRUE[1],r:46,bar:'Нет сигнала',banner:'Ищу сигнал…',spin:true});
-    else if(g.t==='bounce') setPhone({x:TRUE[0]+g.jump[0],y:TRUE[1]+g.jump[1],r:accR(g.acc*3),bar:`Точность: ${g.acc} м`,banner:'Пересчитываю путь…',reroute:true,jitter:true});
-    else if(g.t==='coarse'||g.t==='best'){ const o=g.off||[0,0]; setPhone({x:TRUE[0]+o[0],y:TRUE[1]+o[1],r:accR(g.acc),bar:`Точность: ~${g.acc} м`,banner:ok?'Примерно здесь':'Где-то в этом районе'}) }
-    else { setPhone({x:TRUE[0],y:TRUE[1],r:accR(g.acc),bar:`Точность: ${g.acc} м`,banner:'Вы здесь'}); if(!RM){ ph.classList.remove('buzz'); void ph.getBoundingClientRect(); ph.classList.add('buzz') } }
-    if(ok&&g.t==='ok'&&!RM){ ph.classList.remove('buzz'); void ph.getBoundingClientRect(); ph.classList.add('buzz') }
-    svg.classList.add('answered'); svg.dataset.pick=k;
-    res.innerHTML=`<p class="verdict-line"><b>${ok?'Верно!':'Не совсем.'}</b> Навигатор выберет: <b>${NAME[s.ans]}</b>.</p>
-      <ul class="sig-list">${['sat','wifi','cell'].map(q=>{const st=ST[s.sig[q].t];return `<li class="${st[1]}"><i></i>${NAME[q]}<span>${st[0]}</span></li>`}).join('')}</ul>
-      <p class="why">${s.why}</p>`;
-    res.hidden=false; nextB.hidden=false; nextB.textContent=i<SC.length-1?'Следующее место':'Узнать итог';
-  }));
-  nextB.addEventListener('click',()=>{
-    svg.classList.remove('answered');
-    if(i<SC.length-1){ i++; render(); return }
-    if(nextB.dataset.done){ delete nextB.dataset.done; i=0; score=0; render(); return }
-    steps.innerHTML=SC.map(x=>`<span class="done">${x.title}</span>`).join('');
-    qEl.textContent=`Ваш результат: ${score} из ${SC.length}`;
-    res.innerHTML=`<p class="why">${score===SC.length?'Вы рассуждаете как навигатор.':'Выбирать непросто, и навигатору тоже.'} Каждую секунду он решает ту же задачу: какому источнику сейчас верить. Если ошибиться, точка на карте уедет в соседний дом, а маршрут начнёт перестраиваться.</p>`;
-    opts.querySelectorAll('button').forEach(b=>b.disabled=true);
-    nextB.textContent='Пройти заново'; nextB.dataset.done='1';
-    if(score===SC.length) ACH.unlock('tunnel');
-  });
-  render();
-})();}catch(err){console.error('section failed',err)}
-
 
 try{(function ask(){
   const cv=$('#a-map'), ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
@@ -1850,18 +1665,18 @@ try{(function ask(){
   const arb={x0:60,y0:H*.62,x1:W-60,y1:H*.3};
   const distToArb=(p)=>{ const vx=arb.x1-arb.x0, vy=arb.y1-arb.y0, L=vx*vx+vy*vy; let t=((p.x-arb.x0)*vx+(p.y-arb.y0)*vy)/L; t=Math.max(0,Math.min(1,t)); return Math.hypot(arb.x0+vx*t-p.x,arb.y0+vy*t-p.y) };
   const Q=[
-    {parts:['Покажи ',['кафе','what'],' ',['на Арбате','where'],' ',['с рейтингом выше 3','cond']],
-     chips:[['what','Что ищем','кафе'],['where','Где','Арбат'],['cond','Условие','рейтинг выше 3']],
+    {parts:['Покажи ',['кафе','what'],' ',['на Арбате','where'],' ',['с рейтингом выше 3','cond']],
+     chips:[['what','Что ищем','кафе'],['where','Где','Арбат'],['cond','Условие','рейтинг выше 3']],
      match:p=>p.cafe&&distToArb(p)<34&&p.rating>3, label:p=>'★ '+String(p.rating).replace('.',','), street:true,
-     note:'Этот пример взят из статьи 2ГИС про ИИ-помощника в 2ГИС Про.'},
-    {parts:['Где ',['тихо','mood'],' ',['поработать с ноутбуком','what'],'?'],
-     chips:[['what','Что ищем','кафе и коворкинги'],['mood','Атмосфера','тихо'],['where','Где','рядом с вами']],
+     note:'Этот пример взят из статьи 2ГИС про ИИ-помощника в 2ГИС Про.'},
+    {parts:['Где ',['тихо','mood'],' ',['поработать с ноутбуком','what'],'?'],
+     chips:[['what','Что ищем','кафе и коворкинги'],['mood','Атмосфера','тихо'],['where','Где','рядом с вами']],
      match:p=>(p.cafe||p.work)&&p.quiet&&Math.hypot(p.x-W*.45,p.y-H*.5)<W*.32, label:null, near:true,
-     note:'Пример. Поиск по атмосфере места описан в статье 2ГИС про ИИ-поиск.'},
-    {parts:['Найди место, ',['похожее на это фото','photo'],' ',['photo-icon','icon']],
-     chips:[['photo','На фото','светлый зал, растения, деревянные столы'],['what','Что ищем','похожие места']],
+     note:'Пример. Поиск по атмосфере места описан в статье 2ГИС про ИИ-поиск.'},
+    {parts:['Найди место, ',['похожее на это фото','photo'],' ',['photo-icon','icon']],
+     chips:[['photo','На фото','светлый зал, растения, деревянные столы'],['what','Что ищем','похожие места']],
      match:p=>p.look, label:null,
-     note:'Пример. Поиск по фото описан в статье 2ГИС про ИИ-поиск.'},
+     note:'Пример. Поиск по фото описан в статье 2ГИС про ИИ-поиск.'},
   ];
   const PHOTO='<svg class="a-photo" viewBox="0 0 64 44" aria-label="Фото кофейни"><rect width="64" height="44" rx="5" fill="#F4E6CF"/><rect x="6" y="6" width="22" height="18" rx="2" fill="#CFE4F2"/><rect x="36" y="26" width="22" height="4" rx="1" fill="#A0703F"/><rect x="40" y="30" width="3" height="10" fill="#A0703F"/><rect x="51" y="30" width="3" height="10" fill="#A0703F"/><circle cx="14" cy="34" r="6" fill="#5FA052"/><rect x="12" y="36" width="4" height="6" fill="#8A6A45"/><line x1="47" y1="0" x2="47" y2="12" stroke="#555" stroke-width="1.5"/><circle cx="47" cy="15" r="4" fill="#FFD36B"/></svg>';
   let cur=-1, t0=0, raf=0;
@@ -1920,9 +1735,9 @@ try{(function detective(){
   MAP.forEach((row,y)=>row.forEach((t,x)=>{ for(const k in pts){ for(let i=0;i<TYPES[t][k];i++) pts[k].push([(x+.08+r()*.84)*cw,(y+.08+r()*.84)*ch]) } }));
   const on={o:true,c:true,s:true,h:true};
   const Q=[
-    {q:'Где деловой центр города?',ok:(x,y)=>MAP[y][x]==='center',why:'Здесь больше всего офисов и кафе, и сюда сходятся остановки. Днём в этих кварталах тысячи людей.',n:'квартала делового центра'},
-    {q:'Где спальный район?',ok:(x,y)=>MAP[y][x]==='res',why:'Почти одни жилые дома и мало офисов. Утром отсюда все уезжают, а вечером возвращаются.'},
-    {q:'Где лучше открыть кофейню?',ok:(x,y)=>MAP[y][x]==='biz',why:'Много офисов и остановок, а кафе почти нет. Людям негде выпить кофе, значит здесь есть спрос.'},
+    {q:'Где деловой центр города?',ok:(x,y)=>MAP[y][x]==='center',why:'Здесь больше всего офисов и кафе, и сюда сходятся остановки. Днём в этих кварталах тысячи людей.',n:'квартала делового центра'},
+    {q:'Где спальный район?',ok:(x,y)=>MAP[y][x]==='res',why:'Почти одни жилые дома и мало офисов. Утром отсюда все уезжают, а вечером возвращаются.'},
+    {q:'Где лучше открыть кофейню?',ok:(x,y)=>MAP[y][x]==='biz',why:'Много офисов и остановок, а кафе почти нет. Людям негде выпить кофе, значит здесь есть спрос.'},
   ];
   const total=q=>MAP.reduce((a,row,y)=>a+row.filter((t,x)=>q.ok(x,y)).length,0);
   let qi=0, clean=0, found=new Set(), miss=0, flash=null, done=false, revealed=false, hover=null;
@@ -1943,23 +1758,23 @@ try{(function detective(){
     if(flash) box(flash[0],flash[1],'#F0503C',4);
     if(revealed && qi<Q.length) MAP.forEach((row,y)=>row.forEach((t,x)=>{ if(Q[qi].ok(x,y)&&!found.has(x+','+y)) box(x,y,css('--green'),3,[8,6]) }));
   }
-  function counter(){ const q=Q[qi]; cnt.innerHTML=`Найдено <b>${found.size} из ${total(q)}</b>`+(miss?` · промахов: ${miss}`:''); }
+  function counter(){ const q=Q[qi]; cnt.innerHTML=`Найдено <b>${found.size} из ${total(q)}</b>`+(miss?` · промахов: ${miss}`:''); }
   function render(){
     if(qi>=Q.length){
-      prog.textContent='Готово'; qEl.textContent=`Без промахов: ${clean} из ${Q.length}`; cnt.textContent='';
-      why.innerHTML=(clean===Q.length?'Вы настоящий картограф-детектив. ':'')+'Так работает геоаналитика: на карте не написано «здесь нужна кофейня», но данные это показывают. В 2ГИС Про такие вопросы можно задать карте словами, как в зале 5.';
+      prog.textContent='Готово'; qEl.textContent=`Без промахов: ${clean} из ${Q.length}`; cnt.textContent='';
+      why.innerHTML=(clean===Q.length?'Вы настоящий картограф-детектив. ':'')+'Так работает геоаналитика: на карте не написано «здесь нужна кофейня», но данные это показывают. В 2ГИС Про такие вопросы можно задать карте словами, как в зале 5.';
       next.textContent='Пройти заново'; next.hidden=false; rev.hidden=true; if(clean===Q.length) ACH.unlock('detective'); found=new Set(); draw(); return;
     }
     found=new Set(); miss=0; flash=null; done=false; revealed=false;
     const t=total(Q[qi]);
-    prog.textContent=`Вопрос ${qi+1} из ${Q.length}`; qEl.textContent=Q[qi].q;
+    prog.textContent=`Вопрос ${qi+1} из ${Q.length}`; qEl.textContent=Q[qi].q;
     const word=t%10>=2&&t%10<=4&&(t%100<12||t%100>14)?'верных квартала':'верных кварталов';
-    why.textContent=t>1?`Здесь ${t} ${word}. Нажимайте на кварталы, пока не найдёте все.`:'Здесь один верный квартал. Нажмите на него.';
+    why.textContent=t>1?`Здесь ${t} ${word}. Нажимайте на кварталы, пока не найдёте все.`:'Здесь один верный квартал. Нажмите на него.';
     next.hidden=true; rev.hidden=false; counter(); draw();
   }
   function finish(byReveal){
     done=true; revealed=byReveal; if(!byReveal&&miss===0) clean++;
-    why.innerHTML=`<b>${byReveal?'Вот все верные кварталы.':miss?'Все найдены!':'Все найдены без промахов!'}</b> ${Q[qi].why}`;
+    why.innerHTML=`<b>${byReveal?'Вот все верные кварталы.':miss?'Все найдены!':'Все найдены без промахов!'}</b> ${Q[qi].why}`;
     next.textContent=qi===Q.length-1?'Узнать итог':'Следующий вопрос'; next.hidden=false; rev.hidden=true; counter(); draw();
   }
   const cell=e=>{const b=cv.getBoundingClientRect(); const x=Math.floor((e.clientX-b.left)/b.width*COLS), y=Math.floor((e.clientY-b.top)/b.height*ROWS); return [Math.max(0,Math.min(COLS-1,x)),Math.max(0,Math.min(ROWS-1,y))]};
@@ -1968,7 +1783,7 @@ try{(function detective(){
   let ft;
   cv.addEventListener('click',e=>{ if(done||qi>=Q.length) return; const [x,y]=cell(e), k=x+','+y; if(found.has(k)) return;
     if(Q[qi].ok(x,y)){ found.add(k); flash=null; if(found.size===total(Q[qi])) return finish(false); why.textContent='Верно! Ищите дальше.' }
-    else { miss++; flash=[x,y]; why.textContent='Не тот квартал. Посмотрите на точки внимательнее.'; clearTimeout(ft); ft=setTimeout(()=>{flash=null;draw()},700) }
+    else { miss++; flash=[x,y]; why.textContent='Не тот квартал. Посмотрите на точки внимательнее.'; clearTimeout(ft); ft=setTimeout(()=>{flash=null;draw()},700) }
     counter(); draw(); });
   rev.onclick=()=>{ if(!done&&qi<Q.length) finish(true) };
   next.onclick=()=>{ if(qi>=Q.length){ qi=0; clean=0 } else qi++; render() };
@@ -1984,10 +1799,10 @@ try{(function detective(){
 try{(function preds(){
   const opts=['Сбылось','Частично','Нет'];
   const D=[
-    {y:'1938',img:'tm-1938-cover',claim:'Автомобиль будущего, в котором часть управления берёт на себя автоматика',src:'Ю. Долматовский, «Автосфера ЗИС-1001». «Техника — молодёжи», №10, 1938',ans:1,v:'Автоматика уже держит полосу, тормозит и паркуется сама. Полностью беспилотные машины пока ездят в отдельных городах и тестовых зонах.'},
-    {y:'1954',img:'tm-1954-cover',claim:'Радиолокационная картина местности совмещается с навигационной картой',src:'Ф. Честнов, «Радиоволны-путеводители». «Техника — молодёжи», №12, 1954',ans:0,v:'Только без радара. Изображение местности поверх схемы стало обычным слоем карты, а сравнение снимка с картой помогает найти себя даже внутри зданий.'},
-    {y:'1956',img:'tm-1956-cover',claim:'Тротуары-конвейеры везут пешеходов по городу',src:'С. Вольберг, «Движущаяся улица». «Техника — молодёжи», №6, 1956',ans:1,v:'Движущиеся дорожки есть в аэропортах и на пересадках метро. Городской улицей они так и не стали.'},
-    {y:'1980',img:null,claim:'Вычислительные сети станут частью городской жизни и работы',src:'В. Глушков, «Город завтрашнего дня». «Техника — молодёжи», №5, 1980',ans:0,v:'Город связан сетями настолько, что данные светофоров приходят прямо в навигатор и помогают проехать «зелёной волной».'},
+    {y:'1938',img:'tm-1938-cover',claim:'Автомобиль будущего, в котором часть управления берёт на себя автоматика',src:'Ю. Долматовский, «Автосфера ЗИС-1001». «Техника — молодёжи», №10, 1938',ans:1,v:'Автоматика уже держит полосу, тормозит и паркуется сама. Полностью беспилотные машины пока ездят в отдельных городах и тестовых зонах.'},
+    {y:'1954',img:'tm-1954-cover',claim:'Радиолокационная картина местности совмещается с навигационной картой',src:'Ф. Честнов, «Радиоволны-путеводители». «Техника — молодёжи», №12, 1954',ans:0,v:'Только без радара. Изображение местности поверх схемы стало обычным слоем карты, а сравнение снимка с картой помогает найти себя даже внутри зданий.'},
+    {y:'1956',img:'tm-1956-cover',claim:'Тротуары-конвейеры везут пешеходов по городу',src:'С. Вольберг, «Движущаяся улица». «Техника — молодёжи», №6, 1956',ans:1,v:'Движущиеся дорожки есть в аэропортах и на пересадках метро. Городской улицей они так и не стали.'},
+    {y:'1980',img:null,claim:'Вычислительные сети станут частью городской жизни и работы',src:'В. Глушков, «Город завтрашнего дня». «Техника — молодёжи», №5, 1980',ans:0,v:'Город связан сетями настолько, что данные светофоров приходят прямо в навигатор и помогают проехать «зелёной волной».'},
   ];
   const root=$('#preds'); let score=0, answered=0;
   D.forEach((d,idx)=>{
@@ -2002,9 +1817,9 @@ try{(function preds(){
       if(i!==d.ans){ b.classList.add('picked'); b.disabled=false; b.style.cursor='default' }
       if(i===d.ans) score++; answered++;
       const v=document.createElement('div'); v.className='verdict'; v.innerHTML=`<b>${opts[d.ans]}.</b> ${d.v}`; c.appendChild(v);
-      $('#score').textContent=`${score} из ${D.length}`;
+      $('#score').textContent=`${score} из ${D.length}`;
       if(answered===D.length && score===D.length) ACH.unlock('seer');
-      if(answered===D.length) $('#score-note').textContent= score>=3?'Чутьё на технологии у вас отличное. Осталось проверить своё в 2056 году.':'Предсказывать трудно. Попробуйте сделать это лучше, чем инженеры прошлого.';
+      if(answered===D.length) $('#score-note').textContent= score>=3?'Чутьё на технологии у вас отличное. Осталось проверить своё в 2056 году.':'Предсказывать трудно. Попробуйте сделать это лучше, чем инженеры прошлого.';
     });
     root.appendChild(c);
   });
@@ -2015,61 +1830,61 @@ try{(function preds(){
    ========================================================= */
 try{(function letter(){
   const Q=[
-    {q:'Как в 2056 году навигатор узнаёт, где вы?',o:[
-      ['По спутникам, как сейчас, только точнее','Спутники никуда не делись. Их стало больше, а приёмники научились отбрасывать отражённый от стен сигнал, и в центре города ошибка сократилась до сантиметров.'],
-      ['Город сам подсказывает: маяки, датчики, камеры','Координату теперь сообщает сам город: маяки в фонарях, датчики в асфальте, метки на остановках. Спутник нужен разве что в лесу.'],
-      ['По тому, что видит камера, как человек','Устройство определяет место так же, как человек: смотрит вокруг и сравнивает увиденное с картой. Идея «Робота-штурмана» 1980 года стала стандартом.']]},
+    {q:'Как в 2056 году навигатор узнаёт, где вы?',o:[
+      ['По спутникам, как сейчас, только точнее','Спутники никуда не делись. Их стало больше, а приёмники научились отбрасывать отражённый от стен сигнал, и в центре города ошибка сократилась до сантиметров.'],
+      ['Город сам подсказывает: маяки, датчики, камеры','Координату теперь сообщает сам город: маяки в фонарях, датчики в асфальте, метки на остановках. Спутник нужен разве что в лесу.'],
+      ['По тому, что видит камера, как человек','Устройство определяет место так же, как человек: смотрит вокруг и сравнивает увиденное с картой. Идея «Робота-штурмана» 1980 года стала стандартом.']]},
     {q:'Кто прокладывает маршрут?',o:[
-      ['Ваш навигатор, как и сейчас','Маршрут по-прежнему строит личный навигатор, только он помнит ваши привычки лучше вас.'],
-      ['Город распределяет все потоки сразу','Маршруты больше не строятся по одному. Город распределяет потоки целиком, и ваш путь стал частью общего расписания.'],
-      ['Никто: транспорт сам везёт, куда сказали','Вы называете место, а транспорт сам решает, как туда доехать. Слово «маршрут» осталось у диспетчеров и инженеров.']],
+      ['Ваш навигатор, как и сейчас','Маршрут по-прежнему строит личный навигатор, только он помнит ваши привычки лучше вас.'],
+      ['Город распределяет все потоки сразу','Маршруты больше не строятся по одному. Город распределяет потоки целиком, и ваш путь стал частью общего расписания.'],
+      ['Никто: транспорт сам везёт, куда сказали','Вы называете место, а транспорт сам решает, как туда доехать. Слово «маршрут» осталось у диспетчеров и инженеров.']],
       h:['Навигатор остался личным помощником','Город прокладывает маршруты сам','Маршрут перестал быть заботой человека']},
     {q:'Какой маршрут считается лучшим?',o:[
-      ['Самый быстрый','Главным критерием осталась скорость. Секунды экономят на всём: на светофорах, перестроениях, поиске парковки.'],
-      ['Самый спокойный','Лучшим считается не самый быстрый путь, а самый спокойный: без лишних перестроений, левых поворотов и нервов.'],
-      ['Тот, который вы выбрали бы сами, если бы знали всё','Маршрут подбирается под человека: учитывает, торопитесь ли вы, с кем едете и что любите видеть по дороге.']],
-      d:['Скорость по-прежнему решает','Спокойствие стало важнее секунд','У каждого теперь свой лучший путь']},
-    {q:'Как вы спрашиваете карту?',o:[
-      ['Словами, как человека','С картой говорят обычными словами. Запрос «тихое место поработать до вечера рядом с домом» давно никого не удивляет.'],
-      ['Никак: карта предлагает раньше, чем спросили','Карта предлагает раньше, чем спросили: зонт перед дождём, другой выход из метро перед толпой.'],
-      ['По категориям, как сейчас','Кнопки «Кафе» и «Аптеки» пережили все революции. Людям по-прежнему нравится выбирать самим.']]},
-    {q:'Что вы видите, когда едете?',o:[
-      ['Карту на экране','Карта на экране осталась: людям нужно видеть город целиком, а не только следующий поворот.'],
+      ['Самый быстрый','Главным критерием осталась скорость. Секунды экономят на всём: на светофорах, перестроениях, поиске парковки.'],
+      ['Самый спокойный','Лучшим считается не самый быстрый путь, а самый спокойный: без лишних перестроений, левых поворотов и нервов.'],
+      ['Тот, который вы выбрали бы сами, если бы знали всё','Маршрут подбирается под человека: учитывает, торопитесь ли вы, с кем едете и что любите видеть по дороге.']],
+      d:['Скорость по-прежнему решает','Спокойствие стало важнее секунд','У каждого теперь свой лучший путь']},
+    {q:'Как вы спрашиваете карту?',o:[
+      ['Словами, как человека','С картой говорят обычными словами. Запрос «тихое место поработать до вечера рядом с домом» давно никого не удивляет.'],
+      ['Никак: карта предлагает раньше, чем спросили','Карта предлагает раньше, чем спросили: зонт перед дождём, другой выход из метро перед толпой.'],
+      ['По категориям, как сейчас','Кнопки «Кафе» и «Аптеки» пережили все революции. Людям по-прежнему нравится выбирать самим.']]},
+    {q:'Что вы видите, когда едете?',o:[
+      ['Карту на экране','Карта на экране осталась: людям нужно видеть город целиком, а не только следующий поворот.'],
       ['Стрелки прямо поверх улицы','Стрелки рисуются прямо поверх улицы. Экран телефона нужен редко.'],
-      ['Ничего: подсказывают голос и звук','Экранов стало меньше. Дорогу подсказывают голос, звук и лёгкая вибрация.']]},
-    {q:'Какая задача у инженеров 2056 года самая трудная?',o:[
-      ['Можно ли верить данным','Главный вопрос инженеров 2056 года: можно ли верить данным, если их присылают миллионы устройств.'],
-      ['Как помогать, почти ничего не зная о человеке','Главный вопрос инженеров 2056 года: как помогать человеку, почти ничего о нём не зная.'],
-      ['Как уместить всё это в маленькое устройство','Главный вопрос инженеров 2056 года: как уместить всё это в устройство, которое неделю живёт без зарядки.']]},
-    {q:'Что стало с бумажной картой?',o:[
-      ['Лежит в музее','Бумажные карты лежат в музее рядом с журналами 1950-х.'],
-      ['Осталась у туристов','Бумажная карта осталась у туристов: она не разряжается.'],
-      ['Вернулась как запасной план','Бумажная карта вернулась в бардачки как запасной план на случай сбоя.']]},
+      ['Ничего: подсказывают голос и звук','Экранов стало меньше. Дорогу подсказывают голос, звук и лёгкая вибрация.']]},
+    {q:'Какая задача у инженеров 2056 года самая трудная?',o:[
+      ['Можно ли верить данным','Главный вопрос инженеров 2056 года: можно ли верить данным, если их присылают миллионы устройств.'],
+      ['Как помогать, почти ничего не зная о человеке','Главный вопрос инженеров 2056 года: как помогать человеку, почти ничего о нём не зная.'],
+      ['Как уместить всё это в маленькое устройство','Главный вопрос инженеров 2056 года: как уместить всё это в устройство, которое неделю живёт без зарядки.']]},
+    {q:'Что стало с бумажной картой?',o:[
+      ['Лежит в музее','Бумажные карты лежат в музее рядом с журналами 1950-х.'],
+      ['Осталась у туристов','Бумажная карта осталась у туристов: она не разряжается.'],
+      ['Вернулась как запасной план','Бумажная карта вернулась в бардачки как запасной план на случай сбоя.']]},
   ];
   const quiz=$('#quiz'), paper=$('#paper'), acts=$('#res-actions'), note=$('#res-note');
   let step=0, ans=[];
   function render(){
     if(step>=Q.length){ result(); return }
     const q=Q[step];
-    quiz.innerHTML=`<div class="qtop"><span>Вопрос ${step+1} из ${Q.length}</span><button type="button" id="q-back" ${step?'':'disabled'}>Назад</button></div>
+    quiz.innerHTML=`<div class="qtop"><span>Вопрос ${step+1} из ${Q.length}</span><button type="button" id="q-back" ${step?'':'disabled'}>Назад</button></div>
       <div class="bars" aria-hidden="true">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
       <h3>${q.q}</h3><div class="opts">${q.o.map((o,i)=>`<button class="opt${ans[step]===i?' sel':''}" type="button" data-i="${i}">${o[0]}</button>`).join('')}</div>
-      <p class="privacy">Ответы никуда не отправляются.</p>`;
+      <p class="privacy">Ответы никуда не отправляются.</p>`;
     quiz.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{ ans[step]=+b.dataset.i; b.classList.add('sel'); setTimeout(()=>{step++;render()},RM?0:220) });
     const back=$('#q-back'); if(back) back.onclick=()=>{step=Math.max(0,step-1);render()};
   }
   // 9 headlines (Q2 x Q1), 9 decks (Q3 x Q4), 3 endings (Q7): every screenshot looks different
   const HEAD=[
-    ['Личный навигатор видит спутники даже между небоскрёбами','Город подсказывает вашему навигатору, где вы','Навигатор научился смотреть по сторонам'],
-    ['Спутники и город поделили дороги','Город прокладывает маршруты сам','Улицы сами подсказывают дорогу'],
-    ['Машины находят дорогу по спутникам без водителя','Город везёт вас сам','Транспорт смотрит на дорогу за вас']];
+    ['Личный навигатор видит спутники даже между небоскрёбами','Город подсказывает вашему навигатору, где вы','Навигатор научился смотреть по сторонам'],
+    ['Спутники и город поделили дороги','Город прокладывает маршруты сам','Улицы сами подсказывают дорогу'],
+    ['Машины находят дорогу по спутникам без водителя','Город везёт вас сам','Транспорт смотрит на дорогу за вас']];
   const DECK=[
-    ['Скажите, куда, и вы уже в пути','Карта торопится раньше вас','Быстро, как всегда, и по-прежнему просто'],
-    ['Спокойный путь теперь можно попросить словами','Карта бережёт нервы ещё до выезда','Без спешки и без сюрпризов'],
-    ['Карта понимает, что вы имели в виду','Карта знает вас лучше, чем вы сами','Свой путь у каждого, а кнопки по-прежнему общие']];
-  const END=['Тридцать лет назад, в 2026 году, это казалось фантастикой. Впрочем, в 1956-м так же думали о машине, которая сама прокладывает маршрут.',
-    'В 2026 году в это поверил бы не каждый. Но инженеры 1956 года тоже писали «из будущего», и многое из написанного сбылось.',
-    'Проверим через тридцать лет. Инженеры из 1956-го, которые первыми написали письмо в будущее, уже ждут ответа.'];
+    ['Скажите, куда, и вы уже в пути','Карта торопится раньше вас','Быстро, как всегда, и по-прежнему просто'],
+    ['Спокойный путь теперь можно попросить словами','Карта бережёт нервы ещё до выезда','Без спешки и без сюрпризов'],
+    ['Карта понимает, что вы имели в виду','Карта знает вас лучше, чем вы сами','Свой путь у каждого, а кнопки по-прежнему общие']];
+  const END=['Тридцать лет назад, в 2026 году, это казалось фантастикой. Впрочем, в 1956-м так же думали о машине, которая сама прокладывает маршрут.',
+    'В 2026 году в это поверил бы не каждый. Но инженеры 1956 года тоже писали «из будущего», и многое из написанного сбылось.',
+    'Проверим через тридцать лет. Инженеры из 1956-го, которые первыми написали письмо в будущее, уже ждут ответа.'];
   const issueNo=()=>1+ans.reduce((a,v,i)=>a+v*Math.pow(3,i),0);
   const TOTAL=Math.pow(3,Q.length);
   function article(){
@@ -2078,9 +1893,9 @@ try{(function letter(){
       paras:[`${s(0)} ${s(1)}`,`${s(2)} ${s(3)} ${s(4)}`,`${s(5)} ${s(6)}`,END[ans[6]]]};
   }
   function paperHTML(a){
-    return `<div class="mast"><span>Из статей, опубликованных в 2056 году</span><span>${a.no?'№ '+intf(a.no):'№ …'}</span></div>
-      <h3>${a.head}</h3><p class="deck">${a.deck}</p><p class="by">Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956</p>
-      <div class="cols">${a.paras.map(p=>`<p>${p}</p>`).join('')}</div>`+(a.no?`<div class="stamp"><b>№ ${intf(a.no)}</b><span>из ${intf(TOTAL)} вариантов</span></div>`:'');
+    return `<div class="mast"><span>Из статей, опубликованных в 2056 году</span><span>${a.no?'№ '+intf(a.no):'№ …'}</span></div>
+      <h3>${a.head}</h3><p class="deck">${a.deck}</p><p class="by">Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956</p>
+      <div class="cols">${a.paras.map(p=>`<p>${p}</p>`).join('')}</div>`+(a.no?`<div class="stamp"><b>№ ${intf(a.no)}</b><span>из ${intf(TOTAL)} вариантов</span></div>`:'');
   }
   function printIn(){
     if(RM) return;
@@ -2092,26 +1907,26 @@ try{(function letter(){
     const a=article(); paper.classList.remove('ghost','printing','thud'); paper.innerHTML=paperHTML(a); printIn(); acts.hidden=false; ACH.unlock('letter');
     quiz.innerHTML=`<div class="qtop"><span>Готово</span><button type="button" id="q-back">Изменить ответы</button></div>
       <div class="bars" aria-hidden="true">${Q.map(()=>'<i class="on"></i>').join('')}</div>
-      <h3>Ваша статья из 2056 года готова</h3><p style="margin-top:12px;color:var(--ink-2)">Сохраните её и вернитесь через тридцать лет проверить. Инженеры из 1956-го уже ждут.</p>`;
+      <h3>Ваша статья из 2056 года готова</h3><p style="margin-top:12px;color:var(--ink-2)">Сохраните её и вернитесь через тридцать лет проверить. Инженеры из 1956-го уже ждут.</p>`;
     $('#q-back').onclick=()=>{step=Q.length-1;render()};
     if(innerWidth<900) paper.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
   }
   // placeholder page before answers
-  paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Георгий Бабат в 1956 году описал термоядерную ТЭЦ и другие технологии «из 2056 года». Ваша статья будет о том, как люди будут находить дорогу.','Каждый ответ добавит в неё абзац.']});
+  paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Георгий Бабат в 1956 году описал термоядерную ТЭЦ и другие технологии «из 2056 года». Ваша статья будет о том, как люди будут находить дорогу.','Каждый ответ добавит в неё абзац.']});
   $('#r-again').onclick=()=>{step=0;ans=[];paper.classList.add('ghost');acts.hidden=true;note.textContent='';
-    paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Каждый ответ добавит в неё абзац.']}); render()};
-  $('#r-copy').onclick=async()=>{const a=article(); const t=`${a.head}\n${a.deck}\n\n${a.paras.join('\n\n')}\n\nИз статей, опубликованных в 2056 году. Выпуск № ${intf(a.no)} из ${intf(TOTAL)}`;
+    paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Каждый ответ добавит в неё абзац.']}); render()};
+  $('#r-copy').onclick=async()=>{const a=article(); const t=`${a.head}\n${a.deck}\n\n${a.paras.join('\n\n')}\n\nИз статей, опубликованных в 2056 году. Выпуск № ${intf(a.no)} из ${intf(TOTAL)}`;
     try{await navigator.clipboard.writeText(t); note.textContent='Текст скопирован.'}catch(e){ const r=document.createRange(); r.selectNodeContents(paper); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); note.textContent='Текст выделен, скопируйте его сочетанием клавиш.'}};
   $('#r-save').onclick=()=>{
     const a=article(), w=1080, L=150, MW=w-2*L, c=document.createElement('canvas'); let x=c.getContext('2d'), y=0, dry=true;
     const wrap=(t,font,lh,col)=>{x.font=font; x.fillStyle=col; const words=t.split(' '); let ln=''; for(const wd of words){const tt=ln?ln+' '+wd:wd; if(x.measureText(tt).width>MW&&ln){ if(!dry) x.fillText(ln,L,y); y+=lh; ln=wd }else ln=tt} if(ln){ if(!dry) x.fillText(ln,L,y); y+=lh }};
     const PT=90;
     const body=()=>{ y=PT+80;
-      if(!dry){ x.fillStyle='#16130E'; x.font='600 21px "SB Sans Text", sans-serif'; x.fillText('ИЗ СТАТЕЙ, ОПУБЛИКОВАННЫХ В 2056 ГОДУ',L,y); x.fillRect(L,y+20,MW,5) }
+      if(!dry){ x.fillStyle='#16130E'; x.font='600 21px "SB Sans Text", sans-serif'; x.fillText('ИЗ СТАТЕЙ, ОПУБЛИКОВАННЫХ В 2056 ГОДУ',L,y); x.fillRect(L,y+20,MW,5) }
       y+=100;
       wrap(a.head,'600 68px "SB Sans Text", sans-serif',74,'#16130E'); y+=10;
       wrap(a.deck,'500 32px "SB Sans Text", sans-serif',40,'#3A352B'); y+=6;
-      wrap('Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956','400 21px "SB Sans Text", sans-serif',30,'#6A6355'); y+=22;
+      wrap('Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956','400 21px "SB Sans Text", sans-serif',30,'#6A6355'); y+=22;
       a.paras.forEach(p=>{ wrap(p,'400 25px "SB Sans Text", sans-serif',36,'#16130E'); y+=12 });
       return y };
     const textEnd=body(), PB=textEnd+190, h=Math.max(1350,PB+110); c.width=w; c.height=h; x=c.getContext('2d'); dry=false;
@@ -2119,9 +1934,9 @@ try{(function letter(){
     x.save(); x.translate(w/2,(PT+PB)/2); x.rotate(-.01); x.fillStyle='#F6F4EC'; x.fillRect(-(w/2-80),-(PB-PT)/2,w-160,PB-PT); x.restore();
     body();
     x.save(); x.translate(w-L-140,PB-95); x.rotate(-.2); x.strokeStyle='rgba(200,40,30,.85)'; x.fillStyle='rgba(200,40,30,.85)'; x.lineWidth=5; x.strokeRect(-135,-56,270,112); x.lineWidth=2; x.strokeRect(-125,-46,250,92);
-    x.textAlign='center'; x.font='600 42px "SB Sans Text", sans-serif'; x.fillText('№ '+intf(a.no),0,4); x.font='500 19px "SB Sans Text", sans-serif'; x.fillText('из '+intf(TOTAL)+' вариантов',0,34); x.restore(); x.textAlign='left';
-    x.fillStyle='#46E06A'; x.font='500 24px "SB Sans Text", sans-serif'; x.fillText('Маршрут строится 88 лет · 2ГИС',L-70,h-48);
-    c.toBlob(b=>{ if(!b){note.textContent='Не удалось собрать картинку.';return} const u=URL.createObjectURL(b); const l=document.createElement('a'); l.href=u; l.download='pismo-2056.png'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); note.textContent='Картинка сохранена в загрузки.'; },'image/png');
+    x.textAlign='center'; x.font='600 42px "SB Sans Text", sans-serif'; x.fillText('№ '+intf(a.no),0,4); x.font='500 19px "SB Sans Text", sans-serif'; x.fillText('из '+intf(TOTAL)+' вариантов',0,34); x.restore(); x.textAlign='left';
+    x.fillStyle='#46E06A'; x.font='500 24px "SB Sans Text", sans-serif'; x.fillText('Маршрут строится 88 лет · 2ГИС',L-70,h-48);
+    c.toBlob(b=>{ if(!b){note.textContent='Не удалось собрать картинку.';return} const u=URL.createObjectURL(b); const l=document.createElement('a'); l.href=u; l.download='pismo-2056.png'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); note.textContent='Картинка сохранена в загрузки.'; },'image/png');
   };
   render();
 })();}catch(err){console.error('section failed',err)}
@@ -2140,7 +1955,7 @@ try{(function lightbox(){
     const sc=el.closest('.scan'), lab=sc&&sc.nextElementSibling&&sc.nextElementSibling.classList.contains('label')?sc.nextElementSibling:(el.closest('.fig')||el.parentElement).querySelector('.label');
     if(lab) return lab.innerHTML.replace(/<a[^>]*>.*?<\/a>/g,'').trim();
     const pr=el.closest('.pred'); if(pr) return pr.querySelector('.src').textContent;
-    const it=el.closest('.item'); if(it) return it.querySelector('h5').textContent+'<small>Иллюстрация из статьи на Хабре</small>';
+    const it=el.closest('.item'); if(it) return it.querySelector('h5').textContent+'<small>Иллюстрация из статьи на Хабре</small>';
     const pre=el.closest('.pre'); if(pre) return el.parentElement.querySelector('b').textContent;
     return el.alt||'';
   }
@@ -2168,7 +1983,7 @@ try{(function lightbox(){
 
 /* for the curious */
 try{
-  console.log('%cВЦ 2ГИС%c\n\nЗАДАЧА: ДОВЕСТИ ЧЕЛОВЕКА ИЗ А В Б\nСТАТУС: РЕШАЕТСЯ С 1938 ГОДА\nОТКРЫТЫХ ВОПРОСОВ: МНОГО\n\nЕсли вы читаете консоль, вам может понравиться и это:\nhttps://job.2gis.ru/vacancies?direction=development\nhttps://t.me/rnd2GIS',
+  console.log('%cВЦ 2ГИС%c\n\nЗАДАЧА: ДОВЕСТИ ЧЕЛОВЕКА ИЗ А В Б\nСТАТУС: РЕШАЕТСЯ С 1938 ГОДА\nОТКРЫТЫХ ВОПРОСОВ: МНОГО\n\nЕсли вы читаете консоль, вам может понравиться и это:\nhttps://job.2gis.ru/vacancies?direction=development\nhttps://t.me/rnd2GIS',
     'font:600 20px monospace;color:#19AA1E','font:13px monospace;color:inherit');
 }catch(e){}
 })();
