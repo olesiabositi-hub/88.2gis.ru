@@ -3,7 +3,7 @@
 Спецпроект 2ГИС: интерактивный музей одной инженерной задачи — как довести человека из точки А в точку Б.
 Статьи из «Техники — молодёжи» и «Науки и жизни» 1938–1984 годов и работа инженеров 2ГИС сегодня.
 
-Адрес: https://88.2gis.ru
+Адрес: https://graph.2gis.ru
 
 ## Как устроено
 
@@ -17,5 +17,5 @@
 
 ## Подключение домена
 
-DNS: `88.2gis.ru. CNAME olesiabositi-hub.github.io.`
-Затем в Settings → Pages указать Custom domain `88.2gis.ru` и включить Enforce HTTPS.
+DNS: `graph.2gis.ru. CNAME olesiabositi-hub.github.io.`
+Затем в Settings → Pages указать Custom domain `graph.2gis.ru` и включить Enforce HTTPS.
