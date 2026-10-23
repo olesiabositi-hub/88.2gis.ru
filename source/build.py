@@ -3,6 +3,8 @@
 Запуск из корня репозитория:  python3 source/build.py
 Шаблон содержит метку /*FONTFACE*/, на её место подставляются шрифты SB Sans Text.
 """
+import base64
+import hashlib
 import os
 import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,7 +36,32 @@ def typo(t):
 
 
 body = body[:cut] + typo(body[cut:])
+
+# Политика безопасности контента (CSP). GitHub Pages не даёт задать HTTP-заголовки,
+# поэтому политика ставится через <meta>. Встроенный скрипт разрешается по SHA-256 хешу,
+# который пересчитывается при каждой сборке. Всё остальное грузится только с этого же сайта.
+scripts = re.findall(r'<script>(.*?)</script>', body, re.S)
+assert len(scripts) == 1, 'ожидается ровно один встроенный <script>'
+sha = base64.b64encode(hashlib.sha256(scripts[0].encode('utf-8')).digest()).decode()
+CSP = '; '.join([
+    "default-src 'none'",
+    f"script-src 'sha256-{sha}'",
+    "style-src 'self' 'unsafe-inline'",   # style="" в разметке и в шаблонах JS
+    "img-src 'self' data: blob:",          # data: — иконки в CSS, blob: — сохранение «Письма» картинкой
+    "font-src 'self'",
+    "connect-src 'none'",
+    "media-src 'none'",
+    "object-src 'none'",
+    "frame-src 'none'",
+    "worker-src 'none'",
+    "manifest-src 'none'",
+    "base-uri 'none'",
+    "form-action 'none'",
+    "upgrade-insecure-requests",
+])
 page = ('<!doctype html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n'
+        f'<meta http-equiv="Content-Security-Policy" content="{CSP}">\n'
+        '<meta name="referrer" content="strict-origin-when-cross-origin">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
         '<meta name="theme-color" content="#0B130F">\n<link rel="icon" href="assets/img/2gis-logo.png">\n'
         + body[:cut] + '\n</head>\n<body>\n' + body[cut:] + '\n</body>\n</html>\n')
