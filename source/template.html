@@ -18,9 +18,6 @@
 <meta name="twitter:description" content="Обгоните ЭВМ 1972 года, перекройте улицы и сравните алгоритмы поиска пути, напишите письмо в 2056 год. Интерактивный музей одной инженерной задачи от 2ГИС.">
 <meta name="twitter:image" content="https://88.2gis.ru/assets/og.jpg">
 <meta name="vk:image" content="https://88.2gis.ru/assets/og.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
 <style>
 /*FONTFACE*/
 /* Layout: тёмная «ночная карта» с живым поиском маршрута, затем бумажный музей; через все залы идёт сквозная линия-маршрут, остановки окрашены по смыслу (путь, положение, данные) */
@@ -30,7 +27,7 @@
   --night:#0B130F; --night-2:#121D17; --night-line:#22322A; --night-text:#E8F0E8; --night-muted:#90A396;
   --scan-bg:#FFFFFF; --road:#D3DBD1; --road-line:#FFFFFF; --sky:#DCE9F2;
   --sans:"SB Sans Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  --mono:"PT Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --mono:"SB Sans Text",system-ui,sans-serif; /* корпоративный шрифт вместо моноширинного; цифры выравнивает tabular-nums */
   --gutter:clamp(16px,4vw,40px);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -54,6 +51,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--gutter)}
 .muted{color:var(--ink-2)}
 .num{font-variant-numeric:tabular-nums}
+
+.hud,.halls .y,.printout,.item .stack,.code,.hud-m,.corr.dev figcaption,.rstop,svg text{font-variant-numeric:tabular-nums}
 
 /* ---------- top bar ---------- */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--night) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--night-text);border-bottom:1px solid var(--night-line)}
@@ -180,7 +179,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 .node:focus{outline:none}
 
-.printout{position:relative;background-color:var(--card);background-image:repeating-linear-gradient(180deg,var(--band) 0 48px,transparent 48px 96px);background-position:0 18px;border:1px solid var(--rule);border-radius:3px;padding:18px 46px;font:400 13px/24px var(--mono);text-transform:uppercase;letter-spacing:.02em;color:var(--ink);min-height:540px;max-height:640px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.printout{position:relative;background-color:var(--card);background-image:repeating-linear-gradient(180deg,var(--band) 0 48px,transparent 48px 96px);background-position:0 18px;border:1px solid var(--rule);border-radius:3px;padding:18px 46px;font:400 13px/24px var(--mono);text-transform:uppercase;letter-spacing:.02em;color:var(--ink);min-height:540px;max-height:640px;overflow:auto;white-space:pre-wrap;word-break:break-word;tab-size:13em;-moz-tab-size:13em}
 .printout::before,.printout::after{content:"";position:absolute;top:0;bottom:0;width:30px;background:radial-gradient(circle at 15px 12px,var(--paper) 5px,transparent 5.6px) 0 0/30px 24px repeat-y}
 .printout::before{left:0;border-right:1px dashed var(--rule)}
 .printout::after{right:0;border-left:1px dashed var(--rule)}
@@ -1395,7 +1394,7 @@ try{(function evm(){
     const L=len(route), tie=Math.abs(L-33)<.05, beat=!tie&&L<33;
     tip.textContent=tie?'Ваш маршрут 33,0 км — ровно как у ЭВМ 1972 года! Устройте гонку с машиной.':beat?`Ваш маршрут ${fmt(L)} км — короче, чем у ЭВМ 1972 года! Устройте гонку и убедитесь сами.`:`Ваш маршрут ${fmt(L)} км. Нажмите «Гонка с ЭВМ 1972» и посмотрите, кто приедет первым.`;
     if(beat) ACH.unlock('beat');
-    print(['—',['Ваш маршрут','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[route[k]][i])}`),['Итого: '+fmt(L)+' км','y'],tie?'Ровно как у ЭВМ 1972!':beat?'Короче, чем у ЭВМ 1972!':'ЭВМ 1972: 33,0 км']);
+    print(['—',['Ваш маршрут','hl'],...route.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${S[i].s}\t${fmt(D[route[k]][i])}`),['Итого: '+fmt(L)+' км','y'],tie?'Ровно как у ЭВМ 1972!':beat?'Короче, чем у ЭВМ 1972!':'ЭВМ 1972: 33,0 км']);
   }
   const evmRoute=EVM_ORDER;
   // plotter-style drawing with a moving pen
@@ -1411,7 +1410,7 @@ try{(function evm(){
   }
   $('#b-evm').onclick=()=>{
     plot(gEvm,evmRoute,PH,5,2200);
-    print(['—',['Маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${padR(S[i].s,15)} ${fmt(D[evmRoute[k]][i])}`),
+    print(['—',['Маршрут ЭВМ 1972 года','hl'],...evmRoute.slice(1,-1).map((i,k)=>`${pad2(k+1)} ${S[i].s}\t${fmt(D[evmRoute[k]][i])}`),
       ['Итого: 33,0 км','y'],'Инженер вручную: 35,6 км, ~1 час'],150);
   };
   $('#b-exact').onclick=()=>{
