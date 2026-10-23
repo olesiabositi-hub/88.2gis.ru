@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Ib4/bdeshr3IgEN8ozVK9pQ8ZYa26yqEuJAlx80UqPA='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-DZAvB9YbeEEJu04buExXrWwvrry/4n6KuaMn9HzpNOQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B130F">
@@ -116,6 +116,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .halls .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:0}
 .halls h3{font-size:clamp(17px,1.6vw,21px);margin-top:10px;letter-spacing:-.02em}
 .halls p{font-size:13px;color:var(--night-muted);margin-top:6px;line-height:1.4}
+@media (min-width:1601px){
+  .hero::after{background:linear-gradient(90deg,var(--night) 0%,var(--night) calc(50% - 800px),rgba(11,19,15,.86) calc(50% - 288px),rgba(11,19,15,.15) calc(50% + 192px),rgba(11,19,15,0) calc(50% + 800px)),linear-gradient(270deg,rgba(11,19,15,.75) 0%,rgba(11,19,15,0) calc(50% - 800px)),linear-gradient(0deg,var(--night) 0%,rgba(11,19,15,0) 22%)}
+  .hero .hud,.hero .sandbox{right:calc((100% - 1600px)/2 + var(--gutter))}
+}
 @media (max-width:900px){
   .hero::after{background:linear-gradient(0deg,var(--night) 30%,rgba(11,19,15,.55) 70%,rgba(11,19,15,.2) 100%)}
   .hero-in{min-height:auto;padding-top:220px}
@@ -1112,10 +1116,14 @@ try{(function hero(){
   function build(){
     const r=rng(1972); nodes=[]; adj=[]; edges=[];
     const mob=W<900;
-    cx=mob?W*.5:W*.66; cy=mob?H*.22:H*.47; R=Math.max(W,H)*(mob?.62:.56);
+    /* на широких экранах город строится в центральной рамке 1600px (как на обычном мониторе), а за её пределами достраиваются внешние кольца */
+    const F=mob?W:Math.min(W,1600), off=(W-F)/2;
+    cx=mob?W*.5:off+F*.66; cy=mob?H*.22:H*.47; R=Math.max(F,H)*(mob?.62:.56);
+    const far=Math.max(...[[0,0],[W,0],[0,H],[W,H]].map(([x,y])=>Math.hypot(x-cx,(y-cy)/.86)))/R, wide=!mob&&W>1600;
     const add=(x,y)=>{nodes.push({x,y});adj.push([]);return nodes.length-1};
     const link=(a,b,maj=0)=>{if(a===b||adj[a].some(o=>o.to===b))return;const d=Math.hypot(nodes[a].x-nodes[b].x,nodes[a].y-nodes[b].y);const e={a,b,d,maj,closed:false,jam:0};edges.push(e);adj[a].push({to:b,e});adj[b].push({to:a,e})};
     const rings=[.06,.12,.2,.31,.46,.66,.9], nRad=18, radAng=[];
+    if(wide) while(rings[rings.length-1]<far) rings.push(+(rings[rings.length-1]*1.32).toFixed(3));
     for(let i=0;i<nRad;i++) radAng.push(i/nRad*Math.PI*2+(r()-.5)*.18);
     const ringIdx=[];
     rings.forEach((rr,ri)=>{
@@ -1125,18 +1133,22 @@ try{(function hero(){
         for(let k=0;k<extra;k++){ const a=a0+(a1-a0)*k/extra, rj=rr*R*(1+(r()-.5)*.05);
           pts.push({id:add(cx+Math.cos(a)*rj,cy+Math.sin(a)*rj*.86),rad:k===0?i:-1}); }
       }
-      for(let i=0;i<pts.length;i++) link(pts[i].id,pts[(i+1)%pts.length].id,ri===1||ri===3||ri===6?2:1);
+      for(let i=0;i<pts.length;i++) link(pts[i].id,pts[(i+1)%pts.length].id,ri===1||ri===3||ri===6||ri===8?2:1);
       ringIdx.push(pts);
     });
     for(let i=0;i<nRad;i++){ let prev=-1; ringIdx.forEach(pts=>{const p=pts.find(q=>q.rad===i); if(p){ if(prev>=0) link(prev,p.id,1); prev=p.id }}) }
     const loc=[];
     for(let i=0;i<620;i++){ const a=r()*Math.PI*2, rr=(.07+Math.pow(r(),.8)*.86)*R; loc.push(add(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*.86)) }
+    if(wide){ const r0=.93, r1=far+.05, n=Math.min(1400,Math.round(620*.5*(r1*r1-r0*r0)/(r0*r0)));
+      for(let i=0;i<n;i++){ const a=r()*Math.PI*2, rr=Math.sqrt(r0*r0+r()*(r1*r1-r0*r0))*R, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr*.86;
+        if(x>-40&&x<W+40&&y>-40&&y<H+40) loc.push(add(x,y)) } }
     const cell=R*.06, grid=new Map(), key=(x,y)=>Math.floor(x/cell)+','+Math.floor(y/cell);
     nodes.forEach((n,i)=>{const k=key(n.x,n.y);(grid.get(k)||grid.set(k,[]).get(k)).push(i)});
     loc.forEach(i=>{ const n=nodes[i], gx=Math.floor(n.x/cell), gy=Math.floor(n.y/cell), cand=[];
       for(let dx=-2;dx<=2;dx++)for(let dy=-2;dy<=2;dy++){const g=grid.get((gx+dx)+','+(gy+dy)); if(g) g.forEach(j=>{if(j!==i)cand.push([j,Math.hypot(nodes[j].x-n.x,nodes[j].y-n.y)])})}
       cand.sort((a,b)=>a[1]-b[1]); cand.slice(0,3).forEach(([j,d])=>{ if(d<cell*2.2) link(i,j) }); });
-    river=[]; for(let t=-1.2;t<=1.2;t+=.02){ river.push([cx+t*R*1.1, cy+Math.sin(t*3.1+.6)*R*.13+t*R*.12]) }
+    const tr=wide?Math.max(1.2,(Math.max(cx,W-cx)/(R*1.1))+.05):1.2;
+    river=[]; for(let t=-tr;t<=tr;t+=.02){ river.push([cx+t*R*1.1, cy+Math.sin(t*3.1+.6)*R*.13+t*R*.12]) }
     hudN.textContent=intf(nodes.length);
   }
   const weight=e=>e.closed?Infinity:e.d*(e.maj?.8:1)*(1+e.jam*4);
