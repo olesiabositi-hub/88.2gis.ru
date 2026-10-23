@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-HOJr0Sq7qUNRZ4TkXiLdUfUOA4s0Y2oxWURq0Owex9w='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-uFE98vbSy9zJoUidwehIP2enGSq2FF2/oA9vWSfgfiE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B130F">
@@ -106,7 +106,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .legend i{width:16px;height:3px;border-radius:2px;display:inline-block}
 
 /* hall index inside hero */
-.halls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--night-line);margin-top:48px}
+.halls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--night-line);margin-top:48px;position:relative;background:var(--night);box-shadow:0 0 0 100vmax var(--night);clip-path:inset(0 -100vmax -100vmax)} /* карта заканчивается над залами: ссылки на залы не перекрывают дороги */
 .halls a{display:block;padding:16px 18px 20px;text-decoration:none;border-right:1px solid var(--night-line);transition:background .15s}
 .halls a:nth-child(4n+1){padding-left:0}
 .halls a:nth-child(4n){border-right:0}
@@ -1189,7 +1189,9 @@ try{(function hero(){
 
   /* ---------- state ---------- */
   let A=0,B=0,run=null,phase='search',shown=0,pathT=0,hold=0,fade=1;
-  const okPos=n=> W<900 ? (n.x>24&&n.x<W-24&&n.y>175&&n.y<290) : (n.x>W*.5&&n.x<W-70&&n.y>Math.min(H*.42,400)&&n.y<H-200);
+  let HT=1e9; /* верх блока залов в координатах карты: ниже него точек нет */
+  const hallsTop=()=>{ const h=document.querySelector('.hero .halls'); HT=h?h.getBoundingClientRect().top-cv.getBoundingClientRect().top:1e9 };
+  const okPos=n=> W<900 ? (n.x>24&&n.x<W-24&&n.y>175&&n.y<290) : (n.x>W*.5&&n.x<W-70&&n.y>Math.min(H*.42,400)&&n.y<Math.min(H-200,HT-40));
   function pickNear(x,y,filter){let b=-1,bd=Infinity;nodes.forEach((n,i)=>{if(filter&&!filter(i))return;const d=(n.x-x)**2+(n.y-y)**2;if(d<bd){bd=d;b=i}});return b<0?0:b}
   function compute(){
     const res={};
@@ -1213,7 +1215,7 @@ try{(function hero(){
   function resize(){
     const bb=cv.getBoundingClientRect(); DPR=Math.min(2,devicePixelRatio||1);
     W=bb.width; H=bb.height; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-    build(); A=W<900?pickNear(W*.25,230):pickNear(cx-R*.12,cy+R*.02); newTarget();
+    build(); hallsTop(); A=W<900?pickNear(W*.25,230):pickNear(cx-R*.12,cy+R*.02,i=>nodes[i].y<HT-40); newTarget();
   }
 
   /* ---------- drawing ---------- */
@@ -1275,7 +1277,7 @@ try{(function hero(){
   function brush(x,y){ for(const e of edges){ const mx=(nodes[e.a].x+nodes[e.b].x)/2, my=(nodes[e.a].y+nodes[e.b].y)/2; if((mx-x)**2+(my-y)**2<34*34 && !e.jam){e.jam=1;painted=true} } if(RM) paint() }
   cv.addEventListener('pointerdown',e=>{
     const [x,y]=pos(e); touch();
-    if(mode==='route'){ if(phase==='fade'){A=B} const b=pickNear(x,y,i=>i!==A); B=b; compute(); ACH.unlock('route'); if(RM) paint() }
+    if(mode==='route'){ if(phase==='fade'){A=B} const b=pickNear(x,y,i=>i!==A&&nodes[i].y<HT-14); B=b; compute(); ACH.unlock('route'); if(RM) paint() }
     else if(mode==='close'){ const ed=nearestEdge(x,y,16); if(ed){ ed.closed=!ed.closed; compute(); ACH.unlock('close'); if(RM) paint() } }
     else if(mode==='jam'){ painting=true; painted=false; try{cv.setPointerCapture(e.pointerId)}catch(_){}; brush(x,y) }
   });
