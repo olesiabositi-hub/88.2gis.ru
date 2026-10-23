@@ -1,21 +1,21 @@
-<title>Маршрут строится 88 лет</title>
-<meta name="description" content="Обгоните ЭВМ 1972 года, перекройте улицы и сравните алгоритмы поиска пути, напишите письмо в 2056 год. Интерактивный музей одной инженерной задачи от 2ГИС.">
+<title>Пешком по графу</title>
+<meta name="description" content="Прогуляйтесь по городу глазами навигатора: обгоните ЭВМ 1972 года и поймайте зелёную волну.">
 <link rel="canonical" href="https://graph.2gis.ru/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="2ГИС · Инженерный музей">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://graph.2gis.ru/">
-<meta property="og:title" content="Маршрут строится 88 лет">
-<meta property="og:description" content="Обгоните ЭВМ 1972 года, перекройте улицы и сравните алгоритмы поиска пути, напишите письмо в 2056 год. Интерактивный музей одной инженерной задачи от 2ГИС.">
+<meta property="og:title" content="Пешком по графу">
+<meta property="og:description" content="Прогуляйтесь по городу глазами навигатора: обгоните ЭВМ 1972 года и поймайте зелёную волну.">
 <meta property="og:image" content="https://graph.2gis.ru/assets/og.jpg">
 <meta property="og:image:secure_url" content="https://graph.2gis.ru/assets/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Ночная карта города с построенным маршрутом и заголовком «Маршрут строится 88 лет»">
+<meta property="og:image:alt" content="Ночная карта города с построенным маршрутом и заголовком «Пешком по графу»">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Маршрут строится 88 лет">
-<meta name="twitter:description" content="Обгоните ЭВМ 1972 года, перекройте улицы и сравните алгоритмы поиска пути, напишите письмо в 2056 год. Интерактивный музей одной инженерной задачи от 2ГИС.">
+<meta name="twitter:title" content="Пешком по графу">
+<meta name="twitter:description" content="Прогуляйтесь по городу глазами навигатора: обгоните ЭВМ 1972 года и поймайте зелёную волну.">
 <meta name="twitter:image" content="https://graph.2gis.ru/assets/og.jpg">
 <meta name="vk:image" content="https://graph.2gis.ru/assets/og.jpg">
 <style>
@@ -669,8 +669,8 @@ html{scroll-padding-top:96px}
   </div>
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <h1 id="h1">Навигация <span class="yrs">интереснее, чем&nbsp;кажется</span></h1>
-      <p class="lede">Тысячи лет люди строили маршруты самостоятельно, а в XX веке это начали доверять машине. Мы нашли статьи про задачи навигации в советских журналах и сравнили с рассказами инженеров 2ГИС о том, как всё работает сегодня. Получился интерактивный музей, в котором можно узнать, какая сложная инженерная работа стоит за маршрутами.</p>
+      <h1 id="h1">Пешком <span class="yrs">по&nbsp;графу</span></h1>
+      <p class="lede">Это интерактивный музей задач про навигацию. Обгоните ЭВМ 1972 года, поймайте зелёную волну и найдите себя на карте глазами робота.</p>
       <div class="ctas">
         <a class="btn btn-go" href="#hall-1">Начать экскурсию</a>
         <a class="btn btn-ghost" href="#letter">Сразу в 2056 год</a>
@@ -1938,7 +1938,7 @@ try{(function letter(){
     body();
     x.save(); x.translate(w-L-140,PB-95); x.rotate(-.2); x.strokeStyle='rgba(200,40,30,.85)'; x.fillStyle='rgba(200,40,30,.85)'; x.lineWidth=5; x.strokeRect(-135,-56,270,112); x.lineWidth=2; x.strokeRect(-125,-46,250,92);
     x.textAlign='center'; x.font='600 42px "SB Sans Text", sans-serif'; x.fillText('№ '+intf(a.no),0,4); x.font='500 19px "SB Sans Text", sans-serif'; x.fillText('из '+intf(TOTAL)+' вариантов',0,34); x.restore(); x.textAlign='left';
-    x.fillStyle='#46E06A'; x.font='500 24px "SB Sans Text", sans-serif'; x.fillText('Маршрут строится 88 лет · 2ГИС',L-70,h-48);
+    x.fillStyle='#46E06A'; x.font='500 24px "SB Sans Text", sans-serif'; x.fillText('Пешком по графу · 2ГИС',L-70,h-48);
     c.toBlob(b=>{ if(!b){note.textContent='Не удалось собрать картинку.';return} const u=URL.createObjectURL(b); const l=document.createElement('a'); l.href=u; l.download='pismo-2056.png'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); note.textContent='Картинка сохранена в загрузки.'; },'image/png');
   };
   render();
