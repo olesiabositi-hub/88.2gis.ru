@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-JeanmXmzfHwtocuhwb2xp05it23G108tna4gvtkZtZo='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-HOJr0Sq7qUNRZ4TkXiLdUfUOA4s0Y2oxWURq0Owex9w='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B130F">
@@ -361,6 +361,8 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .sb-foot button{background:none;border:0;color:var(--night-text);text-decoration:underline;text-underline-offset:3px;font-size:13px;padding:0}
 .sb-title{font-size:15px;font-weight:600;color:var(--night-text);margin-bottom:2px}
 .sandbox .legend{margin-top:4px;justify-content:flex-end;gap:8px 14px}
+/* панель не перехватывает нажатия: сквозь подписи, легенду и пустые места клик доходит до карты; кликаются только кнопки */
+.sandbox{pointer-events:none}.sandbox .seg,.sandbox button{pointer-events:auto}
 /* подложка под подсказку и легенду, как у переключателей: текст читается поверх линий карты */
 .sb-foot,.sandbox .legend{background:rgba(11,19,15,.82);border:1px solid var(--night-line);border-radius:18px;padding:7px 14px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 #sb-hint::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 0 3px rgba(25,170,30,.25)}
@@ -1118,10 +1120,10 @@ try{(function hero(){
   function build(){
     const r=rng(1972); nodes=[]; adj=[]; edges=[];
     const mob=W<900;
-    /* на широких экранах город строится в центральной рамке 1600px (как на обычном мониторе), а за её пределами достраиваются внешние кольца */
+    /* на широких экранах город строится в центральной рамке 1600px (как на обычном мониторе) */
     const F=mob?W:Math.min(W,1600), off=(W-F)/2;
     cx=mob?W*.5:off+F*.74; cy=mob?H*.22:H*.47; R=Math.max(F,H)*(mob?.62:.56);
-    const far=Math.max(...[[0,0],[W,0],[0,H],[W,H]].map(([x,y])=>Math.hypot(x-cx,(y-cy)/.86)))/R, wide=!mob&&W>1600;
+    const far=Math.max(...[[0,0],[W,0],[0,H],[W,H]].map(([x,y])=>Math.hypot(x-cx,(y-cy)/.86)))/R, wide=!mob; /* внешние кольца достраиваются до краёв экрана, чтобы клик в любом месте попадал рядом с улицей */
     const add=(x,y)=>{nodes.push({x,y});adj.push([]);return nodes.length-1};
     const link=(a,b,maj=0)=>{if(a===b||adj[a].some(o=>o.to===b))return;const d=Math.hypot(nodes[a].x-nodes[b].x,nodes[a].y-nodes[b].y);const e={a,b,d,maj,closed:false,jam:0};edges.push(e);adj[a].push({to:b,e});adj[b].push({to:a,e})};
     const rings=[.06,.12,.2,.31,.46,.66,.9], nRad=18, radAng=[];
@@ -1141,7 +1143,7 @@ try{(function hero(){
     for(let i=0;i<nRad;i++){ let prev=-1; ringIdx.forEach(pts=>{const p=pts.find(q=>q.rad===i); if(p){ if(prev>=0) link(prev,p.id,1); prev=p.id }}) }
     const loc=[];
     for(let i=0;i<620;i++){ const a=r()*Math.PI*2, rr=(.07+Math.pow(r(),.8)*.86)*R; loc.push(add(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*.86)) }
-    if(wide){ const r0=.93, r1=far+.05, n=Math.min(1400,Math.round(620*.5*(r1*r1-r0*r0)/(r0*r0)));
+    if(wide){ const r0=.93, r1=far+.05, n=Math.min(2600,Math.round(620*.9*(r1*r1-r0*r0)/(r0*r0)));
       for(let i=0;i<n;i++){ const a=r()*Math.PI*2, rr=Math.sqrt(r0*r0+r()*(r1*r1-r0*r0))*R, x=cx+Math.cos(a)*rr, y=cy+Math.sin(a)*rr*.86;
         if(x>-40&&x<W+40&&y>-40&&y<H+40) loc.push(add(x,y)) } }
     const cell=R*.06, grid=new Map(), key=(x,y)=>Math.floor(x/cell)+','+Math.floor(y/cell);
