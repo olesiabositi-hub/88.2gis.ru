@@ -1104,7 +1104,7 @@ try{(function hero(){
     const mob=W<900;
     /* на широких экранах город строится в центральной рамке 1600px (как на обычном мониторе), а за её пределами достраиваются внешние кольца */
     const F=mob?W:Math.min(W,1600), off=(W-F)/2;
-    cx=mob?W*.5:off+F*.66; cy=mob?H*.22:H*.47; R=Math.max(F,H)*(mob?.62:.56);
+    cx=mob?W*.5:off+F*.74; cy=mob?H*.22:H*.47; R=Math.max(F,H)*(mob?.62:.56);
     const far=Math.max(...[[0,0],[W,0],[0,H],[W,H]].map(([x,y])=>Math.hypot(x-cx,(y-cy)/.86)))/R, wide=!mob&&W>1600;
     const add=(x,y)=>{nodes.push({x,y});adj.push([]);return nodes.length-1};
     const link=(a,b,maj=0)=>{if(a===b||adj[a].some(o=>o.to===b))return;const d=Math.hypot(nodes[a].x-nodes[b].x,nodes[a].y-nodes[b].y);const e={a,b,d,maj,closed:false,jam:0};edges.push(e);adj[a].push({to:b,e});adj[b].push({to:a,e})};
