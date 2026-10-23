@@ -58,7 +58,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--night) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--night-text);border-bottom:1px solid var(--night-line)}
 .bar .wrap{display:flex;align-items:center;gap:24px;height:58px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.01em;text-decoration:none}
-.brand img{width:30px;height:30px}
+.brand img{width:auto;height:30px;display:block}
 .brand span{color:var(--night-muted);font-weight:400;font-size:14px;letter-spacing:0}
 .bar nav{display:flex;gap:4px;margin-left:auto}
 .bar nav a{font-size:14px;text-decoration:none;color:var(--night-muted);padding:7px 10px;border-radius:999px}
@@ -258,7 +258,8 @@ table.cmp{width:100%;min-width:620px;border-collapse:collapse;font-size:15px}
 .pred .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .pred .yr{font-size:clamp(40px,4vw,54px);font-weight:600;letter-spacing:-.05em;line-height:.95}
 .pred img{width:62px;border:1px solid var(--rule)}
-.pred .claim{font-size:17px;font-weight:500;line-height:1.35;margin-top:14px;letter-spacing:-.01em}
+.pred .top{margin-bottom:14px}
+.pred .claim{font-size:17px;font-weight:500;line-height:1.35;margin-top:auto;letter-spacing:-.01em}
 .pred .src{font-size:13px;color:var(--ink-2);margin-top:8px}
 .pred .row{margin-top:16px;gap:6px}
 .pred .chip{padding:7px 12px;font-size:13.5px}
@@ -460,7 +461,7 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .a-qs button{border:1.5px solid var(--rule);background:transparent;border-radius:999px;padding:9px 14px;font-size:14.5px;font-weight:500;color:var(--ink);transition:border-color .15s,background .15s}
 .a-qs button:hover{border-color:var(--ink)}
 .a-qs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.a-phrase{font-size:clamp(20px,2.2vw,26px);font-weight:500;letter-spacing:-.015em;line-height:1.45;margin:20px 0 14px}
+.a-phrase{font-size:clamp(17px,1.55vw,22px);font-weight:500;letter-spacing:-.015em;line-height:1.45;margin:20px 0 14px}
 .a-phrase mark{background:transparent;color:inherit;border-radius:6px;padding:0 3px;box-shadow:inset 0 -3px 0 transparent;transition:background .3s,box-shadow .3s}
 .a-phrase mark.on{background:color-mix(in srgb,var(--m) 22%,transparent);box-shadow:inset 0 -3px 0 var(--m)}
 .a-photo{width:56px;height:38px;vertical-align:middle;border-radius:5px;border:1px solid var(--rule)}
@@ -629,7 +630,7 @@ html{scroll-padding-top:96px}
 
 <header class="bar">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="assets/img/2gis-logo.png" alt="2ГИС" width="30" height="30">2ГИС <span>Инженерный музей</span></a>
+    <a class="brand" href="#top"><img src="assets/img/2gis-lockup.png" alt="2ГИС" width="93" height="30"><span>Инженерный музей</span></a>
     <a class="tg" href="https://t.me/rnd2GIS" target="_blank" rel="noopener">Telegram</a>
   </div>
   <div class="route" role="navigation" aria-label="Маршрут по залам"><div class="route-in" id="route"><div class="route-fill" id="route-fill"></div></div></div>
@@ -942,7 +943,7 @@ html{scroll-padding-top:96px}
       <div class="l-grid">
         <div>
           <h2 id="h-letter">Письмо в&nbsp;<span>2056</span></h2>
-          <p class="lede">В 1956 году доктор технических наук Георгий Бабат опубликовал в «Технике — молодёжи» «Мечты инженера»: отрывки из статей, будто бы опубликованных в 2056 году. До 2056-го осталось 30 лет. Ответьте на семь вопросов, и мы соберём вашу статью из будущего.</p>
+          <p class="lede">В 1956 году доктор технических наук Георгий Бабат опубликовал в «Технике — молодёжи» «Мечты инженера»: отрывки из статей, будто бы опубликованных в 2056 году. До <span style="white-space:nowrap">2056-го</span> осталось 30 лет. Ответьте на семь вопросов, и мы соберём вашу статью из будущего.</p>
           <div class="babat"><img src="assets/img/babat.webp" alt="Георгий Бабат" width="160" height="222" loading="lazy"><span>Г. И. Бабат. «Мечты инженера (отрывки из статей, опубликованных в 2056 году)». «Техника — молодёжи», №6, 1956, с. 30–32</span></div>
           <div class="quiz" id="quiz" aria-live="polite"></div>
         </div>
@@ -1186,12 +1187,15 @@ try{(function hero(){
   }
 
   /* ---------- drawing ---------- */
+  const PIN_OUT=new Path2D('M-208-218A272 272 0 1 1 208-218C91-207 23-165 17 0H-17C-23-165-91-207-208-218Z'),
+        PIN_IN=new Path2D('M-191-243A242 242 0 1 1 191-243C81-233 11-185 0-105C-11-185-81-233-191-243Z');
   function pin(x,y,col){
     ctx.save(); ctx.translate(x,y);
-    ctx.fillStyle='rgba(0,0,0,.35)'; ctx.beginPath(); ctx.ellipse(0,2,7,2.5,0,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.moveTo(0,0); ctx.bezierCurveTo(-3,-7,-11,-12,-11,-21); ctx.arc(0,-21,11,Math.PI,0); ctx.bezierCurveTo(11,-12,3,-7,0,0);
-    ctx.fillStyle=col; ctx.fill(); ctx.lineWidth=2.5; ctx.strokeStyle='#fff'; ctx.stroke();
-    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(0,-21,4,0,Math.PI*2); ctx.fill(); ctx.restore();
+    /* пин 2ГИС: круг, вогнутый «хвост», белая обводка и ножка; координаты из макета (кончик ножки = точка) */
+    ctx.scale(.054,.054);
+    ctx.shadowColor='rgba(0,0,0,.4)'; ctx.shadowBlur=8; ctx.shadowOffsetY=3;
+    ctx.fillStyle='#fff'; ctx.fill(PIN_OUT); ctx.shadowColor='transparent';
+    ctx.fillStyle=col; ctx.fill(PIN_IN); ctx.restore();
   }
   const seg=(e)=>{ctx.moveTo(nodes[e.a].x,nodes[e.a].y);ctx.lineTo(nodes[e.b].x,nodes[e.b].y)};
   function paint(){
@@ -1224,7 +1228,7 @@ try{(function hero(){
       if(phase==='hold'){ hold++; if(auto && hold>150 && !RM) phase='fade' }
       if(phase==='fade'){ fade-=.03; if(fade<=0){ A=B; newTarget() } }
       ctx.globalAlpha=1;
-      pin(nodes[A].x,nodes[A].y,'#0073FA'); pin(nodes[B].x,nodes[B].y,'#19AA1E');
+      pin(nodes[A].x,nodes[A].y,'#0168F9'); pin(nodes[B].x,nodes[B].y,'#19AA1E');
     }
   }
   function frame(){ try{ paint() }catch(e){ if(!frame.w){console.error(e);frame.w=1} } if(!RM) requestAnimationFrame(frame) }
@@ -1756,7 +1760,7 @@ try{(function detective(){
     const t=total(Q[qi]);
     prog.textContent=`Вопрос ${qi+1} из ${Q.length}`; qEl.textContent=Q[qi].q;
     const word=t%10>=2&&t%10<=4&&(t%100<12||t%100>14)?'верных квартала':'верных кварталов';
-    why.textContent=t>1?`Здесь ${t} ${word}. Нажимайте на кварталы, пока не найдёте все.`:'Здесь один верный квартал. Нажмите на него.';
+    why.textContent=t>1?`Здесь ${t} ${word}. Нажимайте на кварталы, пока не найдёте все.`:'Здесь один верный квартал. Нажмите на него.';
     next.hidden=true; rev.hidden=false; counter(); draw();
   }
   function finish(byReveal){
