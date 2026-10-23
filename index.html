@@ -361,14 +361,16 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .sb-foot button{background:none;border:0;color:var(--night-text);text-decoration:underline;text-underline-offset:3px;font-size:13px;padding:0}
 .sb-title{font-size:15px;font-weight:600;color:var(--night-text);margin-bottom:2px}
 .sandbox .legend{margin-top:4px;justify-content:flex-end;gap:8px 14px}
+/* подложка под подсказку и легенду, как у переключателей: текст читается поверх линий карты */
+.sb-foot,.sandbox .legend{background:rgba(11,19,15,.82);border:1px solid var(--night-line);border-radius:18px;padding:7px 14px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 #sb-hint::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 0 3px rgba(25,170,30,.25)}
 @media (max-width:900px){
   .hud{display:none}
   .hud-m{display:block;position:absolute;top:12px;left:var(--gutter);right:var(--gutter);font:400 11.5px/1.4 var(--mono);color:var(--night-muted);pointer-events:none}
   .sandbox{top:36px;bottom:auto;left:var(--gutter);right:var(--gutter);justify-items:start}
   .seg button{padding:6px 10px;font-size:12.5px}
-  .sb-foot{justify-content:flex-start}.sandbox .legend{justify-content:flex-start}
-  .hero-in{padding-top:330px}
+  .sb-foot{justify-content:flex-start;gap:4px 14px;padding:6px 12px}.sandbox .legend{justify-content:flex-start;padding:6px 12px}
+  .hero-in{padding-top:370px}
 }
 
 /* games */
