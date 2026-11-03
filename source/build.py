@@ -13,7 +13,11 @@ W = {'Regular': 400, 'Medium': 500, 'SemiBold': 600}
 ff = '\n'.join(
     f'@font-face{{font-family:"SB Sans Text";src:url(assets/fonts/SBSansText-{n}.woff) format("woff");'
     f'font-weight:{w};font-style:normal;font-display:swap}}' for n, w in W.items())
-body = src.replace('/*FONTFACE*/', ff)
+# Счётчик посещений. Пока адрес пуст, сайт ничего не отправляет и внешние запросы запрещены.
+COUNTER_URL = ''  # например 'https://graph-counter-xxxx.containers.cloud.ru/e'
+assert COUNTER_URL == '' or re.fullmatch(r'https://[a-z0-9.-]+/e', COUNTER_URL), 'неверный адрес счётчика'
+COUNTER_ORIGIN = COUNTER_URL[:-2]
+body = src.replace('/*FONTFACE*/', ff).replace('/*COUNTER_URL*/', COUNTER_URL)
 cut = body.index('</style>') + len('</style>')
 
 # Типографика: неразрывный пробел после коротких предлогов и союзов, перед тире,
@@ -49,7 +53,7 @@ CSP = '; '.join([
     "style-src 'self' 'unsafe-inline'",   # style="" в разметке и в шаблонах JS
     "img-src 'self' data: blob:",          # data: — иконки в CSS, blob: — сохранение «Письма» картинкой
     "font-src 'self'",
-    "connect-src 'none'",
+    f"connect-src {COUNTER_ORIGIN}" if COUNTER_ORIGIN else "connect-src 'none'",
     "media-src 'none'",
     "object-src 'none'",
     "frame-src 'none'",

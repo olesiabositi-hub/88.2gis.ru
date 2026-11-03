@@ -994,7 +994,7 @@ html{scroll-padding-top:96px}
 
 <footer>
   <div class="wrap">
-    <div><b>2ГИС</b> · Инженерный музей<br>Сайт не использует cookie и счётчики аналитики. Ответы в тестах исчезают, когда вы закрываете страницу. Достижения и талон хранятся только в вашем браузере, сбросить их можно в панели достижений.</div>
+    <div><b>2ГИС</b> · Инженерный музей<br>Сайт не использует cookie и не сохраняет IP-адреса. Мы считаем только суммы за день: сколько было посетителей, откуда они пришли, с какого типа устройства и какие залы прошли. Отдельные посетители в этих данных не различаются. Чтобы не считать вас дважды за день, браузер хранит дату последнего визита. Ответы в тестах исчезают, когда вы закрываете страницу. Достижения и талон хранятся только в вашем браузере, сбросить их можно в панели достижений.</div>
     <div><b>Источники</b>
       <ul>
         <li>Ю. Долматовский. «Автосфера ЗИС-1001». <a href="https://ru.djvu.online/file/jCxy9WnwPsCP5" target="_blank" rel="noopener">«Техника — молодёжи», №10, 1938</a></li>
@@ -1039,6 +1039,48 @@ function rng(seed){let s=seed>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5
    HERO: radial-ring city graph + animated A*
    ========================================================= */
 /* =========================================================
+   Счётчик: только суммы за день, без cookie и идентификаторов.
+   Адрес подставляет source/build.py; пока он пуст, ничего не отправляется.
+   ========================================================= */
+const track=(function(){
+  const URL_E='/*COUNTER_URL*/';
+  if(!URL_E || location.hostname!=='graph.2gis.ru' || navigator.webdriver) return ()=>{};
+  const clean=v=>{ v=String(v||'').toLowerCase().replace(/^www\./,''); return /^[a-z0-9][a-z0-9._-]{0,39}$/.test(v)?v:'other' };
+  let source='direct';
+  try{
+    const utm=new URLSearchParams(location.search).get('utm_source');
+    const ref=document.referrer?new URL(document.referrer).hostname:'';
+    if(utm) source=clean(utm); else if(ref && ref!==location.hostname) source=clean(ref);
+  }catch(e){}
+  const w=Math.min(innerWidth,screen.width||innerWidth), device=w<=700?'phone':w<=1100?'tablet':'desktop';
+  function send(e){
+    const body=JSON.stringify({e,s:source,d:device});
+    try{ if(navigator.sendBeacon(URL_E,body)) return }catch(err){}
+    try{ fetch(URL_E,{method:'POST',body,keepalive:true,mode:'cors',credentials:'omit'}).catch(()=>{}) }catch(err){}
+  }
+  /* Хранится только дата и пройденные сегодня залы: так один человек не считается дважды за день. */
+  const day=new Date().toISOString().slice(0,10); let seen={d:day,h:[]}, fresh=true;
+  try{ const o=JSON.parse(localStorage.getItem('museum88-seen')||'null'); if(o&&o.d===day&&Array.isArray(o.h)){ seen=o; fresh=false } }catch(e){}
+  const remember=()=>{ try{ localStorage.setItem('museum88-seen',JSON.stringify(seen)) }catch(e){} };
+  send(fresh?['view','visitor']:['view']); remember();
+  if('IntersectionObserver' in window){
+    /* Зал засчитывается, если человек задержался на нём 2 секунды, а не пролистал мимо. */
+    const timers=new Map();
+    const io=new IntersectionObserver(es=>es.forEach(x=>{
+      const t=x.target;
+      if(!x.isIntersecting){ clearTimeout(timers.get(t)); return }
+      timers.set(t,setTimeout(()=>{ io.unobserve(t); const h=t.id.replace('-','_'); if(seen.h.includes(h)) return; seen.h.push(h); remember(); send('reach_'+h) },2000));
+    }),{rootMargin:'-45% 0px -45% 0px'});
+    document.querySelectorAll('#hall-1,#hall-2,#hall-3,#hall-4,#hall-5,#hall-6,#letter').forEach(x=>io.observe(x));
+  }
+  document.addEventListener('click',e=>{
+    if(e.target.closest('#r-save')) send('save_png');
+    else if(e.target.closest('#r-copy')) send('copy_text');
+  });
+  return send;
+})();
+
+/* =========================================================
    ACHIEVEMENTS (stored only in this browser)
    ========================================================= */
 const ACH=(function(){
@@ -1068,6 +1110,7 @@ const ACH=(function(){
     const r=crypto.getRandomValues(new Uint32Array(8)); let c='';
     r.forEach((v,i)=>{ c+=(i===4?'-':'')+ALPHA[v%ALPHA.length] }); talon=c;
     try{ localStorage.setItem(TKEY,talon) }catch(e){}
+    track('talon');
   }
   const notify=()=>listeners.forEach(f=>{ try{f()}catch(e){} });
   ensureTalon();
@@ -1082,7 +1125,7 @@ const ACH=(function(){
   let tt;
   function unlock(id){
     if(got.has(id)) return; const a=LIST.find(x=>x.id===id); if(!a) return;
-    got.add(id); save(); ensureTalon(); render(); notify();
+    got.add(id); save(); track('ach_'+id); ensureTalon(); render(); notify();
     toast.innerHTML=`<i aria-hidden="true"></i><span><small>Достижение ${got.size} из ${LIST.length}</small>${a.t}</span>`;
     toast.classList.add('show'); pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump');
     clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),3600);

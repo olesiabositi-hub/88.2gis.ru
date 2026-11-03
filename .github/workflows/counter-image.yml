@@ -1,0 +1,24 @@
+# Собирает контейнер счётчика и загружает его в Artifact Registry Cloud.ru.
+# Нужны в настройках репозитория (Settings → Secrets and variables → Actions):
+#   переменная CR_URI — адрес реестра, например example.cr.cloud.ru
+#   секреты EVO_CR_LOGIN и EVO_CR_PWD — Key ID и Key Secret ключа доступа
+name: Сборка счётчика
+on:
+  push:
+    paths:
+      - 'counter/**'
+      - '.github/workflows/counter-image.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Вход в реестр
+        run: echo "${{ secrets.EVO_CR_PWD }}" | docker login "${{ vars.CR_URI }}" -u "${{ secrets.EVO_CR_LOGIN }}" --password-stdin
+      - name: Сборка и загрузка
+        run: |
+          docker build -t "${{ vars.CR_URI }}/graph-counter:latest" counter
+          docker push "${{ vars.CR_URI }}/graph-counter:latest"
