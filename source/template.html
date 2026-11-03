@@ -140,7 +140,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .hh .src{font-size:14px;margin-top:12px}
 .hh .src a{color:var(--green-ink);text-underline-offset:3px}
 .hh p{font-size:clamp(17px,1.4vw,19px);color:var(--ink-2);max-width:52ch}
-@media (max-width:800px){.hh{grid-template-columns:1fr;align-items:start;gap:18px}}
+@media (max-width:800px){.hh{grid-template-columns:minmax(0,1fr);align-items:start;gap:18px}}
+@media (max-width:359px){.hh h2{font-size:32px}}
 
 /* museum label */
 .label{font-size:13.5px;line-height:1.45;color:var(--ink-2);border-top:2px solid var(--ink);padding-top:10px;margin-top:14px}
@@ -572,7 +573,20 @@ footer a{color:var(--ink-2);text-underline-offset:3px}
 .paper{position:relative}
 .paper:has(.stamp){padding-bottom:128px}
 @media(max-width:700px){.paper:has(.stamp){padding-bottom:104px}.stamp{right:16px;bottom:18px}.stamp b{font-size:22px}}
-.paper.printing .mast,.paper.printing h3,.paper.printing .deck,.paper.printing .by,.paper.printing .cols p{animation:ink .7s cubic-bezier(.3,.7,.3,1) both;animation-delay:var(--d,0s)}
+.talon{position:relative;margin-top:20px;padding:14px 16px 13px;background:#EFE7CF;color:#16130E;border:2px dashed #16130E;font-variant-numeric:tabular-nums}
+.talon .t-cut{position:absolute;top:-9px;left:14px;padding:0 6px;background:#F6F4EC;font-size:10.5px;font-weight:500;letter-spacing:.04em;color:#6A6355;line-height:16px}
+.paper:has(.talon){padding-bottom:136px}
+.talon .t-kind span{white-space:nowrap}
+.talon .t-kind{display:flex;justify-content:space-between;gap:10px;border-bottom:3px double #16130E;padding-bottom:7px;font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.talon .t-title{font-size:clamp(22px,2.4vw,28px);font-weight:600;line-height:1.05;letter-spacing:-.03em;margin-top:10px}
+.talon .t-text{font-size:12.5px;line-height:1.4;color:#3A352B;margin-top:5px}
+.talon .t-no{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:9px;border-top:1px solid #16130E;padding-top:8px;font-size:12px;font-weight:500}
+.talon .t-no b{font-size:24px;font-weight:600;letter-spacing:.05em;color:#B3261C;white-space:nowrap}
+@media(max-width:400px){.talon{padding-inline:12px}.talon .t-kind{font-size:10.5px;letter-spacing:.04em}.talon .t-no b{font-size:21px}}
+#ach-title{margin:10px 0;padding:10px 12px;background:#EFE7CF;border:2px dashed #16130E;color:#16130E;font-size:13px;line-height:1.35}
+#ach-title b{display:block;font-weight:600;font-size:15px}
+.t-left{margin-top:10px;font-size:14px;color:var(--ink-2)}
+.paper.printing .talon,.paper.printing .mast,.paper.printing h3,.paper.printing .deck,.paper.printing .by,.paper.printing .cols p{animation:ink .7s cubic-bezier(.3,.7,.3,1) both;animation-delay:var(--d,0s)}
 @keyframes ink{from{clip-path:inset(0 0 100% 0);opacity:.15;filter:blur(1.5px)}to{clip-path:inset(0 0 0 0);opacity:1;filter:none}}
 .stamp{position:absolute;right:22px;bottom:22px;transform:rotate(-12deg);border:4px double rgba(200,40,30,.85);color:rgba(200,40,30,.88);padding:8px 14px;text-align:center;border-radius:4px;mix-blend-mode:multiply;pointer-events:none}
 .stamp b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.05}
@@ -979,14 +993,13 @@ html{scroll-padding-top:96px}
 
 <footer>
   <div class="wrap">
-    <div><b>2ГИС</b> · Инженерный музей<br>Сайт не собирает данные. Ответы в тестах остаются в вашем браузере и исчезают, когда вы закрываете страницу.</div>
+    <div><b>2ГИС</b> · Инженерный музей<br>Сайт не использует cookie и счётчики аналитики. Ответы в тестах исчезают, когда вы закрываете страницу. Достижения и талон хранятся только в вашем браузере, сбросить их можно в панели достижений.</div>
     <div><b>Источники</b>
       <ul>
         <li>Ю. Долматовский. «Автосфера ЗИС-1001». <a href="https://ru.djvu.online/file/jCxy9WnwPsCP5" target="_blank" rel="noopener">«Техника — молодёжи», №10, 1938</a></li>
         <li>Ф. Честнов. «Радиоволны-путеводители». <a href="https://ru.djvu.online/file/6hj8a2fTYObGC" target="_blank" rel="noopener">«Техника — молодёжи», №12, 1954</a></li>
         <li>С. Вольберг. «Движущаяся улица»; Г. Бабат. «Мечты инженера». <a href="https://djvu.online/file/vczZJckoOQdkp" target="_blank" rel="noopener">«Техника — молодёжи», №6, 1956</a></li>
         <li>О. Налбандян. «ЭВМ шагает по Москве». <a href="https://www.nkj.ru/archive/articles/57011/" target="_blank" rel="noopener">«Наука и жизнь», №7, 1972</a></li>
-        <li>Г. Николаев. «Загадки пернатого штурмана». <a href="https://djvu.online/file/lz0mfLRWpWh5L" target="_blank" rel="noopener">«Наука и жизнь», №9, 1975</a></li>
         <li>В. Тарасенко, А. Кориков. «Робот-штурман». <a href="https://djvu.online/file/zKwC09TdR1376" target="_blank" rel="noopener">«Наука и жизнь», №7, 1980</a></li>
         <li>В. Глушков. «Город завтрашнего дня». <a href="https://ru.djvu.online/file/bearrIgsdBmrE" target="_blank" rel="noopener">«Техника — молодёжи», №5, 1980</a></li>
         <li>А. Берлянт. «Информация, которую даёт карта». <a href="https://djvu.online/file/c0htS5DZQyLQb" target="_blank" rel="noopener">«Наука и жизнь», №6, 1984</a></li>
@@ -1000,6 +1013,7 @@ html{scroll-padding-top:96px}
 <div class="ach-panel" id="ach-panel" hidden>
   <h4>Достижения</h4>
   <p>Открываются, пока вы гуляете по залам. Хранятся только в этом браузере.</p>
+  <div id="ach-title" hidden></div>
   <ul id="ach-list"></ul>
   <button type="button" id="ach-reset">Сбросить прогресс</button>
 </div>
@@ -1043,27 +1057,47 @@ const ACH=(function(){
   let got=new Set();
   try{ got=new Set(JSON.parse(localStorage.getItem(KEY)||'[]').filter(id=>LIST.some(a=>a.id===id))) }catch(e){}
   const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify([...got])) }catch(e){} };
+  /* Талон участника: случайный код создаётся один раз, когда открыты все достижения, и живёт только в этом браузере. */
+  const TKEY='museum88-talon', ALPHA='23456789ABCDEFGHJKMNPQRSTUVWXYZ', listeners=[];
+  let talon=null;
+  try{ const t=localStorage.getItem(TKEY); if(/^[2-9A-Z]{4}-[2-9A-Z]{4}$/.test(t||'')) talon=t }catch(e){}
+  const isDone=()=>got.size===LIST.length;
+  function ensureTalon(){
+    if(!isDone()||talon) return;
+    const r=crypto.getRandomValues(new Uint32Array(8)); let c='';
+    r.forEach((v,i)=>{ c+=(i===4?'-':'')+ALPHA[v%ALPHA.length] }); talon=c;
+    try{ localStorage.setItem(TKEY,talon) }catch(e){}
+  }
+  const notify=()=>listeners.forEach(f=>{ try{f()}catch(e){} });
+  ensureTalon();
   const pill=$('#ach-pill'), panel=$('#ach-panel'), list=$('#ach-list'), count=$('#ach-count'), toast=$('#toast');
   function render(){
     count.textContent=`${got.size}/${LIST.length}`;
     pill.classList.toggle('all',got.size===LIST.length);
+    const title=$('#ach-title'); title.hidden=!(isDone()&&talon);
+    if(talon) title.innerHTML=`<b>Почётный картограф</b>Талон участника № ${talon}`;
     list.innerHTML=LIST.map(a=>`<li class="${got.has(a.id)?'got':''}"><i aria-hidden="true"></i><span><b>${a.t}</b>${a.d}</span><em>${got.has(a.id)?'открыто':''}</em></li>`).join('');
   }
   let tt;
   function unlock(id){
     if(got.has(id)) return; const a=LIST.find(x=>x.id===id); if(!a) return;
-    got.add(id); save(); render();
+    got.add(id); save(); ensureTalon(); render(); notify();
     toast.innerHTML=`<i aria-hidden="true"></i><span><small>Достижение ${got.size} из ${LIST.length}</small>${a.t}</span>`;
     toast.classList.add('show'); pill.classList.remove('bump'); void pill.offsetWidth; pill.classList.add('bump');
     clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),3600);
-    if(got.size===LIST.length) setTimeout(()=>{ toast.innerHTML=`<i aria-hidden="true"></i><span><small>Все ${LIST.length} из ${LIST.length}</small>Маршрут пройден целиком</span>`; toast.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),4200) },3800);
+    if(got.size===LIST.length) setTimeout(()=>{ toast.innerHTML=`<i aria-hidden="true"></i><span><small>Все ${LIST.length} из ${LIST.length}. Талон ждёт в «Письме в 2056»</small>Вы Почётный картограф</span>`; toast.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('show'),4200) },3800);
   }
   pill.addEventListener('click',()=>{ const open=panel.hidden; panel.hidden=!open; pill.setAttribute('aria-expanded',open) });
   document.addEventListener('click',e=>{ if(!panel.hidden && !panel.contains(e.target) && !pill.contains(e.target)){ panel.hidden=true; pill.setAttribute('aria-expanded','false') } });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !panel.hidden){ panel.hidden=true; pill.setAttribute('aria-expanded','false'); pill.focus() } });
-  $('#ach-reset').addEventListener('click',()=>{ got.clear(); save(); render() });
+  const resetBtn=$('#ach-reset'), RESET_LABEL=resetBtn.textContent; let armed=false;
+  function doReset(){ got.clear(); talon=null; save(); try{ localStorage.removeItem(TKEY) }catch(e){} render(); notify() }
+  resetBtn.addEventListener('click',()=>{
+    if(talon&&!armed){ armed=true; resetBtn.textContent=`Точно сбросить? Талон № ${talon} исчезнет`; setTimeout(()=>{ armed=false; resetBtn.textContent=RESET_LABEL },6000); return }
+    armed=false; resetBtn.textContent=RESET_LABEL; doReset();
+  });
   render();
-  return {unlock};
+  return {unlock,talon:()=>isDone()?talon:null,left:()=>LIST.length-got.size,total:LIST.length,onChange:f=>listeners.push(f)};
 })();
 
 /* =========================================================
@@ -1901,30 +1935,49 @@ try{(function letter(){
     return {head:HEAD[ans[1]][ans[0]], deck:DECK[ans[2]][ans[3]], no:issueNo(),
       paras:[`${s(0)} ${s(1)}`,`${s(2)} ${s(3)} ${s(4)}`,`${s(5)} ${s(6)}`,END[ans[6]]]};
   }
+  function talonHTML(){
+    const t=ACH.talon(); if(!t) return '';
+    return `<div class="talon"><span class="t-cut" aria-hidden="true">вырезать по линии</span>
+      <div class="t-kind"><span>Талон участника</span><span>${ACH.total} из ${ACH.total}</span></div>
+      <div class="t-title">Почётный картограф</div>
+      <p class="t-text">Настоящим удостоверяется, что предъявитель прошёл весь маршрут.</p>
+      <div class="t-no"><span>Личный номер</span><b>${t}</b></div></div>`;
+  }
+  let shown=false;
+  function leftHTML(){
+    const n=ACH.left();
+    return n>0?`До талона участника осталось достижений: ${n} из ${ACH.total}.`:'Ваш талон участника уже в статье. Сохраните её картинкой.';
+  }
+  ACH.onChange(()=>{
+    if(!shown) return;
+    paper.innerHTML=paperHTML(article()); paper.classList.remove('ghost','printing','thud');
+    const l=$('#t-left'); if(l) l.textContent=leftHTML();
+  });
   function paperHTML(a){
     return `<div class="mast"><span>Из статей, опубликованных в 2056 году</span><span>${a.no?'№ '+intf(a.no):'№ …'}</span></div>
       <h3>${a.head}</h3><p class="deck">${a.deck}</p><p class="by">Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956</p>
-      <div class="cols">${a.paras.map(p=>`<p>${p}</p>`).join('')}</div>`+(a.no?`<div class="stamp"><b>№ ${intf(a.no)}</b><span>из ${intf(TOTAL)} вариантов</span></div>`:'');
+      <div class="cols">${a.paras.map(p=>`<p>${p}</p>`).join('')}</div>`+(a.no?talonHTML():'')+(a.no?`<div class="stamp"><b>№ ${intf(a.no)}</b><span>из ${intf(TOTAL)} вариантов</span></div>`:'');
   }
   function printIn(){
     if(RM) return;
-    const parts=[...paper.querySelectorAll('.mast,h3,.deck,.by,.cols p')]; let d=0;
+    const parts=[...paper.querySelectorAll('.mast,h3,.deck,.by,.cols p,.talon')]; let d=0;
     paper.classList.add('printing'); parts.forEach(el=>{ el.style.setProperty('--d',d+'s'); d+=el.tagName==='P'&&el.parentElement.classList.contains('cols')?.55:.35 });
     const st=paper.querySelector('.stamp'); if(st){ st.style.setProperty('--d',(d+.2)+'s'); setTimeout(()=>{ paper.classList.remove('thud'); void paper.offsetWidth; paper.classList.add('thud') },(d+.2+.32)*1000) }
   }
   function result(){
-    const a=article(); paper.classList.remove('ghost','printing','thud'); paper.innerHTML=paperHTML(a); printIn(); acts.hidden=false; ACH.unlock('letter');
+    ACH.unlock('letter'); shown=true;
+    const a=article(); paper.classList.remove('ghost','printing','thud'); paper.innerHTML=paperHTML(a); printIn(); acts.hidden=false;
     quiz.innerHTML=`<div class="qtop"><span>Готово</span><button type="button" id="q-back">Изменить ответы</button></div>
       <div class="bars" aria-hidden="true">${Q.map(()=>'<i class="on"></i>').join('')}</div>
-      <h3>Ваша статья из 2056 года готова</h3><p style="margin-top:12px;color:var(--ink-2)">Сохраните её и вернитесь через тридцать лет проверить. Инженеры из 1956-го уже ждут.</p>`;
-    $('#q-back').onclick=()=>{step=Q.length-1;render()};
+      <h3>Ваша статья из 2056 года готова</h3><p style="margin-top:12px;color:var(--ink-2)">Сохраните её и вернитесь через тридцать лет проверить. Инженеры из 1956-го уже ждут.</p><p class="t-left" id="t-left">${leftHTML()}</p>`;
+    $('#q-back').onclick=()=>{shown=false;step=Q.length-1;render()};
     if(innerWidth<900) paper.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
   }
   // placeholder page before answers
   paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Георгий Бабат в 1956 году описал термоядерную ТЭЦ и другие технологии «из 2056 года». Ваша статья будет о том, как люди будут находить дорогу.','Каждый ответ добавит в неё абзац.']});
-  $('#r-again').onclick=()=>{step=0;ans=[];paper.classList.add('ghost');acts.hidden=true;note.textContent='';
+  $('#r-again').onclick=()=>{shown=false;step=0;ans=[];paper.classList.add('ghost');acts.hidden=true;note.textContent='';
     paper.innerHTML=paperHTML({head:'Здесь появится ваша статья',deck:'Ответьте на семь вопросов слева',paras:['Каждый ответ добавит в неё абзац.']}); render()};
-  $('#r-copy').onclick=async()=>{const a=article(); const t=`${a.head}\n${a.deck}\n\n${a.paras.join('\n\n')}\n\nИз статей, опубликованных в 2056 году. Выпуск № ${intf(a.no)} из ${intf(TOTAL)}`;
+  $('#r-copy').onclick=async()=>{const a=article(); const t=`${a.head}\n${a.deck}\n\n${a.paras.join('\n\n')}\n\nИз статей, опубликованных в 2056 году. Выпуск № ${intf(a.no)} из ${intf(TOTAL)}`+(ACH.talon()?`\n\nПочётный картограф. Талон участника № ${ACH.talon()}, ${ACH.total} из ${ACH.total}`:'');
     try{await navigator.clipboard.writeText(t); note.textContent='Текст скопирован.'}catch(e){ const r=document.createRange(); r.selectNodeContents(paper); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); note.textContent='Текст выделен, скопируйте его сочетанием клавиш.'}};
   $('#r-save').onclick=()=>{
     const a=article(), w=1080, L=150, MW=w-2*L, c=document.createElement('canvas'); let x=c.getContext('2d'), y=0, dry=true;
@@ -1937,6 +1990,21 @@ try{(function letter(){
       wrap(a.deck,'500 32px "SB Sans Text", sans-serif',40,'#3A352B'); y+=6;
       wrap('Инженер, 2026 год. По мотивам «Мечты инженера» Г. Бабата, 1956','400 21px "SB Sans Text", sans-serif',30,'#6A6355'); y+=22;
       a.paras.forEach(p=>{ wrap(p,'400 25px "SB Sans Text", sans-serif',36,'#16130E'); y+=12 });
+      const tal=ACH.talon();
+      if(tal){ y+=26; const TH=268, tp=y;
+        if(!dry){ const F='"SB Sans Text", sans-serif';
+          x.fillStyle='#EFE7CF'; x.fillRect(L,tp,MW,TH);
+          x.save(); x.setLineDash([16,10]); x.lineWidth=3; x.strokeStyle='#16130E'; x.strokeRect(L,tp,MW,TH); x.restore();
+          const P=L+28, R=L+MW-28;
+          x.fillStyle='#F6F4EC'; x.fillRect(L+22,tp-12,230,24); x.fillStyle='#6A6355'; x.font='500 18px '+F; x.fillText('вырезать по линии',L+32,tp+6);
+          x.fillStyle='#16130E'; x.font='600 21px '+F; x.fillText('ТАЛОН УЧАСТНИКА',P,tp+46); x.textAlign='right'; x.fillText(ACH.total+' ИЗ '+ACH.total,R,tp+46); x.textAlign='left';
+          x.fillRect(P,tp+62,R-P,3); x.fillRect(P,tp+69,R-P,1.5);
+          x.font='600 46px '+F; x.fillText('Почётный картограф',P,tp+124);
+          x.fillStyle='#3A352B'; x.font='400 22px '+F; x.fillText('Настоящим удостоверяется, что предъявитель прошёл весь маршрут.',P,tp+160,R-P);
+          x.fillStyle='#16130E'; x.fillRect(P,tp+182,R-P,1.5); x.font='500 22px '+F; x.fillText('Личный номер',P,tp+232);
+          x.fillStyle='#B3261C'; x.font='600 46px '+F; x.textAlign='right'; x.fillText(tal,R,tp+236); x.textAlign='left';
+        }
+        y=tp+TH+14 }
       return y };
     const textEnd=body(), PB=textEnd+190, h=Math.max(1350,PB+110); c.width=w; c.height=h; x=c.getContext('2d'); dry=false;
     x.fillStyle='#0B130F'; x.fillRect(0,0,w,h);
