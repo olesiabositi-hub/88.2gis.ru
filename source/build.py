@@ -38,21 +38,28 @@ def typo(t):
 body = body[:cut] + typo(body[cut:])
 
 # Политика безопасности контента (CSP). GitHub Pages не даёт задать HTTP-заголовки,
-# поэтому политика ставится через <meta>. Встроенный скрипт разрешается по SHA-256 хешу,
-# который пересчитывается при каждой сборке. Всё остальное грузится только с этого же сайта.
+# поэтому политика ставится через <meta>. Встроенные скрипты (счётчик Метрики и код сайта)
+# разрешаются по SHA-256 хешам, которые пересчитываются при каждой сборке.
+# Извне разрешена только Яндекс Метрика; список доменов взят из её справки:
+# https://yandex.com/support/metrica/ru/code/install-counter-csp
 scripts = re.findall(r'<script>(.*?)</script>', body, re.S)
-assert len(scripts) == 1, 'ожидается ровно один встроенный <script>'
-sha = base64.b64encode(hashlib.sha256(scripts[0].encode('utf-8')).digest()).decode()
+assert len(scripts) == 2, 'ожидается два встроенных <script>: Метрика и код сайта'
+hashes = ' '.join("'sha256-%s'" % base64.b64encode(hashlib.sha256(x.encode('utf-8')).digest()).decode() for x in scripts)
+METRIKA_HOSTS = ['mc.yandex.' + z for z in ('ru', 'az', 'by', 'co.il', 'com', 'com.am', 'com.ge', 'com.tr', 'ee', 'fr',
+                                            'kg', 'kz', 'lt', 'lv', 'md', 'tj', 'tm', 'uz')] + ['mc.webvisor.com', 'mc.webvisor.org']
+M_HTTPS = ' '.join('https://' + h for h in METRIKA_HOSTS)
+M_WSS = ' '.join('wss://' + h for h in METRIKA_HOSTS)
 CSP = '; '.join([
     "default-src 'none'",
-    f"script-src 'sha256-{sha}'",
+    f"script-src {hashes} {M_HTTPS} https://yastatic.net",
     "style-src 'self' 'unsafe-inline'",   # style="" в разметке и в шаблонах JS
-    "img-src 'self' data: blob:",          # data: — иконки в CSS, blob: — сохранение «Письма» картинкой
+    f"img-src 'self' data: blob: {M_HTTPS}",  # data: — иконки в CSS, blob: — сохранение «Письма» картинкой
     "font-src 'self'",
-    "connect-src 'none'",
+    f"connect-src {M_HTTPS} {M_WSS}",
     "media-src 'none'",
     "object-src 'none'",
-    "frame-src 'none'",
+    f"frame-src blob: {M_HTTPS}",          # Вебвизор, карта кликов
+    f"child-src blob: {M_HTTPS}",
     "worker-src 'none'",
     "manifest-src 'none'",
     "base-uri 'none'",
