@@ -1065,13 +1065,31 @@ function rng(seed){let s=seed>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5
    Идентификаторы целей: sandbox_done, hall1_done … hall6_done, letter_done, all_played.
    Каждая игра отправляется один раз за загрузку страницы. all_played — один раз
    на браузер, когда сыграны все шесть залов и «Письмо» (песочница не обязательна).
+   Широкие цели для рекламы, тоже один раз за загрузку страницы:
+   halls_view — после прокрутки любой зал дошёл до середины экрана;
+   game_start — первое действие в любой игре (или её завершение).
    ========================================================= */
 const GOAL=(function(){
   const ID=114012584, KEY='museum88-played', NEED=['hall1','hall2','hall3','hall4','hall5','hall6','letter'];
   const sent=new Set(); let played=new Set();
   try{ played=new Set(JSON.parse(localStorage.getItem(KEY)||'[]')) }catch(e){}
   const send=g=>{ try{ if(typeof ym==='function') ym(ID,'reachGoal',g) }catch(e){} };
+  const once=new Set(), event=id=>{ if(once.has(id)) return; once.add(id); send(id) };
+  try{
+    const halls=[...document.querySelectorAll('section.hall')];
+    /* Зал должен пересечь среднюю треть экрана после прокрутки: на больших мониторах зал 1 виден сразу, это не считается. */
+    const seen=()=>{ if(scrollY<120) return false; const a=innerHeight*.35, b=innerHeight*.65; return halls.some(h=>{ const r=h.getBoundingClientRect(); return r.top<b&&r.bottom>a }) };
+    let tick=false;
+    const onScroll=()=>{ if(tick) return; tick=true; requestAnimationFrame(()=>{ tick=false; if(seen()){ event('halls_view'); removeEventListener('scroll',onScroll) } }) };
+    addEventListener('scroll',onScroll,{passive:true}); onScroll();
+    /* Органы управления игр внутри залов. Ссылки, картинки и неигровые холсты не считаются. */
+    const CTRL='button, input, [role="button"], [role="slider"], #d-map';
+    const start=e=>{ const t=e.target; if(t && t.closest && t.closest('section.hall') && t.closest(CTRL)) event('game_start') };
+    document.addEventListener('pointerdown',start,true);
+    document.addEventListener('keydown',e=>{ if(['Enter',' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) start(e) },true);
+  }catch(e){}
   return function(game){
+    event('game_start');
     if(!sent.has(game)){ sent.add(game); send(game+'_done') }
     if(played.has(game)) return;
     played.add(game);
